@@ -4,39 +4,42 @@ import {
   Smartphone, LineChart, ShieldCheck, Check, ArrowRight,
   MessageCircle, Sparkles, TrendingUp, Send, Loader2,
   Plus, Search, BrainCircuit, FileText, Quote, Lightbulb,
-  Info
+  Info, Calendar, Target, AlertCircle, Volume2, Mic, Settings
 } from 'lucide-react';
-
-// --- Gemini API Setup ---
-const fetchGemini = async (prompt, systemInstruction = "") => {
-  let delay = 1000;
-  for (let i = 0; i < 5; i++) {
-    try {
-      const response = await fetch('/api/gemini', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, systemInstruction })
-      });
-      
-      if (!response.ok) throw new Error('API Error');
-      
-      const data = await response.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text;
-    } catch (error) {
-      if (i === 4) throw error;
-      await new Promise(resolve => setTimeout(resolve, delay));
-      delay *= 2;
-    }
-  }
-};
 
 const styles = `
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-8px); }
   }
+  @keyframes blink-fast {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+  @keyframes typing {
+    0%, 100% { transform: translateY(0px); opacity: 0.4; }
+    50% { transform: translateY(-3px); opacity: 1; }
+  }
+  @keyframes slide-in-right {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes scan-line {
+    0% { top: 0%; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
   .animate-float {
     animation: float 5s ease-in-out infinite;
+  }
+  .animate-blink-fast {
+    animation: blink-fast 0.8s ease-in-out infinite;
+  }
+  .typing-dot {
+    animation: typing 1s ease-in-out infinite;
+  }
+  .animate-slide-user {
+    animation: slide-in-right 0.4s ease-out forwards;
   }
   .glass-card {
     background: rgba(26, 29, 36, 0.6);
@@ -45,6 +48,14 @@ const styles = `
   }
   .glow-primary {
     box-shadow: 0 0 24px rgba(0, 229, 195, 0.25);
+  }
+  .scan-effect {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00E5C3, transparent);
+    animation: scan-line 2s linear infinite;
   }
 `;
 
@@ -81,42 +92,32 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
 
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [chatInput, setChatInput] = useState("");
-  const [chatResponse, setChatResponse] = useState("");
-  const [isChatLoading, setIsChatLoading] = useState(false);
-  const [aiInsight, setAiInsight] = useState(null);
-  const [isInsightLoading, setIsInsightLoading] = useState(false);
+  const [reportState, setReportState] = useState('idle'); 
+  const [loadingStep, setLoadingStep] = useState(0);
+  const [simStep, setSimStep] = useState(0);
 
-  const handleSimulateChat = async () => {
-    if (!chatInput.trim()) return;
-    setIsChatLoading(true);
-    setChatResponse("");
-    try {
-      const response = await fetchGemini(
-        `A customer is scanning a QR code on a luxury speaker package and asks: "${chatInput}". Respond as a helpful, high-conversion SQU AI. Keep it under 2 sentences and include a natural upsell to a "Premium Mounting Kit" if appropriate.`,
-        "You are SQU AI, an expert at reducing support and driving sales for physical products via QR code interactions."
-      );
-      setChatResponse(response);
-    } catch (e) {
-      setChatResponse("Something went wrong. Please try again.");
-    } finally {
-      setIsChatLoading(false);
-    }
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSimStep((prev) => (prev + 1) % 4);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
 
-  const handleGenerateInsight = async () => {
-    setIsInsightLoading(true);
-    try {
-      const result = await fetchGemini(
-        `Generate 3 actionable weekly intelligence points based on common customer questions about product setup, sweetness, and shelf-life. 1. Product Improvement, 2. Marketing Angle, 3. Support FAQ addition. Format as concise bullet points.`,
-        "You are an expert product strategist for SQU. You turn messy customer conversations into high-level business intelligence."
-      );
-      setAiInsight(result);
-    } catch (e) {
-      setAiInsight("Failed to generate report.");
-    } finally {
-      setIsInsightLoading(false);
-    }
+  const steps = ["Accessing Database...", "Clustering 124 User Scans...", "Identifying Core Sentiment...", "Drafting Brand Strategy..."];
+
+  const handleGenerateInsight = () => {
+    setReportState('loading');
+    setLoadingStep(0);
+    const interval = setInterval(() => {
+      setLoadingStep(prev => {
+        if (prev >= steps.length - 1) {
+          clearInterval(interval);
+          setTimeout(() => setReportState('complete'), 800);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 900);
   };
 
   return (
@@ -179,6 +180,7 @@ export default function App() {
             </FadeIn>
           </div>
 
+          {/* COMPACT STATIC CHAT SIMULATOR */}
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
               <div className="flex items-center gap-3 mb-6">
@@ -186,68 +188,62 @@ export default function App() {
                   <Smartphone className="text-[#00E5C3]" size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">✨ Scan Simulator</h4>
-                  <p className="text-xs text-zinc-500">Live AI Response Preview</p>
+                  <h4 className="font-bold text-sm">✨ Live Scan Preview</h4>
+                  <p className="text-xs text-zinc-500">Instant AI Upsell Demo</p>
                 </div>
               </div>
-              <div className="space-y-4 mb-6">
-                <div className="bg-white/5 rounded-2xl p-4 border border-white/5 text-sm text-zinc-300">
-                  Try: "Is this speaker waterproof?"
-                </div>
-                {chatResponse && (
-                  <div className="bg-[#00E5C3]/10 rounded-2xl p-4 border border-[#00E5C3]/20 text-sm text-zinc-100 animate-in fade-in slide-in-from-bottom-2">
-                    <p className="font-bold text-[#00E5C3] mb-1">SQU AI:</p>
-                    {chatResponse}
+              <div className="space-y-4 min-h-[160px] flex flex-col justify-end">
+                {simStep >= 1 ? (
+                  <div className="flex justify-end">
+                    <div className="bg-white/10 rounded-2xl rounded-tr-none p-3.5 max-w-[85%] border border-white/5 text-sm text-white animate-slide-user">
+                      Can I use these earbuds outdoors when it rains?
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center py-12 text-zinc-600 animate-pulse text-[10px] uppercase font-black tracking-[0.2em]">
+                    Waiting for scan...
+                  </div>
+                )}
+                {simStep >= 1 && simStep < 2 && (
+                   <div className="flex justify-start animate-in fade-in duration-300">
+                     <div className="bg-[#00E5C3]/5 rounded-2xl rounded-tl-none p-3 border border-[#00E5C3]/10 flex gap-1 items-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0s'}}></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0.2s'}}></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0.4s'}}></div>
+                     </div>
+                   </div>
+                )}
+                {simStep >= 2 && (
+                  <div className="flex justify-start animate-in zoom-in-95 slide-in-from-left-2 fade-in duration-500 fill-mode-both">
+                    <div className="bg-[#00E5C3]/10 rounded-2xl rounded-tl-none p-3.5 max-w-[85%] border border-[#00E5C3]/20 text-sm text-zinc-100 shadow-lg shadow-[#00E5C3]/5">
+                      <p className="font-bold text-[#00E5C3] mb-1 flex items-center gap-1.5 text-xs uppercase tracking-wider">
+                        <Zap size={10} fill="currentColor" /> SQU AI
+                      </p>
+                      This specific model isn't rain-rated, but our <span className="text-[#00E5C3] font-bold">Pro Edition</span> is fully waterproof. Interested in upgrading your order?
+                    </div>
                   </div>
                 )}
               </div>
-              <div className="relative">
-                <input 
-                  type="text" 
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSimulateChat()}
-                  placeholder="Ask a question..."
-                  className="w-full bg-[#111317] border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00E5C3] text-white"
-                />
-                <button onClick={handleSimulateChat} disabled={isChatLoading} className="absolute right-2 top-2 w-8 h-8 rounded-lg bg-[#00E5C3] text-[#111317] flex items-center justify-center">
-                  {isChatLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
-                </button>
+              <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="relative flex h-2 w-2">
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E5C3] animate-blink-fast"></span>
+                  </div>
+                  <span className="text-[10px] font-black text-[#00E5C3] uppercase tracking-widest">Live Demo</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                   {[0,1,2,3].map(i => (
+                     <div key={i} className={`h-1 w-3 rounded-full transition-all duration-500 ${simStep === i ? 'bg-[#00E5C3] w-5' : 'bg-white/10'}`} />
+                   ))}
+                </div>
               </div>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* Rest of your code continues exactly the same... */}
-      {/* FEATURE TAG CLOUD */}
-      <section className="py-8 border-y border-white/5 bg-[#1A1D24]/30 relative z-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-row flex-nowrap items-center justify-center gap-4 sm:gap-8 md:gap-12">
-            {[
-              { label: "No App Required", icon: Smartphone, color: "text-[#00E5C3]" },
-              { label: "Increase Sales", icon: TrendingUp, color: "text-[#F5A623]" },
-              { label: "Reduce Support", icon: MessageSquare, color: "text-[#00E5C3]" },
-              { label: "Instant ROI Tracking", icon: BarChart3, color: "text-[#F5A623]" },
-              { label: "Real customer insights", icon: Lightbulb, color: "text-[#00E5C3]" }
-            ].map((feature, idx) => (
-              <div 
-                key={idx} 
-                className="flex items-center gap-2 animate-float whitespace-nowrap"
-                style={{ animationDelay: `${idx * 0.4}s` }}
-              >
-                <feature.icon className={`${feature.color} flex-shrink-0`} size={14} />
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-zinc-400">
-                  {feature.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* STATS SECTION */}
-      <section className="py-16 md:py-20 px-6 bg-[#111317]">
+      {/* STATS STRIP */}
+      <section className="pt-24 pb-8 px-6 bg-[#111317]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-[2rem] overflow-hidden border border-white/10">
             {[
@@ -256,50 +252,60 @@ export default function App() {
               { val: "25%", lab: "Up to 25% increase in upsell opportunities", sub: "Revenue", col: "text-[#00E5C3]" },
               { val: "24h", lab: "To go live from setup", sub: "Onboarding", col: "text-white" }
             ].map((stat, i) => (
-              <div key={i} className="bg-[#111317] p-8 md:p-12 hover:bg-white/[0.02] transition-colors group">
-                <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4 flex items-center gap-2">
-                  <span className={`w-1.5 h-1.5 rounded-full ${stat.col.split(' ')[0] === 'text-white' ? 'bg-zinc-500' : stat.col.replace('text-', 'bg-')}`}></span>
+              <div key={i} className="bg-[#111317] p-8 md:p-10 hover:bg-white/[0.02] transition-colors group">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2">
+                  <span className={`w-1 h-1 rounded-full ${stat.col.split(' ')[0] === 'text-white' ? 'bg-zinc-500' : stat.col.replace('text-', 'bg-')}`}></span>
                   {stat.sub}
                 </div>
-                <div className={`text-4xl md:text-5xl font-black mb-2 ${stat.col} group-hover:scale-105 transition-transform origin-left duration-500`}>
+                <div className={`text-3xl md:text-4xl font-black mb-1 ${stat.col} group-hover:scale-105 transition-transform origin-left duration-500 tracking-tight`}>
                   {stat.val}
                 </div>
-                <div className="text-sm text-zinc-400 font-medium leading-relaxed max-w-[180px]">
+                <div className="text-[11px] text-zinc-500 font-medium leading-tight max-w-[140px]">
                   {stat.lab}
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-6 flex items-center justify-center gap-2 text-[11px] font-medium text-zinc-600 uppercase tracking-widest">
-            <Info size={12} />
-            Based on SQU platform data and industry benchmarks 2024
-          </div>
         </div>
       </section>
 
       {/* INTELLIGENCE REPORTS */}
-      <section className="py-24 px-6 bg-[#1A1D24]/30" id="demo">
+      <section className="pb-24 pt-8 px-6 bg-[#111317]" id="demo">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-stretch">
-            <div className="flex flex-col">
-              <FadeIn className="mb-12">
+            {/* LEFT COLUMN */}
+            <div className="flex flex-col h-full">
+              <FadeIn className="mb-10">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-2xl bg-[#F5A623]/20 flex items-center justify-center">
-                      <Quote className="text-[#F5A623]" size={24} />
+                      <Quote className="text-[#F5A623]" size={24} fill="currentColor" />
                     </div>
                     <h2 className="text-4xl font-bold tracking-tight">Weekly Intelligence</h2>
                   </div>
-                  <p className="text-xl text-zinc-400 leading-relaxed">
-                    SQU listens to what people actually say while they use your product. We turn those voices into your next big product update.
+                  <p className="text-xl text-zinc-400 leading-relaxed max-w-lg">
+                    Instantly turn thousands of raw customer questions into actionable product decisions. See what people ask when they're actually using your device.
                   </p>
                 </div>
               </FadeIn>
+              
+              <div className="glass-card p-6 rounded-2xl border-white/5 mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                    <Volume2 className="text-zinc-400" size={32} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg">Aura Speaker Gen 2</h4>
+                    <p className="text-xs text-zinc-500 uppercase tracking-widest font-black">Active Product Tracking</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-6 pl-4 border-l-2 border-white/5 flex-grow">
                 {[
-                  { tag: '"Too sweet for kids"', type: 'Product Feedback', color: 'bg-red-500/10 text-red-400' },
-                  { tag: '"Expires too fast in cabinet"', type: 'UX Issue', color: 'bg-amber-500/10 text-amber-400' },
-                  { tag: '"How do I use this with cream?"', type: 'Support Gap', color: 'bg-blue-500/10 text-blue-400' }
+                  { tag: '"Bass feels muddy at 80% volume"', type: 'Audio Quality', color: 'bg-red-500/10 text-red-400' },
+                  { tag: '"How do I link two for stereo?"', type: 'UX Friction', color: 'bg-amber-500/10 text-amber-400' },
+                  { tag: '"Is it safe near salt water?"', type: 'Support Gap', color: 'bg-[#00E5C3]/10 text-[#00E5C3]' }
                 ].map((item, idx) => (
                   <FadeIn key={idx} delay={idx * 150} className="relative group">
                     <div className="absolute -left-[25px] top-4 w-4 h-4 rounded-full border-2 border-[#F5A623] bg-[#111317]" />
@@ -314,38 +320,108 @@ export default function App() {
               </div>
             </div>
 
-            <FadeIn delay={400} className="h-full">
-              <div className="glass-card rounded-[2.5rem] p-10 border border-white/10 shadow-2xl h-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#111317]">
-                <div className="flex items-center gap-3 mb-10">
-                  <div className="w-10 h-10 rounded-xl bg-[#00E5C3]/20 flex items-center justify-center">
-                    <BrainCircuit className="text-[#00E5C3]" size={20} />
+            {/* RIGHT COLUMN */}
+            <FadeIn delay={400} className="w-full h-full flex">
+              <div className="glass-card rounded-[2.5rem] p-8 md:p-10 border border-white/10 shadow-2xl w-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#111317] relative overflow-hidden min-h-[700px]">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#00E5C3]/20 flex items-center justify-center">
+                      <Zap className="text-[#00E5C3]" size={20} fill="currentColor" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Intelligence Sweep</h3>
+                      <p className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold">Auto-Synthesis Mode</p>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold">AI Strategy Workspace</h3>
+                  {reportState === 'complete' && (
+                    <div className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                      Live Data
+                    </div>
+                  )}
                 </div>
-                {!aiInsight ? (
-                  <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
-                    <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center border border-dashed border-white/10">
-                      <FileText className="text-zinc-600" size={32} />
+
+                {reportState === 'idle' && (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8 animate-in fade-in duration-500">
+                    <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center border border-dashed border-white/10 relative">
+                      <div className="absolute inset-0 rounded-full border border-[#00E5C3]/20 animate-ping opacity-20"></div>
+                      <Mic className="text-zinc-600" size={40} />
                     </div>
-                    <div className="max-w-xs">
-                      <h4 className="text-zinc-300 font-bold mb-2">Ready to Analyze</h4>
-                      <p className="text-sm text-zinc-500 mb-8">Synthesize this week's customer feedback into business goals.</p>
-                      <button onClick={handleGenerateInsight} disabled={isInsightLoading} className="w-full bg-[#00E5C3] text-[#111317] py-4 rounded-2xl font-black text-lg hover:brightness-110 transition-all glow-primary flex items-center justify-center gap-3">
-                        {isInsightLoading ? <Loader2 size={24} className="animate-spin" /> : <><Zap size={20} /> Run AI Analysis</>}
-                      </button>
+                    <div className="max-w-xs space-y-3">
+                      <h4 className="text-xl font-bold text-white tracking-tight">124 Conversations Pending</h4>
+                      <p className="text-sm text-zinc-500">New questions regarding Aura Speaker Gen 2 collected in the last 72 hours.</p>
                     </div>
+                    <button onClick={handleGenerateInsight} className="w-full bg-[#00E5C3] text-[#111317] py-5 rounded-2xl font-black text-lg hover:brightness-110 transition-all glow-primary flex items-center justify-center gap-3 active:scale-[0.98]">
+                      <Sparkles size={22} fill="currentColor" /> Analyze Product Intel
+                    </button>
                   </div>
-                ) : (
-                  <div className="flex-1 space-y-8 animate-in fade-in zoom-in-95 duration-500">
-                    <div className="bg-[#00E5C3]/5 border border-[#00E5C3]/20 rounded-3xl p-8">
-                      <div className="flex items-center gap-2 mb-6 text-[#00E5C3] font-black text-xs uppercase tracking-widest"><Sparkles size={14} /> Intelligence Unlocked</div>
-                      <div className="space-y-6 text-zinc-300 font-mono text-sm leading-relaxed">
-                        {aiInsight.split('\n').map((line, i) => (
-                          <p key={i} className="flex gap-3"><span className="text-[#00E5C3] font-bold">»</span> {line}</p>
-                        ))}
+                )}
+
+                {reportState === 'loading' && (
+                  <div className="flex-1 flex flex-col items-center justify-center space-y-8 relative py-20">
+                    <div className="scan-effect"></div>
+                    <div className="w-20 h-20 border-t-2 border-r-2 border-[#00E5C3] rounded-full animate-spin"></div>
+                    <div className="text-center">
+                      <p className="text-sm font-mono text-[#00E5C3] mb-2">{steps[loadingStep]}</p>
+                      <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-[#00E5C3] transition-all duration-500" 
+                          style={{ width: `${((loadingStep + 1) / steps.length) * 100}%` }}
+                        />
                       </div>
                     </div>
-                    <button onClick={() => setAiInsight(null)} className="text-xs text-zinc-600 hover:text-zinc-400 font-bold uppercase tracking-widest transition-colors self-center mt-auto">Clear & Refresh</button>
+                  </div>
+                )}
+
+                {reportState === 'complete' && (
+                  <div className="flex-1 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 flex flex-col">
+                    <div className="space-y-6 flex-grow">
+                      <div className="flex items-center gap-4 text-zinc-300">
+                        <Calendar size={18} className="text-[#F5A623]" />
+                        <div>
+                          <h4 className="font-bold text-lg">Weekly Engagement Report</h4>
+                          <p className="text-xs text-zinc-500 font-medium">Aura Speaker Gen 2 • <span className="text-white">Active Sentiment: Positive (72%)</span></p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/5">
+                          <p className="text-[10px] uppercase font-black text-zinc-500 tracking-widest mb-1">Total Scans</p>
+                          <p className="text-2xl font-black text-white">124</p>
+                          <p className="text-[10px] text-emerald-400 font-bold">+12% vs last week</p>
+                        </div>
+                        <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/5">
+                          <p className="text-[10px] uppercase font-black text-zinc-500 tracking-widest mb-1">Active Chats</p>
+                          <p className="text-2xl font-black text-white">42</p>
+                          <p className="text-[10px] text-emerald-400 font-bold">+18% conversion</p>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-colors">
+                          <div className="flex items-center gap-2 mb-3 text-[#00E5C3] font-bold text-xs uppercase tracking-widest">
+                            <AlertCircle size={14} /> Core Pain Point
+                          </div>
+                          <p className="text-sm text-zinc-300 leading-relaxed">
+                            <span className="text-white font-bold">14 users</span> specifically asked about pairing with older Gen 1 models. Currently, the AI handles this manually—recommend adding a dedicated <span className="text-white font-bold">"Stereo Link" guide</span> to the scan flow.
+                          </p>
+                        </div>
+                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-colors">
+                          <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest">
+                            <TrendingUp size={14} /> Marketing Opportunity
+                          </div>
+                          <p className="text-sm text-zinc-300 leading-relaxed">
+                            Users are asking about <span className="text-white font-bold">beach usage</span>. Leverage this by adding an "Outdoors & Sand Safety" video module to increase upsells on our Rugged Carrying Case.
+                          </p>
+                        </div>
+                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-zinc-400 transition-colors">
+                          <div className="flex items-center gap-2 mb-3 text-zinc-400 font-bold text-xs uppercase tracking-widest">
+                            <Settings size={14} /> Engineering Note
+                          </div>
+                          <p className="text-sm text-zinc-300 leading-relaxed">
+                            Cluster detected: <span className="text-white font-bold">"Blue light flashing"</span> questions peak at night. Consider a future firmware update for an "Auto-Dim" or "Stealth Mode."
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -367,9 +443,9 @@ export default function App() {
                 <h3 className="text-2xl font-bold mb-3">Starter</h3>
                 <p className="text-zinc-500 text-sm mb-10">For emerging brands</p>
                 <div className="text-6xl font-black mb-12 tracking-tighter">$199<span className="text-xl text-zinc-500 font-normal">/mo</span></div>
-                <div className="space-y-5 mb-12 flex-1">
-                  {["Up to 10 products", "Branded Scan Landing Page", "Basic AI Question Engine", "Weekly Email Reports", "Standard Analytics", "Community Support"].map((f, j) => (
-                    <div key={j} className="flex items-start gap-3 text-zinc-400 text-sm font-medium">
+                <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
+                  {["Up to 10 products", "Branded Scan Landing Page", "Basic AI Question Engine", "Weekly Email Reports"].map((f, j) => (
+                    <div key={j} className="flex items-start gap-3">
                       <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
                     </div>
                   ))}
@@ -377,16 +453,15 @@ export default function App() {
                 <button className="w-full bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all">Start Free</button>
               </div>
             </FadeIn>
-
             <FadeIn delay={200} className="h-full">
-              <div className="bg-[#1A1D24] p-12 rounded-[3rem] border-2 border-[#00E5C3] flex flex-col h-full relative shadow-[0_0_60px_rgba(0,229,195,0.15)] scale-105 z-10 group">
+              <div className="bg-[#1A1D24] p-12 rounded-[3rem] border-2 border-[#00E5C3] flex flex-col h-full relative shadow-[0_0_60px_rgba(0,229,195,0.15)] scale-105 z-10">
                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00E5C3] text-[#111317] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">Most Popular</div>
                 <h3 className="text-2xl font-bold mb-3 text-[#00E5C3]">Growth</h3>
                 <p className="text-zinc-400 text-sm mb-10">Best for scaling teams</p>
                 <div className="text-6xl font-black mb-12 tracking-tighter text-white">$699<span className="text-xl text-zinc-400 font-normal">/mo</span></div>
-                <div className="space-y-5 mb-12 flex-1">
-                  {["Up to 50 products", "Advanced Intelligence Reports", "Real-time Revenue Attribution", "Custom AI Upsell Logic", "Priority CRM Integrations", "Concierge Setup"].map((f, j) => (
-                    <div key={j} className="flex items-start gap-3 text-white text-sm font-bold">
+                <div className="space-y-5 mb-12 flex-1 text-sm text-white font-bold">
+                  {["Up to 50 products", "Advanced Intelligence Reports", "Real-time Revenue Attribution", "Custom AI Upsell Logic"].map((f, j) => (
+                    <div key={j} className="flex items-start gap-3">
                       <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
                     </div>
                   ))}
@@ -394,15 +469,14 @@ export default function App() {
                 <button className="w-full bg-[#00E5C3] text-[#111317] py-4 rounded-2xl font-black text-lg glow-primary">Get Started</button>
               </div>
             </FadeIn>
-
             <FadeIn delay={300} className="h-full">
               <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
                 <h3 className="text-2xl font-bold mb-3">Scale</h3>
                 <p className="text-zinc-500 text-sm mb-10">Enterprise power</p>
                 <div className="text-6xl font-black mb-12 tracking-tighter">$999<span className="text-xl text-zinc-500 font-normal">/mo</span></div>
-                <div className="space-y-5 mb-12 flex-1">
-                  {["Unlimited Products", "White-label Scan Pages", "Multi-Brand Dashboard", "Dedicated Data Scientist", "API & Webhook Access", "24/7 Phone Support"].map((f, j) => (
-                    <div key={j} className="flex items-start gap-3 text-zinc-400 text-sm font-medium">
+                <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
+                  {["Unlimited Products", "White-label Scan Pages", "Multi-Brand Dashboard", "API & Webhook Access"].map((f, j) => (
+                    <div key={j} className="flex items-start gap-3">
                       <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
                     </div>
                   ))}
