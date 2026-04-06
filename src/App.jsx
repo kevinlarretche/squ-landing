@@ -171,7 +171,6 @@ export default function App() {
             </FadeIn>
           </div>
 
-          {/* COMPACT STATIC CHAT SIMULATOR */}
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
               <div className="flex items-center gap-3 mb-6">
@@ -507,7 +506,7 @@ export default function App() {
 
                     <div className="h-px w-full bg-white/5 mb-8" />
 
-                    <div className="space-y-4 mb-12 flex-grow">
+                    <div className="space-y-4 flex-grow">
                       {p.features.map((feat, idx) => (
                         <div key={idx} className="flex items-center gap-3 group/item">
                           <Check size={14} className="text-[#00E5C3]" />
@@ -515,10 +514,6 @@ export default function App() {
                         </div>
                       ))}
                     </div>
-
-                    <button className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${p.active ? 'bg-[#00E5C3] text-[#111317] hover:brightness-110 shadow-lg shadow-[#00E5C3]/20' : 'bg-white/5 text-white hover:bg-white/10 border border-white/5'}`}>
-                      Select Plan <MoveRight size={14} className="arrow-icon transition-transform" />
-                    </button>
                   </div>
                 </div>
               </FadeIn>
@@ -527,7 +522,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* CONTACT SECTION - TIGHTER SPACING */}
+      {/* CONTACT SECTION */}
       <section className="pb-24 pt-4 px-6 relative overflow-hidden" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
 
