@@ -31,7 +31,6 @@ const fetchGemini = async (prompt, systemInstruction = "") => {
   }
 };
 
-
   let delay = 1000;
   for (let i = 0; i < 5; i++) {
     try {
