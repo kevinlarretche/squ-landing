@@ -14,9 +14,9 @@ const GEMINI_MODEL = "gemini-2.0-flash-lite";
 const fetchGemini = async (prompt, systemInstruction = "") => {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
   const payload = {
-    contents: [{ parts: [{ text: prompt }] }],
-    systemInstruction: { parts: [{ text: systemInstruction }] }
-  };
+  contents: [{ parts: [{ text: prompt }] }],
+  ...(systemInstruction && { systemInstruction: { parts: [{ text: systemInstruction }] } })
+};
 
   let delay = 1000;
   for (let i = 0; i < 5; i++) {
