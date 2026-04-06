@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 
 // --- Gemini API Setup ---
-
 const fetchGemini = async (prompt, systemInstruction = "") => {
   let delay = 1000;
   for (let i = 0; i < 5; i++) {
@@ -21,25 +20,6 @@ const fetchGemini = async (prompt, systemInstruction = "") => {
       
       if (!response.ok) throw new Error('API Error');
       
-      const data = await response.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text;
-    } catch (error) {
-      if (i === 4) throw error;
-      await new Promise(resolve => setTimeout(resolve, delay));
-      delay *= 2;
-    }
-  }
-};
-
-  let delay = 1000;
-  for (let i = 0; i < 5; i++) {
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) throw new Error('API Error');
       const data = await response.json();
       return data.candidates?.[0]?.content?.parts?.[0]?.text;
     } catch (error) {
@@ -239,6 +219,7 @@ export default function App() {
         </div>
       </section>
 
+      {/* Rest of your code continues exactly the same... */}
       {/* FEATURE TAG CLOUD */}
       <section className="py-8 border-y border-white/5 bg-[#1A1D24]/30 relative z-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -265,7 +246,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* STATS SECTION - UPDATED WITH "UP TO" */}
+      {/* STATS SECTION */}
       <section className="py-16 md:py-20 px-6 bg-[#111317]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-[2rem] overflow-hidden border border-white/10">
@@ -296,11 +277,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* INTELLIGENCE REPORTS - ALIGNED LAYOUT */}
+      {/* INTELLIGENCE REPORTS */}
       <section className="py-24 px-6 bg-[#1A1D24]/30" id="demo">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-stretch">
-            {/* LEFT SIDE */}
             <div className="flex flex-col">
               <FadeIn className="mb-12">
                 <div className="space-y-6">
@@ -334,7 +314,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* RIGHT SIDE */}
             <FadeIn delay={400} className="h-full">
               <div className="glass-card rounded-[2.5rem] p-10 border border-white/10 shadow-2xl h-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#111317]">
                 <div className="flex items-center gap-3 mb-10">
@@ -375,7 +354,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRICING - RESTORED FULL FEATURES */}
+      {/* PRICING */}
       <section className="py-32 px-6" id="pricing">
         <div className="max-w-7xl mx-auto">
           <FadeIn className="text-center mb-20">
@@ -383,7 +362,6 @@ export default function App() {
             <p className="text-xl text-zinc-500">Transparent pricing for brands of all sizes.</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-8 items-stretch">
-            {/* Starter */}
             <FadeIn delay={100} className="h-full">
               <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
                 <h3 className="text-2xl font-bold mb-3">Starter</h3>
@@ -400,7 +378,6 @@ export default function App() {
               </div>
             </FadeIn>
 
-            {/* Growth */}
             <FadeIn delay={200} className="h-full">
               <div className="bg-[#1A1D24] p-12 rounded-[3rem] border-2 border-[#00E5C3] flex flex-col h-full relative shadow-[0_0_60px_rgba(0,229,195,0.15)] scale-105 z-10 group">
                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00E5C3] text-[#111317] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">Most Popular</div>
@@ -418,7 +395,6 @@ export default function App() {
               </div>
             </FadeIn>
 
-            {/* Scale */}
             <FadeIn delay={300} className="h-full">
               <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
                 <h3 className="text-2xl font-bold mb-3">Scale</h3>
