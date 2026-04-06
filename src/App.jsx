@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Menu, X, QrCode, MessageSquare, Zap, BarChart3, 
-  Smartphone, LineChart, ShieldCheck, Check, ArrowRight,
-  MessageCircle, Sparkles, TrendingUp, Send, Loader2,
-  Plus, Search, BrainCircuit, FileText, Quote, Lightbulb,
-  Info, Calendar, Target, AlertCircle, Volume2, Mic, Settings
+  Menu, X, Smartphone, Zap, BarChart3, 
+  Check, ArrowRight, Sparkles, TrendingUp,
+  Quote, Lightbulb, Calendar, AlertCircle, 
+  Volume2, Mic, Settings, MoveRight, Wrench
 } from 'lucide-react';
 
 const styles = `
@@ -234,7 +233,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* REDESIGNED STATS SECTION */}
+      {/* STATS STRIPE */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -246,11 +245,9 @@ export default function App() {
             ].map((stat, i) => (
               <FadeIn key={i} delay={i * 100} className="stat-grid-item group">
                 <div className="relative h-full bg-[#1A1D24] border border-white/5 rounded-3xl p-8 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1">
-                  {/* Decorative background text */}
                   <span className="stat-bg-text absolute -bottom-4 -right-4 text-8xl font-black text-white/[0.02] transition-all duration-700 pointer-events-none uppercase italic">
                     {stat.sub}
                   </span>
-                  
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-2">
                       <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${stat.col} animate-pulse`} />
@@ -258,13 +255,10 @@ export default function App() {
                         {stat.sub}
                       </span>
                     </div>
-                    
                     <div className={`text-6xl font-black mb-4 tracking-tighter bg-gradient-to-br ${stat.col} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500 origin-left`}>
                       {stat.val}
                     </div>
-                    
                     <div className="h-px w-8 bg-white/10 mb-4 group-hover:w-full transition-all duration-700" />
-                    
                     <p className="text-sm font-bold text-zinc-400 leading-tight group-hover:text-zinc-200 transition-colors">
                       {stat.lab}
                     </p>
@@ -280,7 +274,6 @@ export default function App() {
       <section className="pb-24 pt-8 px-6 bg-[#111317]" id="demo">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-stretch">
-            {/* LEFT COLUMN */}
             <div className="flex flex-col h-full">
               <FadeIn className="mb-10">
                 <div className="space-y-6">
@@ -327,10 +320,12 @@ export default function App() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN */}
             <FadeIn delay={400} className="w-full h-full flex">
               <div className="glass-card rounded-[2.5rem] p-8 md:p-10 border border-white/10 shadow-2xl w-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#111317] relative overflow-hidden min-h-[700px]">
-                {/* Header */}
+                <span className="stat-bg-text absolute -bottom-10 -right-10 text-[12rem] font-black text-white/[0.01] transition-all duration-700 pointer-events-none uppercase italic">
+                  INTEL
+                </span>
+
                 <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-[#00E5C3]/20 flex items-center justify-center">
@@ -390,6 +385,7 @@ export default function App() {
                           <p className="text-xs text-zinc-500 font-medium">Aura Speaker Gen 2 • <span className="text-white">Active Sentiment: Positive (72%)</span></p>
                         </div>
                       </div>
+                      
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/5">
                           <p className="text-[10px] uppercase font-black text-zinc-500 tracking-widest mb-1">Total Scans</p>
@@ -402,8 +398,9 @@ export default function App() {
                           <p className="text-[10px] text-emerald-400 font-bold">+18% conversion</p>
                         </div>
                       </div>
+
                       <div className="space-y-4">
-                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-colors">
+                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-all">
                           <div className="flex items-center gap-2 mb-3 text-[#00E5C3] font-bold text-xs uppercase tracking-widest">
                             <AlertCircle size={14} /> Core Pain Point
                           </div>
@@ -411,7 +408,8 @@ export default function App() {
                             <span className="text-white font-bold">14 users</span> specifically asked about pairing with older Gen 1 models. Currently, the AI handles this manually—recommend adding a dedicated <span className="text-white font-bold">"Stereo Link" guide</span> to the scan flow.
                           </p>
                         </div>
-                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-colors">
+                        
+                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-all">
                           <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest">
                             <TrendingUp size={14} /> Marketing Opportunity
                           </div>
@@ -419,13 +417,17 @@ export default function App() {
                             Users are asking about <span className="text-white font-bold">beach usage</span>. Leverage this by adding an "Outdoors & Sand Safety" video module to increase upsells on our Rugged Carrying Case.
                           </p>
                         </div>
-                        <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-zinc-400 transition-colors">
-                          <div className="flex items-center gap-2 mb-3 text-zinc-400 font-bold text-xs uppercase tracking-widest">
-                            <Settings size={14} /> Engineering Note
+
+                        <div className="group bg-[#F5A623]/5 border border-[#F5A623]/20 rounded-2xl p-5 hover:bg-[#F5A623]/10 transition-all relative overflow-hidden">
+                          <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest relative z-10">
+                            <Wrench size={14} /> Engineering Note
                           </div>
-                          <p className="text-sm text-zinc-300 leading-relaxed">
-                            Cluster detected: <span className="text-white font-bold">"Blue light flashing"</span> questions peak at night. Consider a future firmware update for an "Auto-Dim" or "Stealth Mode."
+                          <p className="text-sm text-zinc-300 leading-relaxed relative z-10">
+                            Cluster detected: <span className="text-white font-bold">"Blue light flashing"</span> questions peak at night. Consider a future firmware update for an <span className="text-[#F5A623] font-bold">"Auto-Dim"</span> or <span className="text-[#F5A623] font-bold">"Stealth Mode."</span>
                           </p>
+                          <div className="absolute top-0 right-0 p-2 opacity-10">
+                            <Settings className="text-[#F5A623]" size={40} style={{ animation: 'spin 8s linear infinite' }} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -437,90 +439,102 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRICING */}
-      <section className="pt-24 pb-12 px-6" id="pricing">
+      {/* PRICING SECTION */}
+      <section className="py-24 px-6 bg-[#111317]" id="pricing">
         <div className="max-w-7xl mx-auto">
-          <FadeIn className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter">Scale Your Intelligence</h2>
-            <p className="text-xl text-zinc-500">Transparent pricing for brands at every stage.</p>
+          <FadeIn className="mb-16 text-center">
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Scale Your Intelligence</h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">Transparent pricing for brands at every stage.</p>
           </FadeIn>
-          <div className="grid md:grid-cols-3 gap-8 items-stretch">
-            {/* CORE PLAN */}
-            <FadeIn delay={100} className="h-full">
-              <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
-                <h3 className="text-2xl font-bold mb-3 text-white">Core</h3>
-                <p className="text-zinc-500 text-sm mb-10 italic">Entry point for interactions</p>
-                <div className="text-6xl font-black mb-12 tracking-tighter">$299<span className="text-xl text-zinc-500 font-normal">/mo</span></div>
-                <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
-                  {["1–10 products", "QR code system", "AI Q&A chatbot", "Basic data capture"].map((f, j) => (
-                    <div key={j} className="flex items-start gap-3">
-                      <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
-                    </div>
-                  ))}
-                  <div className="pt-4 mt-4 border-t border-white/5 text-[10px] text-zinc-600 font-bold uppercase tracking-widest">
-                    No Upsells or Analytics
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-            
-            {/* GROWTH PLAN */}
-            <FadeIn delay={200} className="h-full">
-              <div className="bg-[#1A1D24] p-12 rounded-[3rem] border-2 border-[#00E5C3] flex flex-col h-full relative shadow-[0_0_60px_rgba(0,229,195,0.15)] scale-105 z-10">
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00E5C3] text-[#111317] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">Revenue Focused</div>
-                <h3 className="text-2xl font-bold mb-3 text-[#00E5C3]">Growth</h3>
-                <p className="text-zinc-400 text-sm mb-10 italic">Conversations into insights</p>
-                <div className="text-6xl font-black mb-12 tracking-tighter text-white">$599<span className="text-xl text-zinc-400 font-normal">/mo</span></div>
-                <div className="space-y-5 mb-12 flex-1 text-sm text-white font-bold">
-                  {["11–100 products", "Upsell prompts (bundles, recipes, links)", "Weekly/Daily Intelligence Reports", "Analytics dashboard"].map((f, j) => (
-                    <div key={j} className="flex items-start gap-3">
-                      <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeIn>
 
-            {/* ENTERPRISE PLAN */}
-            <FadeIn delay={300} className="h-full">
-              <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
-                <h3 className="text-2xl font-bold mb-3 text-white">Enterprise</h3>
-                <p className="text-zinc-500 text-sm mb-10 italic">Full conversion platform</p>
-                <div className="text-5xl font-black mb-12 tracking-tighter text-white">
-                  <span className="text-lg font-bold text-zinc-500 mr-1">From</span>$1,200<span className="text-xl text-zinc-500 font-normal">/mo</span>
-                </div>
-                <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
-                  {[
-                    "Unlimited products & scans", 
-                    "Full E-commerce integration", 
-                    "Advanced upsell engine", 
-                    "Multi-language AI & CRM", 
-                    "Custom AI training", 
-                    "Priority Messaging"
-                  ].map((f, j) => (
-                    <div key={j} className="flex items-start gap-3">
-                      <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { 
+                plan: "Core", 
+                price: "$299", 
+                sub: "Level 01", 
+                bg: "CORE",
+                features: ["1–10 Products", "QR Code Generation", "Unlimited Scans", "Email Support"],
+                col: "from-[#00E5C3] to-emerald-400",
+                active: false
+              },
+              { 
+                plan: "Growth", 
+                price: "$599", 
+                sub: "Level 02", 
+                bg: "GROWTH",
+                features: ["11–100 Products", "Upsell AI Logic", "Weekly Intel Reports", "Priority Support"],
+                col: "from-[#F5A623] to-orange-400",
+                active: true
+              },
+              { 
+                plan: "Enterprise", 
+                price: "Custom", 
+                sub: "Max Level", 
+                bg: "SCALE",
+                features: ["Unlimited Products", "API Access", "Custom AI Training", "Dedicated Manager"],
+                col: "from-blue-400 to-[#00E5C3]",
+                active: false
+              }
+            ].map((p, i) => (
+              <FadeIn key={i} delay={i * 100} className="stat-grid-item group">
+                <div className={`relative h-full bg-[#1A1D24] border ${p.active ? 'border-[#00E5C3]/30 ring-1 ring-[#00E5C3]/20' : 'border-white/5'} rounded-3xl p-8 md:p-10 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1`}>
+                  
+                  <span className="stat-bg-text absolute -bottom-4 -right-4 text-8xl font-black text-white/[0.02] transition-all duration-700 pointer-events-none uppercase italic">
+                    {p.bg}
+                  </span>
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${p.col} animate-pulse`} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
+                          {p.sub}
+                        </span>
+                      </div>
+                      {p.active && (
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[#00E5C3] px-2 py-0.5 rounded-md bg-[#00E5C3]/10 border border-[#00E5C3]/20">Most Popular</span>
+                      )}
                     </div>
-                  ))}
-                  <div className="pt-4 mt-4 border-t border-white/5 text-[10px] text-[#F5A623] font-bold uppercase tracking-widest">
-                    +% Revenue Share Applies
+
+                    <div className="mb-10">
+                      <h3 className="text-2xl font-bold text-white mb-2">{p.plan}</h3>
+                      <div className={`text-6xl font-black tracking-tighter bg-gradient-to-br ${p.col} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-500 origin-left`}>
+                        {p.price}
+                      </div>
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-2">per month, billed annually</p>
+                    </div>
+
+                    <div className="h-px w-full bg-white/5 mb-8" />
+
+                    <div className="space-y-4 mb-12 flex-grow">
+                      {p.features.map((feat, idx) => (
+                        <div key={idx} className="flex items-center gap-3 group/item">
+                          <Check size={14} className="text-[#00E5C3]" />
+                          <span className="text-sm font-medium text-zinc-400 group-hover/item:text-zinc-200 transition-colors">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${p.active ? 'bg-[#00E5C3] text-[#111317] hover:brightness-110 shadow-lg shadow-[#00E5C3]/20' : 'bg-white/5 text-white hover:bg-white/10 border border-white/5'}`}>
+                      Select Plan <MoveRight size={14} className="arrow-icon transition-transform" />
+                    </button>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* PREMIUM CONTACT SECTION */}
-      <section className="py-24 px-6 relative overflow-hidden" id="contact">
+      {/* CONTACT SECTION - TIGHTER SPACING */}
+      <section className="pb-24 pt-4 px-6 relative overflow-hidden" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <FadeIn>
             <div className="glass-card rounded-[3rem] p-10 md:p-16 border border-white/10">
               <div className="grid lg:grid-cols-2 gap-16 items-center">
-                
                 <div>
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
                     <Zap size={14} fill="currentColor" /> Invite-Only Access
@@ -529,13 +543,12 @@ export default function App() {
                     Ready to transform your support?
                   </h2>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-6">
-                    SQU is currently rolling out to select partners. Skip the waitlist and reach out directly to discuss how we can elevate your brand's post-purchase experience.
+                    SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
                   </p>
                 </div>
 
                 <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-                  
                   <div className="relative bg-[#1A1D24] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
                     <div className="flex items-center gap-5 mb-10">
                       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
@@ -553,7 +566,7 @@ export default function App() {
                       <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-4 rounded-xl transition-all group/btn">
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                            <MessageSquare size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
+                            <BarChart3 size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
                           </div>
                           <div className="text-left">
                             <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
@@ -561,19 +574,6 @@ export default function App() {
                           </div>
                         </div>
                         <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
-                      </a>
-
-                      <a href="tel:+85270737141" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#F5A623]/30 p-4 rounded-xl transition-all group/btn">
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                            <Smartphone size={18} className="text-zinc-400 group-hover/btn:text-[#F5A623]" />
-                          </div>
-                          <div className="text-left">
-                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Call / WhatsApp</p>
-                            <p className="text-sm font-medium text-zinc-200">+852 7073 7141</p>
-                          </div>
-                        </div>
-                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#F5A623] group-hover/btn:translate-x-1 transition-all" />
                       </a>
                     </div>
                   </div>
@@ -584,7 +584,7 @@ export default function App() {
         </div>
       </section>
 
-      <footer className="border-t border-white/5 py-12 px-6">
+      <footer className="border-t border-white/5 py-12 px-6 text-center">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded bg-[#00E5C3] flex items-center justify-center"><span className="text-[#111317] font-bold text-xs">S</span></div>
