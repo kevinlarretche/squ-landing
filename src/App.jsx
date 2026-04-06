@@ -9,7 +9,7 @@ import {
 
 // --- Gemini API Setup ---
 const apiKey = "AIzaSyCzZAoW2OfjdZLTTaYpEoBjJzSx_YgMPVI"; 
-const GEMINI_MODEL = "gemini-2.5-flash-preview-09-2025";
+const GEMINI_MODEL = "gemini-2.0-flash-lite";
 
 const fetchGemini = async (prompt, systemInstruction = "") => {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
