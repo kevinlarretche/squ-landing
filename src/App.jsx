@@ -135,11 +135,9 @@ export default function App() {
           </div>
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Features</a>
-            <a href="#pricing" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Pricing</a>
             <a href="#demo" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Demo</a>
-            <button className="bg-[#00E5C3] text-[#111317] px-5 py-2.5 rounded-full text-sm font-bold hover:bg-[#00cba9] transition-all glow-primary">
-              Start Free Trial
-            </button>
+            <a href="#pricing" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Pricing</a>
+            <a href="#contact" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
           </div>
           <button className="md:hidden text-zinc-400" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -164,19 +162,9 @@ export default function App() {
               </h1>
             </FadeIn>
             <FadeIn delay={200}>
-              <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed">
+              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed mb-4">
                 Customers scan a QR code, ask anything — and your AI answers instantly, reduces support, drives upsells, and captures what customers really think.
               </p>
-            </FadeIn>
-            <FadeIn delay={300}>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <button className="w-full sm:w-auto bg-[#00E5C3] text-[#111317] px-8 py-4 rounded-full text-lg font-bold hover:bg-[#00cba9] transition-all glow-primary flex items-center justify-center gap-2">
-                  Start Free Trial <ArrowRight size={18} />
-                </button>
-                <button className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all">
-                  See Demo
-                </button>
-              </div>
             </FadeIn>
           </div>
 
@@ -242,7 +230,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* STATS STRIP - ENLARGED FONT */}
+      {/* STATS STRIP */}
       <section className="pt-24 pb-8 px-6 bg-[#111317]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white/5 rounded-[2rem] overflow-hidden border border-white/10">
@@ -431,7 +419,7 @@ export default function App() {
       </section>
 
       {/* PRICING */}
-      <section className="py-32 px-6" id="pricing">
+      <section className="pt-24 pb-12 px-6" id="pricing">
         <div className="max-w-7xl mx-auto">
           <FadeIn className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter">Simple Pricing</h2>
@@ -450,7 +438,6 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <button className="w-full bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all">Start Free</button>
               </div>
             </FadeIn>
             <FadeIn delay={200} className="h-full">
@@ -466,7 +453,6 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <button className="w-full bg-[#00E5C3] text-[#111317] py-4 rounded-2xl font-black text-lg glow-primary">Get Started</button>
               </div>
             </FadeIn>
             <FadeIn delay={300} className="h-full">
@@ -483,13 +469,94 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <button className="w-full bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all">Contact Sales</button>
               </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
+      {/* PREMIUM CONTACT SECTION */}
+      <section className="py-24 px-6 relative overflow-hidden" id="contact">
+        {/* Decorative background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <FadeIn>
+            <div className="glass-card rounded-[3rem] p-10 md:p-16 border border-white/10">
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                
+                {/* Left Column: Copy */}
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
+                    <Zap size={14} fill="currentColor" /> Invite-Only Access
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter leading-tight">
+                    Ready to transform your support?
+                  </h2>
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-6">
+                    SQU is currently rolling out to select partners. Skip the waitlist and reach out directly to discuss how we can elevate your brand's post-purchase experience.
+                  </p>
+                </div>
+
+                {/* Right Column: Digital Business Card */}
+                <div className="relative group">
+                  {/* Animated border glow effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+                  
+                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
+                    <div className="flex items-center gap-5 mb-10">
+                      {/* Avatar Placeholder */}
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
+                        <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
+                          <span className="text-2xl font-black text-white tracking-tighter">KL</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
+                        <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      {/* Email Button */}
+                      <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-4 rounded-xl transition-all group/btn">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                            <MessageSquare size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
+                            <p className="text-sm font-medium text-zinc-200">kevin.larretche@gmail.com</p>
+                          </div>
+                        </div>
+                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
+                      </a>
+
+                      {/* Phone Button */}
+                      <a href="tel:+85270737141" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#F5A623]/30 p-4 rounded-xl transition-all group/btn">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                            <Smartphone size={18} className="text-zinc-400 group-hover/btn:text-[#F5A623]" />
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Call / WhatsApp</p>
+                            <p className="text-sm font-medium text-zinc-200">+852 7073 7141</p>
+                          </div>
+                        </div>
+                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#F5A623] group-hover/btn:translate-x-1 transition-all" />
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* FOOTER */}
       <footer className="border-t border-white/5 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
