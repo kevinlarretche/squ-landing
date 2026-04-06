@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 // --- Gemini API Setup ---
-const apiKey = "AIzaSyCzZAoW2OfjdZLTTaYpEoBjJzSx_YgMPVI"; 
+const apiKey = "AIzaSyCulNCOeC4hmBJnKhz9y1FVDg2_PPwamRQ"; 
 const GEMINI_MODEL = "gemini-2.0-flash-lite";
 
 const fetchGemini = async (prompt, systemInstruction = "") => {
