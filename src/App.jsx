@@ -242,25 +242,25 @@ export default function App() {
         </div>
       </section>
 
-      {/* STATS STRIP */}
+      {/* STATS STRIP - ENLARGED FONT */}
       <section className="pt-24 pb-8 px-6 bg-[#111317]">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-[2rem] overflow-hidden border border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white/5 rounded-[2rem] overflow-hidden border border-white/10">
             {[
               { val: "35%", lab: "Up to 35% conversion lift", sub: "Conversion", col: "text-[#00E5C3]" },
               { val: "80%", lab: "Up to 80% questions answered instantly", sub: "Automation", col: "text-[#F5A623]" },
               { val: "25%", lab: "Up to 25% increase in upsell opportunities", sub: "Revenue", col: "text-[#00E5C3]" },
               { val: "24h", lab: "To go live from setup", sub: "Onboarding", col: "text-white" }
             ].map((stat, i) => (
-              <div key={i} className="bg-[#111317] p-8 md:p-10 hover:bg-white/[0.02] transition-colors group">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2">
-                  <span className={`w-1 h-1 rounded-full ${stat.col.split(' ')[0] === 'text-white' ? 'bg-zinc-500' : stat.col.replace('text-', 'bg-')}`}></span>
+              <div key={i} className="bg-[#111317] p-10 md:p-14 hover:bg-white/[0.02] transition-colors group border-b lg:border-b-0 lg:border-r border-white/5 last:border-0">
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-4 flex items-center gap-2">
+                  <span className={`w-1.5 h-1.5 rounded-full ${stat.col.split(' ')[0] === 'text-white' ? 'bg-zinc-500' : stat.col.replace('text-', 'bg-')}`}></span>
                   {stat.sub}
                 </div>
-                <div className={`text-3xl md:text-4xl font-black mb-1 ${stat.col} group-hover:scale-105 transition-transform origin-left duration-500 tracking-tight`}>
+                <div className={`text-6xl md:text-7xl font-black mb-3 ${stat.col} group-hover:scale-105 transition-transform origin-left duration-500 tracking-tighter`}>
                   {stat.val}
                 </div>
-                <div className="text-[11px] text-zinc-500 font-medium leading-tight max-w-[140px]">
+                <div className="text-sm md:text-base text-zinc-400 font-medium leading-tight max-w-[200px]">
                   {stat.lab}
                 </div>
               </div>
@@ -473,7 +473,9 @@ export default function App() {
               <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
                 <h3 className="text-2xl font-bold mb-3">Scale</h3>
                 <p className="text-zinc-500 text-sm mb-10">Enterprise power</p>
-                <div className="text-6xl font-black mb-12 tracking-tighter">$999<span className="text-xl text-zinc-500 font-normal">/mo</span></div>
+                <div className="text-5xl font-black mb-12 tracking-tighter text-white">
+                  <span className="text-lg font-bold text-zinc-500 mr-1">From</span>$1,119<span className="text-xl text-zinc-500 font-normal">/mo</span>
+                </div>
                 <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
                   {["Unlimited Products", "White-label Scan Pages", "Multi-Brand Dashboard", "API & Webhook Access"].map((f, j) => (
                     <div key={j} className="flex items-start gap-3">
