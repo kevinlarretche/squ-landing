@@ -57,6 +57,10 @@ const styles = `
     background: linear-gradient(90deg, transparent, #00E5C3, transparent);
     animation: scan-line 2s linear infinite;
   }
+  .stat-grid-item:hover .stat-bg-text {
+    transform: translateY(-10px);
+    opacity: 0.1;
+  }
 `;
 
 const FadeIn = ({ children, delay = 0, className = "" }) => {
@@ -146,23 +150,23 @@ export default function App() {
       </nav>
 
       {/* HERO */}
-      <section className="pt-40 pb-16 px-6 relative">
+      <section className="pt-32 pb-8 px-6 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00E5C3]/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-left relative z-10">
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/5 text-[#00E5C3] text-sm font-medium mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/5 text-[#00E5C3] text-sm font-medium mb-6">
                 <Sparkles size={14} /> Less support. Better products. More sales.
               </div>
             </FadeIn>
             <FadeIn delay={100}>
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
                 Ask Any Stupid Question. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">Really.</span>
               </h1>
             </FadeIn>
             <FadeIn delay={200}>
-              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed mb-4">
+              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed">
                 Customers scan a QR code, ask anything — and your AI answers instantly, reduces support, drives upsells, and captures what customers really think.
               </p>
             </FadeIn>
@@ -230,28 +234,43 @@ export default function App() {
         </div>
       </section>
 
-      {/* STATS STRIP */}
-      <section className="pt-24 pb-8 px-6 bg-[#111317]">
+      {/* REDESIGNED STATS SECTION */}
+      <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white/5 rounded-[2rem] overflow-hidden border border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { val: "35%", lab: "Up to 35% conversion lift", sub: "Conversion", col: "text-[#00E5C3]" },
-              { val: "80%", lab: "Up to 80% questions answered instantly", sub: "Automation", col: "text-[#F5A623]" },
-              { val: "25%", lab: "Up to 25% increase in upsell opportunities", sub: "Revenue", col: "text-[#00E5C3]" },
-              { val: "24h", lab: "To go live from setup", sub: "Onboarding", col: "text-white" }
+              { val: "35%", lab: "Up to 35% conversion lift", sub: "Conversion", col: "from-[#00E5C3] to-emerald-400" },
+              { val: "80%", lab: "Up to 80% questions answered instantly", sub: "Automation", col: "from-[#F5A623] to-orange-400" },
+              { val: "25%", lab: "Up to 25% increase in upsells", sub: "Revenue", col: "from-blue-400 to-[#00E5C3]" },
+              { val: "24h", lab: "To go live from setup", sub: "Onboarding", col: "from-zinc-200 to-zinc-500" }
             ].map((stat, i) => (
-              <div key={i} className="bg-[#111317] p-10 md:p-14 hover:bg-white/[0.02] transition-colors group border-b lg:border-b-0 lg:border-r border-white/5 last:border-0">
-                <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-4 flex items-center gap-2">
-                  <span className={`w-1.5 h-1.5 rounded-full ${stat.col.split(' ')[0] === 'text-white' ? 'bg-zinc-500' : stat.col.replace('text-', 'bg-')}`}></span>
-                  {stat.sub}
+              <FadeIn key={i} delay={i * 100} className="stat-grid-item group">
+                <div className="relative h-full bg-[#1A1D24] border border-white/5 rounded-3xl p-8 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1">
+                  {/* Decorative background text */}
+                  <span className="stat-bg-text absolute -bottom-4 -right-4 text-8xl font-black text-white/[0.02] transition-all duration-700 pointer-events-none uppercase italic">
+                    {stat.sub}
+                  </span>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${stat.col} animate-pulse`} />
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
+                        {stat.sub}
+                      </span>
+                    </div>
+                    
+                    <div className={`text-6xl font-black mb-4 tracking-tighter bg-gradient-to-br ${stat.col} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500 origin-left`}>
+                      {stat.val}
+                    </div>
+                    
+                    <div className="h-px w-8 bg-white/10 mb-4 group-hover:w-full transition-all duration-700" />
+                    
+                    <p className="text-sm font-bold text-zinc-400 leading-tight group-hover:text-zinc-200 transition-colors">
+                      {stat.lab}
+                    </p>
+                  </div>
                 </div>
-                <div className={`text-6xl md:text-7xl font-black mb-3 ${stat.col} group-hover:scale-105 transition-transform origin-left duration-500 tracking-tighter`}>
-                  {stat.val}
-                </div>
-                <div className="text-sm md:text-base text-zinc-400 font-medium leading-tight max-w-[200px]">
-                  {stat.lab}
-                </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -422,32 +441,38 @@ export default function App() {
       <section className="pt-24 pb-12 px-6" id="pricing">
         <div className="max-w-7xl mx-auto">
           <FadeIn className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter">Simple Pricing</h2>
-            <p className="text-xl text-zinc-500">Transparent pricing for brands of all sizes.</p>
+            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter">Scale Your Intelligence</h2>
+            <p className="text-xl text-zinc-500">Transparent pricing for brands at every stage.</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            {/* CORE PLAN */}
             <FadeIn delay={100} className="h-full">
               <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
-                <h3 className="text-2xl font-bold mb-3">Starter</h3>
-                <p className="text-zinc-500 text-sm mb-10">For emerging brands</p>
-                <div className="text-6xl font-black mb-12 tracking-tighter">$199<span className="text-xl text-zinc-500 font-normal">/mo</span></div>
+                <h3 className="text-2xl font-bold mb-3 text-white">Core</h3>
+                <p className="text-zinc-500 text-sm mb-10 italic">Entry point for interactions</p>
+                <div className="text-6xl font-black mb-12 tracking-tighter">$299<span className="text-xl text-zinc-500 font-normal">/mo</span></div>
                 <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
-                  {["Up to 10 products", "Branded Scan Landing Page", "Basic AI Question Engine", "Weekly Email Reports"].map((f, j) => (
+                  {["1–10 products", "QR code system", "AI Q&A chatbot", "Basic data capture"].map((f, j) => (
                     <div key={j} className="flex items-start gap-3">
                       <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
                     </div>
                   ))}
+                  <div className="pt-4 mt-4 border-t border-white/5 text-[10px] text-zinc-600 font-bold uppercase tracking-widest">
+                    No Upsells or Analytics
+                  </div>
                 </div>
               </div>
             </FadeIn>
+            
+            {/* GROWTH PLAN */}
             <FadeIn delay={200} className="h-full">
               <div className="bg-[#1A1D24] p-12 rounded-[3rem] border-2 border-[#00E5C3] flex flex-col h-full relative shadow-[0_0_60px_rgba(0,229,195,0.15)] scale-105 z-10">
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00E5C3] text-[#111317] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">Most Popular</div>
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00E5C3] text-[#111317] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">Revenue Focused</div>
                 <h3 className="text-2xl font-bold mb-3 text-[#00E5C3]">Growth</h3>
-                <p className="text-zinc-400 text-sm mb-10">Best for scaling teams</p>
-                <div className="text-6xl font-black mb-12 tracking-tighter text-white">$699<span className="text-xl text-zinc-400 font-normal">/mo</span></div>
+                <p className="text-zinc-400 text-sm mb-10 italic">Conversations into insights</p>
+                <div className="text-6xl font-black mb-12 tracking-tighter text-white">$599<span className="text-xl text-zinc-400 font-normal">/mo</span></div>
                 <div className="space-y-5 mb-12 flex-1 text-sm text-white font-bold">
-                  {["Up to 50 products", "Advanced Intelligence Reports", "Real-time Revenue Attribution", "Custom AI Upsell Logic"].map((f, j) => (
+                  {["11–100 products", "Upsell prompts (bundles, recipes, links)", "Weekly/Daily Intelligence Reports", "Analytics dashboard"].map((f, j) => (
                     <div key={j} className="flex items-start gap-3">
                       <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
                     </div>
@@ -455,19 +480,31 @@ export default function App() {
                 </div>
               </div>
             </FadeIn>
+
+            {/* ENTERPRISE PLAN */}
             <FadeIn delay={300} className="h-full">
               <div className="glass-card p-12 rounded-[3rem] border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
-                <h3 className="text-2xl font-bold mb-3">Scale</h3>
-                <p className="text-zinc-500 text-sm mb-10">Enterprise power</p>
+                <h3 className="text-2xl font-bold mb-3 text-white">Enterprise</h3>
+                <p className="text-zinc-500 text-sm mb-10 italic">Full conversion platform</p>
                 <div className="text-5xl font-black mb-12 tracking-tighter text-white">
-                  <span className="text-lg font-bold text-zinc-500 mr-1">From</span>$1,119<span className="text-xl text-zinc-500 font-normal">/mo</span>
+                  <span className="text-lg font-bold text-zinc-500 mr-1">From</span>$1,200<span className="text-xl text-zinc-500 font-normal">/mo</span>
                 </div>
                 <div className="space-y-5 mb-12 flex-1 text-sm text-zinc-400">
-                  {["Unlimited Products", "White-label Scan Pages", "Multi-Brand Dashboard", "API & Webhook Access"].map((f, j) => (
+                  {[
+                    "Unlimited products & scans", 
+                    "Full E-commerce integration", 
+                    "Advanced upsell engine", 
+                    "Multi-language AI & CRM", 
+                    "Custom AI training", 
+                    "Priority Messaging"
+                  ].map((f, j) => (
                     <div key={j} className="flex items-start gap-3">
                       <Check size={14} className="text-[#00E5C3] mt-0.5" /> <span>{f}</span>
                     </div>
                   ))}
+                  <div className="pt-4 mt-4 border-t border-white/5 text-[10px] text-[#F5A623] font-bold uppercase tracking-widest">
+                    +% Revenue Share Applies
+                  </div>
                 </div>
               </div>
             </FadeIn>
@@ -477,7 +514,6 @@ export default function App() {
 
       {/* PREMIUM CONTACT SECTION */}
       <section className="py-24 px-6 relative overflow-hidden" id="contact">
-        {/* Decorative background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -485,7 +521,6 @@ export default function App() {
             <div className="glass-card rounded-[3rem] p-10 md:p-16 border border-white/10">
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                 
-                {/* Left Column: Copy */}
                 <div>
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
                     <Zap size={14} fill="currentColor" /> Invite-Only Access
@@ -498,14 +533,11 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Right Column: Digital Business Card */}
                 <div className="relative group">
-                  {/* Animated border glow effect */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
                   
                   <div className="relative bg-[#1A1D24] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
                     <div className="flex items-center gap-5 mb-10">
-                      {/* Avatar Placeholder */}
                       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
                         <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
                           <span className="text-2xl font-black text-white tracking-tighter">KL</span>
@@ -518,7 +550,6 @@ export default function App() {
                     </div>
 
                     <div className="space-y-4">
-                      {/* Email Button */}
                       <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-4 rounded-xl transition-all group/btn">
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
@@ -532,7 +563,6 @@ export default function App() {
                         <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
                       </a>
 
-                      {/* Phone Button */}
                       <a href="tel:+85270737141" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#F5A623]/30 p-4 rounded-xl transition-all group/btn">
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
@@ -546,17 +576,14 @@ export default function App() {
                         <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#F5A623] group-hover/btn:translate-x-1 transition-all" />
                       </a>
                     </div>
-
                   </div>
                 </div>
-
               </div>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="border-t border-white/5 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
