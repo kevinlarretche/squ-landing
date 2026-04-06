@@ -15,7 +15,7 @@ const fetchGemini = async (prompt, systemInstruction = "") => {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
   const payload = {
   contents: [{ parts: [{ text: prompt }] }],
-  ...(systemInstruction && { systemInstruction: { parts: [{ text: systemInstruction }] } })
+  systemInstruction: { parts: [{ text: systemInstruction }] }
 };
 
   let delay = 1000;
