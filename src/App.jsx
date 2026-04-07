@@ -159,11 +159,9 @@ export default function App() {
               </div>
             </FadeIn>
             <FadeIn delay={100}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                Your customers are talking.{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">
-                  Are you listening?
-                </span>
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
+                Ask Any Stupid Question. <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">Really.</span>
               </h1>
             </FadeIn>
             <FadeIn delay={200}>
@@ -172,8 +170,6 @@ export default function App() {
               </p>
             </FadeIn>
           </div>
-        </div>
-      </section>
 
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
@@ -463,7 +459,7 @@ export default function App() {
               },
               { 
                 plan: "Growth", 
-                price: "$699", 
+                price: "$99", 
                 sub: "Level 02", 
                 bg: "GROWTH",
                 features: ["Up to 10 Products", "Upsell AI Logic", "Weekly Intel Reports", "Up to 1,500 chats"],
