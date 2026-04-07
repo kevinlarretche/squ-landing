@@ -168,7 +168,7 @@ export default function App() {
             </FadeIn>
             <FadeIn delay={200}>
               <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed">
-                Customers scan a QR code, ask anything — and your AI answers instantly, reduces support, drives upsells, and captures what customers really think.
+                A QR code on your product. An AI that answers, upsells, and reports back.
               </p>
             </FadeIn>
           </div>
