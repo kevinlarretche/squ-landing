@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Menu, X, Smartphone, Zap, BarChart3, 
+import {
+  Menu, X, Smartphone, Zap, BarChart3,
   Check, ArrowRight, Sparkles, TrendingUp,
-  Quote, Lightbulb, Calendar, AlertCircle, 
+  Quote, Lightbulb, Calendar, AlertCircle,
   Volume2, Mic, Settings, MoveRight, Wrench,
   BadgeDollarSign, BrainCircuit, Rocket, ChevronRight
 } from 'lucide-react';
+
 
 const styles = `
   @keyframes float {
@@ -63,9 +64,11 @@ const styles = `
   }
 `;
 
+
 const FadeIn = ({ children, delay = 0, className = "" }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef();
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -81,6 +84,7 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
     return () => observer.disconnect();
   }, []);
 
+
   return (
     <div
       ref={ref}
@@ -94,11 +98,13 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
   );
 };
 
+
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [reportState, setReportState] = useState('idle'); 
+  const [reportState, setReportState] = useState('idle');
   const [loadingStep, setLoadingStep] = useState(0);
   const [simStep, setSimStep] = useState(0);
+
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -107,7 +113,9 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+
   const steps = ["Accessing Database...", "Clustering 124 User Scans...", "Identifying Core Sentiment...", "Drafting Brand Strategy..."];
+
 
   const handleGenerateInsight = () => {
     setReportState('loading');
@@ -124,9 +132,11 @@ export default function App() {
     }, 900);
   };
 
+
   return (
     <div className="min-h-screen bg-[#111317] text-zinc-100 font-sans selection:bg-[#00E5C3] selection:text-zinc-900 overflow-x-hidden">
       <style dangerouslySetInnerHTML={{ __html: styles }} />
+
 
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full z-50 bg-[#111317]/80 backdrop-blur-lg border-b border-white/5">
@@ -139,27 +149,30 @@ export default function App() {
             <span className="text-2xl font-bold tracking-tight">SQU</span>
           </div>
 
+
           {/* Desktop links + CTA */}
-        <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-8">
-            <a href="#features" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Features</a>
-            <a href="#demo" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Demo</a>
-            <a href="#pricing" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Pricing</a>
-            <a href="#contact" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Contact</a>
+          <div className="hidden md:flex items-center gap-6">
+            <div className="flex items-center gap-8">
+              <a href="#features" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Features</a>
+              <a href="#demo" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Demo</a>
+              <a href="#pricing" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Pricing</a>
+              <a href="#contact" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Contact</a>
+            </div>
+
+
+            {/* CTA Button */}
+            <a
+              href="#contact"
+              className="ml-4 relative group px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300"
+            >
+              <div className="absolute inset-0 bg-[#00E5C3]/10 group-hover:bg-[#00E5C3]/20 transition-colors border border-[#00E5C3]/30 rounded-full" />
+              <span className="relative z-10 text-[#00E5C3] font-bold text-[11px] uppercase tracking-[0.15em] flex items-center gap-2">
+                Request Early Access
+                <div className="w-1 h-1 rounded-full bg-[#00E5C3] animate-pulse" />
+              </span>
+            </a>
           </div>
 
-          {/* CTA Button */}
-          <a
-            href="#contact"
-            className="ml-4 relative group px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300"
-          >
-            <div className="absolute inset-0 bg-[#00E5C3]/10 group-hover:bg-[#00E5C3]/20 transition-colors border border-[#00E5C3]/30 rounded-full" />
-            <span className="relative z-10 text-[#00E5C3] font-bold text-[11px] uppercase tracking-[0.15em] flex items-center gap-2">
-              Request Early Access
-              <div className="w-1 h-1 rounded-full bg-[#00E5C3] animate-pulse" />
-            </span>
-          </a>
-        </div>
 
           {/* Mobile menu toggle */}
           <button className="md:hidden text-zinc-400" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -167,6 +180,7 @@ export default function App() {
           </button>
         </div>
       </nav>
+
 
       {/* HERO */}
       <section className="pt-32 pb-8 px-6 relative">
@@ -197,6 +211,7 @@ export default function App() {
               </a>
             </FadeIn>
           </div>
+
 
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
@@ -259,6 +274,7 @@ export default function App() {
         </div>
       </section>
 
+
       {/* STATS STRIPE */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
@@ -306,6 +322,7 @@ export default function App() {
         </div>
       </section>
 
+
       {/* INTELLIGENCE REPORTS */}
       <section className="pb-24 pt-8 px-6 bg-[#111317]" id="demo">
         <div className="max-w-7xl mx-auto">
@@ -320,11 +337,11 @@ export default function App() {
                     <h2 className="text-4xl font-bold tracking-tight">Your Product, always Listening</h2>
                   </div>
                   <p className="text-xl text-zinc-400 leading-relaxed max-w-lg">
-                    Instantly turn thousands of raw customer questions into actionable product decisions. See what people ask when they're actually using your device.
+                    Stop guessing what to fix, what to market, and what to build next. Your customers are already telling you.
                   </p>
                 </div>
               </FadeIn>
-              
+             
               <div className="glass-card p-6 rounded-2xl border-white/5 mb-8">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
@@ -336,6 +353,7 @@ export default function App() {
                   </div>
                 </div>
               </div>
+
 
               <div className="space-y-6 pl-4 border-l-2 border-white/5 flex-grow">
                 {[
@@ -356,11 +374,13 @@ export default function App() {
               </div>
             </div>
 
+
             <FadeIn delay={400} className="w-full h-full flex">
               <div className="glass-card rounded-[2.5rem] p-8 md:p-10 border border-white/10 shadow-2xl w-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#111317] relative overflow-hidden min-h-[700px]">
                 <span className="stat-bg-text absolute -bottom-10 -right-10 text-[12rem] font-black text-white/[0.01] transition-all duration-700 pointer-events-none uppercase italic">
                   INTEL
                 </span>
+
 
                 <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
                   <div className="flex items-center gap-3">
@@ -379,6 +399,7 @@ export default function App() {
                   )}
                 </div>
 
+
                 {reportState === 'idle' && (
                   <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8 animate-in fade-in duration-500">
                     <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center border border-dashed border-white/10 relative">
@@ -395,6 +416,7 @@ export default function App() {
                   </div>
                 )}
 
+
                 {reportState === 'loading' && (
                   <div className="flex-1 flex flex-col items-center justify-center space-y-8 relative py-20">
                     <div className="scan-effect"></div>
@@ -402,14 +424,15 @@ export default function App() {
                     <div className="text-center">
                       <p className="text-sm font-mono text-[#00E5C3] mb-2">{steps[loadingStep]}</p>
                       <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-[#00E5C3] transition-all duration-500" 
+                        <div
+                          className="h-full bg-[#00E5C3] transition-all duration-500"
                           style={{ width: `${((loadingStep + 1) / steps.length) * 100}%` }}
                         />
                       </div>
                     </div>
                   </div>
                 )}
+
 
                 {reportState === 'complete' && (
                   <div className="flex-1 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 flex flex-col">
@@ -421,7 +444,7 @@ export default function App() {
                           <p className="text-xs text-zinc-500 font-medium">Aura Speaker Gen 2 • <span className="text-white">Active Sentiment: Positive (72%)</span></p>
                         </div>
                       </div>
-                      
+                     
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/5">
                           <p className="text-[10px] uppercase font-black text-zinc-500 tracking-widest mb-1">Total Scans</p>
@@ -435,6 +458,7 @@ export default function App() {
                         </div>
                       </div>
 
+
                       <div className="space-y-4">
                         <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-all">
                           <div className="flex items-center gap-2 mb-3 text-[#00E5C3] font-bold text-xs uppercase tracking-widest">
@@ -444,7 +468,7 @@ export default function App() {
                             <span className="text-white font-bold">14 users</span> specifically asked about pairing with older Gen 1 models. Currently, the AI handles this manually—recommend adding a dedicated <span className="text-white font-bold">"Stereo Link" guide</span> to the scan flow.
                           </p>
                         </div>
-                        
+                       
                         <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-all">
                           <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest">
                             <TrendingUp size={14} /> Marketing Opportunity
@@ -453,6 +477,7 @@ export default function App() {
                             Users are asking about <span className="text-white font-bold">beach usage</span>. Leverage this by adding an "Outdoors & Sand Safety" video module to increase upsells on our Rugged Carrying Case.
                           </p>
                         </div>
+
 
                         <div className="group bg-[#F5A623]/5 border border-[#F5A623]/20 rounded-2xl p-5 hover:bg-[#F5A623]/10 transition-all relative overflow-hidden">
                           <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest relative z-10">
@@ -475,6 +500,7 @@ export default function App() {
         </div>
       </section>
 
+
       {/* PRICING */}
       <section className="py-24 px-4 bg-[#111317]" id="pricing">
         <div className="max-w-7xl mx-auto">
@@ -482,6 +508,7 @@ export default function App() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">Scale Your Intelligence</h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">Transparent pricing for brands at every stage.</p>
           </FadeIn>
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -546,59 +573,57 @@ export default function App() {
         </div>
       </section>
 
+
       {/* CONTACT SECTION */}
-      <section className="pb-24 pt-12 px-4 sm:px-6 relative overflow-hidden" id="contact">
+      <section className="pb-24 pt-4 px-6 relative overflow-hidden" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
+
 
         <div className="max-w-6xl mx-auto relative z-10">
           <FadeIn>
-            <div className="bg-white/5 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 border border-white/10">
-              
-              <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="glass-card rounded-[3rem] p-10 md:p-16 border border-white/10">
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
                     <Zap size={14} fill="currentColor" /> Invite-Only Access
                   </div>
-                  
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight">
+                  <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter leading-tight">
                     Ready to transform your support?
                   </h2>
-                  <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-6">
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-6">
                     SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
                   </p>
                 </div>
 
-                <div className="relative group w-full">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-                  
-                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-3xl md:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
-                    <div className="flex items-center gap-4 sm:gap-5 mb-8 sm:mb-10">
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
+
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
+                    <div className="flex items-center gap-5 mb-10">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
                         <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
-                          <span className="text-xl sm:text-2xl font-black text-white tracking-tighter">KL</span>
+                          <span className="text-2xl font-black text-white tracking-tighter">KL</span>
                         </div>
                       </div>
-                      <div className="min-w-0">
-                        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight truncate">Kevin Larretche</h3>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
                         <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
                       </div>
                     </div>
 
+
                     <div className="space-y-4">
-                      <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 sm:p-4 rounded-xl transition-all group/btn w-full">
-                        <div className="flex items-center gap-3 sm:gap-4 overflow-hidden w-full pr-2">
-                          <div className="w-10 h-10 shrink-0 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                      <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-4 rounded-xl transition-all group/btn">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
                             <BarChart3 size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
                           </div>
-                          
-                          <div className="text-left min-w-0 flex-1">
+                          <div className="text-left">
                             <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
-                            <p className="text-xs sm:text-sm font-medium text-zinc-200 truncate block w-full">
-                              kevin.larretche@gmail.com
-                            </p>
+                            <p className="text-sm font-medium text-zinc-200">kevin.larretche@gmail.com</p>
                           </div>
                         </div>
-                        <ArrowRight size={16} className="shrink-0 text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
+                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
                       </a>
                     </div>
                   </div>
@@ -608,3 +633,18 @@ export default function App() {
           </FadeIn>
         </div>
       </section>
+
+
+      <footer className="border-t border-white/5 py-12 px-6 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded bg-[#00E5C3] flex items-center justify-center"><span className="text-[#111317] font-bold text-xs">S</span></div>
+            <span className="text-xl font-bold tracking-tight">SQU</span>
+          </div>
+          <p className="text-zinc-600 text-sm font-medium italic">"The stupidest thing about business is ignoring your customers."</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
