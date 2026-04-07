@@ -573,63 +573,78 @@ export default function App() {
         </div>
       </section>
 
+
       {/* CONTACT SECTION */}
-      <section className="pb-24 pt-12 px-4 sm:px-6 relative overflow-hidden" id="contact">
+      <section className="pb-24 pt-4 px-6 relative overflow-hidden" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
 
+
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="bg-white/5 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 border border-white/10">
-            
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
-                  <Zap size={14} fill="currentColor" /> Invite-Only Access
-                </div>
-                
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight text-white">
-                  Ready to transform your support?
-                </h2>
-                <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-6">
-                  SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
-                </p>
-              </div>
-
-              <div className="relative group w-full">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000" />
-                
-                <div className="relative bg-[#1A1D24] border border-white/10 rounded-3xl md:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
-                  <div className="flex items-center gap-4 sm:gap-5 mb-8 sm:mb-10">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
-                      <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
-                        <span className="text-xl sm:text-2xl font-black text-white tracking-tighter">KL</span>
-                      </div>
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight truncate">Kevin Larretche</h3>
-                      <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
-                    </div>
+          <FadeIn>
+            <div className="glass-card rounded-[3rem] p-10 md:p-16 border border-white/10">
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
+                    <Zap size={14} fill="currentColor" /> Invite-Only Access
                   </div>
+                  <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter leading-tight">
+                    Ready to transform your support?
+                  </h2>
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-6">
+                    SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
+                  </p>
+                </div>
 
-                  <div className="space-y-4">
-                    <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 sm:p-4 rounded-xl transition-all group/btn w-full">
-                      <div className="flex items-center gap-3 sm:gap-4 overflow-hidden w-full pr-2">
-                        <div className="w-10 h-10 shrink-0 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                          <BarChart3 size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
-                        </div>
-                        
-                        <div className="text-left min-w-0 flex-1">
-                          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
-                          <p className="text-xs sm:text-sm font-medium text-zinc-200 truncate block w-full">
-                            kevin.larretche@gmail.com
-                          </p>
+
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
+                    <div className="flex items-center gap-5 mb-10">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
+                        <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
+                          <span className="text-2xl font-black text-white tracking-tighter">KL</span>
                         </div>
                       </div>
-                      <ArrowRight size={16} className="shrink-0 text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
-                    </a>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
+                        <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
+                      </div>
+                    </div>
+
+
+                    <div className="space-y-4">
+                      <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-4 rounded-xl transition-all group/btn">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                            <BarChart3 size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
+                            <p className="text-sm font-medium text-zinc-200">kevin.larretche@gmail.com</p>
+                          </div>
+                        </div>
+                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
+
+
+      <footer className="border-t border-white/5 py-12 px-6 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded bg-[#00E5C3] flex items-center justify-center"><span className="text-[#111317] font-bold text-xs">S</span></div>
+            <span className="text-xl font-bold tracking-tight">SQU</span>
+          </div>
+          <p className="text-zinc-600 text-sm font-medium italic">"The stupidest thing about business is ignoring your customers."</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
