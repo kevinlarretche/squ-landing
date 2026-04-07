@@ -172,16 +172,15 @@ export default function App() {
                 A QR code on your product. An AI that answers, upsells, and reports back.
               </p>
             </FadeIn>
+            <FadeIn delay={300}>
+              
+                href="#contact"
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105"
+              >
+                Request Early Access <ArrowRight size={16} />
+              </a>
+            </FadeIn>
           </div>
-          {/* CTA Button */}
-          <FadeIn delay={300}>
-            <a 
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105 mt-8"
-            >
-              Request Early Access <ArrowRight size={16} />
-            </a>
-          </FadeIn>
 
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
@@ -207,13 +206,13 @@ export default function App() {
                   </div>
                 )}
                 {simStep >= 1 && simStep < 2 && (
-                   <div className="flex justify-start animate-in fade-in duration-300">
-                     <div className="bg-[#00E5C3]/5 rounded-2xl rounded-tl-none p-3 border border-[#00E5C3]/10 flex gap-1 items-center">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0s'}}></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0.2s'}}></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0.4s'}}></div>
-                     </div>
-                   </div>
+                  <div className="flex justify-start animate-in fade-in duration-300">
+                    <div className="bg-[#00E5C3]/5 rounded-2xl rounded-tl-none p-3 border border-[#00E5C3]/10 flex gap-1 items-center">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0s'}}></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0.2s'}}></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E5C3] typing-dot" style={{animationDelay: '0.4s'}}></div>
+                    </div>
+                  </div>
                 )}
                 {simStep >= 2 && (
                   <div className="flex justify-start animate-in zoom-in-95 slide-in-from-left-2 fade-in duration-500 fill-mode-both">
@@ -234,9 +233,9 @@ export default function App() {
                   <span className="text-[10px] font-black text-[#00E5C3] uppercase tracking-widest">Live Demo</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                   {[0,1,2,3].map(i => (
-                     <div key={i} className={`h-1 w-3 rounded-full transition-all duration-500 ${simStep === i ? 'bg-[#00E5C3] w-5' : 'bg-white/10'}`} />
-                   ))}
+                  {[0,1,2,3].map(i => (
+                    <div key={i} className={`h-1 w-3 rounded-full transition-all duration-500 ${simStep === i ? 'bg-[#00E5C3] w-5' : 'bg-white/10'}`} />
+                  ))}
                 </div>
               </div>
             </div>
