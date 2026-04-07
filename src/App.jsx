@@ -240,10 +240,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Zap, label: "AI Support", title: "Answers questions instantly, 24/7", tag: "Auto-Resolution", color: "text-[#00E5C3]", bgColor: "bg-[#00E5C3]" },
-              { icon: BadgeDollarSign, label: "Upsell Revenue", title: "Recommends the right product at the right moment", tag: "Smart Cart", color: "text-[#F5A623]", bgColor: "bg-[#F5A623]" },
-              { icon: BrainCircuit, label: "Product Intel", title: "Know what customers think, every single week", tag: "Sentiment AI", color: "text-blue-400", bgColor: "bg-blue-400" },
-              { icon: Rocket, label: "Fast Onboarding", title: "Go live in 24 hours, no dev needed", tag: "Zero-Code", color: "text-purple-400", bgColor: "bg-purple-400" }
+              { icon: Zap, label: "AI Support", title: "Answers questions instantly, 24/7", tag: "Always On", color: "text-[#00E5C3]", bgColor: "bg-[#00E5C3]" },
+              { icon: BadgeDollarSign, label: "Upsell Revenue", title: "Recommends the right product at the right moment", tag: "Smart Upsell", color: "text-[#F5A623]", bgColor: "bg-[#F5A623]" },
+              { icon: BrainCircuit, label: "Product Intel", title: "Know what customers think, every single week", tag: "Weekly Intel", color: "text-blue-400", bgColor: "bg-blue-400" },
+              { icon: Rocket, label: "Fast Onboarding", title: "Go live in 24 hours, no dev needed", tag: "Live in 24h", color: "text-purple-400", bgColor: "bg-purple-400" }
             ].map((stat, i) => {
               const Icon = stat.icon;
               return (
