@@ -167,7 +167,7 @@ export default function App() {
               </h1>
             </FadeIn>
             <FadeIn delay={200}>
-              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed">
+              <p className="text-xl md:text-2xl text-white/80 max-w-xl leading-relaxed font-medium">
                 A QR code on your product. An AI that answers, upsells, and reports back.
               </p>
             </FadeIn>
