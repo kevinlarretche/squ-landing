@@ -140,26 +140,26 @@ export default function App() {
           </div>
 
           {/* Desktop links + CTA */}
-          <div className="hidden md:flex items-center gap-6">
-            <div className="flex items-center gap-8">
-              <a href="#features" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Features</a>
-              <a href="#demo" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Demo</a>
-              <a href="#pricing" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Pricing</a>
-              <a href="#contact" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Contact</a>
-            </div>
-
-            {/* CTA Button */}
-            <a
-              href="#contact"
-              className="ml-4 relative group px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-[#00E5C3]/10 group-hover:bg-[#00E5C3]/20 transition-colors border border-[#00E5C3]/30 rounded-full" />
-              <span className="relative z-10 text-[#00E5C3] font-bold text-[11px] uppercase tracking-[0.15em] flex items-center gap-2">
-                Request Early Access
-                <div className="w-1 h-1 rounded-full bg-[#00E5C3] animate-pulse" />
-              </span>
-            </a>
+        <div className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-8">
+            <a href="#features" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Features</a>
+            <a href="#demo" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Demo</a>
+            <a href="#pricing" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Pricing</a>
+            <a href="#contact" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Contact</a>
           </div>
+
+          {/* CTA Button */}
+          <a
+            href="#contact"
+            className="ml-4 relative group px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300"
+          >
+            <div className="absolute inset-0 bg-[#00E5C3]/10 group-hover:bg-[#00E5C3]/20 transition-colors border border-[#00E5C3]/30 rounded-full" />
+            <span className="relative z-10 text-[#00E5C3] font-bold text-[11px] uppercase tracking-[0.15em] flex items-center gap-2">
+              Request Early Access
+              <div className="w-1 h-1 rounded-full bg-[#00E5C3] animate-pulse" />
+            </span>
+          </a>
+        </div>
 
           {/* Mobile menu toggle */}
           <button className="md:hidden text-zinc-400" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -320,7 +320,7 @@ export default function App() {
                     <h2 className="text-4xl font-bold tracking-tight">Your Product, always Listening</h2>
                   </div>
                   <p className="text-xl text-zinc-400 leading-relaxed max-w-lg">
-                    Stop guessing what to fix, what to market, and what to build next. Your customers are already telling you.
+                    Instantly turn thousands of raw customer questions into actionable product decisions. See what people ask when they're actually using your device.
                   </p>
                 </div>
               </FadeIn>
@@ -547,95 +547,62 @@ export default function App() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section className="pb-20 pt-8 px-4 sm:px-6 relative overflow-hidden" id="contact">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00E5C3]/5 blur-[120px] rounded-full pointer-events-none" />
+      <section className="pb-24 pt-12 px-4 sm:px-6 relative overflow-hidden" id="contact">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <FadeIn>
-            <div className="bg-white/5 backdrop-blur-xl rounded-[2rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 border border-white/10">
+            <div className="bg-white/5 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 border border-white/10">
               
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                
-                {/* LEFT SIDE */}
                 <div>
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-6">
-                    <Zap size={14} fill="currentColor" />
-                    Invite-Only Access
+                    <Zap size={14} fill="currentColor" /> Invite-Only Access
                   </div>
-
+                  
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight">
-                    Let’s make your support smarter
+                    Ready to transform your support?
                   </h2>
-
-                  <p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-md">
-                    SQU is rolling out with a small group of brands. Reach out directly and let’s see if it’s a fit.
+                  <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-6">
+                    SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
                   </p>
                 </div>
 
-                {/* RIGHT SIDE */}
                 <div className="relative group w-full">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
                   
-                  {/* Glow border */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-700" />
-                  
-                  {/* Card */}
-                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-[1.5rem] md:rounded-[2rem] p-5 sm:p-8 shadow-2xl overflow-hidden">
-                    
-                    {/* Profile */}
-                    <div className="flex items-center gap-4 mb-8">
+                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-3xl md:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
+                    <div className="flex items-center gap-4 sm:gap-5 mb-8 sm:mb-10">
                       <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
                         <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
-                          <span className="text-xl sm:text-2xl font-black text-white tracking-tighter">
-                            KL
-                          </span>
+                          <span className="text-xl sm:text-2xl font-black text-white tracking-tighter">KL</span>
                         </div>
                       </div>
-
                       <div className="min-w-0">
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight truncate">
-                          Kevin Larretche
-                        </h3>
-                        <p className="text-[#00E5C3] font-medium text-sm">
-                          Founder & CEO
-                        </p>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight truncate">Kevin Larretche</h3>
+                        <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
                       </div>
                     </div>
 
-                    {/* Contact item */}
-                    <div className="space-y-3 sm:space-y-4">
-                      <a
-                        href="mailto:kevin.larretche@gmail.com"
-                        className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 sm:p-4 rounded-xl transition-all group/btn w-full"
-                      >
-                        <div className="flex items-center gap-3 sm:gap-4 w-full min-w-0">
-                          
+                    <div className="space-y-4">
+                      <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 sm:p-4 rounded-xl transition-all group/btn w-full">
+                        <div className="flex items-center gap-3 sm:gap-4 overflow-hidden w-full pr-2">
                           <div className="w-10 h-10 shrink-0 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                            <BarChart3
-                              size={18}
-                              className="text-zinc-400 group-hover/btn:text-[#00E5C3]"
-                            />
+                            <BarChart3 size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
                           </div>
-
-                          <div className="min-w-0 flex-1">
-                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">
-                              Email Direct
-                            </p>
-                            <p className="text-xs sm:text-sm font-medium text-zinc-200 truncate">
+                          
+                          <div className="text-left min-w-0 flex-1">
+                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
+                            <p className="text-xs sm:text-sm font-medium text-zinc-200 truncate block w-full">
                               kevin.larretche@gmail.com
                             </p>
                           </div>
                         </div>
-
-                        <ArrowRight
-                          size={16}
-                          className="ml-auto shrink-0 text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all"
-                        />
+                        <ArrowRight size={16} className="shrink-0 text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all" />
                       </a>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </FadeIn>
