@@ -298,7 +298,7 @@ export default function App() {
                     <div className="w-12 h-12 rounded-2xl bg-[#F5A623]/20 flex items-center justify-center">
                       <Quote className="text-[#F5A623]" size={24} fill="currentColor" />
                     </div>
-                    <h2 className="text-4xl font-bold tracking-tight">Weekly Intelligence</h2>
+                    <h2 className="text-4xl font-bold tracking-tight">Your Product, Always Listening</h2>
                   </div>
                   <p className="text-xl text-zinc-400 leading-relaxed max-w-lg">
                     Instantly turn thousands of raw customer questions into actionable product decisions. See what people ask when they're actually using your device.
@@ -466,7 +466,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { plan: "Starter", price: "$99", sub: "Level 01", bg: "START", features: ["Up to 2 Product", "Basic Chat Interface", "300 Monthly Scans", "Email Support"], col: "from-[#00E5C3] to-emerald-400", active: false },
+              { plan: "Starter", price: "$99", sub: "Level 01", bg: "START", features: ["Up to 2 Products", "Basic Chat Interface", "300 Monthly Scans", "Email Support"], col: "from-[#00E5C3] to-emerald-400", active: false },
               { plan: "Growth", price: "$349", sub: "Level 02", bg: "GROW", features: ["Up to 5 Products", "Upsell AI Logic", "Basic Analytics Reports", "1,000 Monthly Scans"], col: "from-[#F5A623] to-orange-400", active: false },
               { plan: "Pro", price: "$699", sub: "Level 03", bg: "INTEL", features: ["Up to 15 Products", "Priority Support", "Advanced Weekly Reports", "3,000 Monthly Scans"], col: "from-purple-500 to-indigo-400", active: true },
               { plan: "Enterprise", price: "Custom", sub: "Max Level", bg: "SCALE", features: ["Unlimited Products", "Custom Actionable Reports", "White-label Dashboard", "Dedicated Manager"], col: "from-blue-400 to-[#00E5C3]", active: false }
