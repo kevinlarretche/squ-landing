@@ -573,7 +573,6 @@ export default function App() {
         </div>
       </section>
 
-
       {/* CONTACT SECTION */}
       <section className="pb-24 pt-12 px-4 sm:px-6 relative overflow-hidden" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
@@ -636,4 +635,3 @@ export default function App() {
           </FadeIn>
         </div>
       </section>
-
