@@ -456,82 +456,69 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRICING SECTION */}
-      <section className="py-24 px-6 bg-[#111317]" id="pricing">
+      {/* PRICING */}
+      <section className="py-24 px-4 bg-[#111317]" id="pricing">
         <div className="max-w-7xl mx-auto">
           <FadeIn className="mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Scale Your Intelligence</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">Scale Your Intelligence</h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">Transparent pricing for brands at every stage.</p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { 
-                plan: "Starter", 
-                price: "$299", 
-                sub: "Level 01", 
-                bg: "STARTER",
-                features: ["Up to 2 Products", "QR Code Generation", "Limited AI Scans", "Email Support"],
-                col: "from-[#00E5C3] to-emerald-400",
-                active: false
-              },
-              { 
-                plan: "Growth", 
-                price: "$699", 
-                sub: "Level 02", 
-                bg: "GROWTH",
-                features: ["Up to 10 Products", "Upsell AI Logic", "Weekly Intel Reports", "Up to 1,500 chats"],
-                col: "from-[#F5A623] to-orange-400",
-                active: true
-              },
-              { 
-                plan: "Enterprise", 
-                price: "Custom", 
-                sub: "Max Level", 
-                bg: "SCALE",
-                features: ["Unlimited Products", "Advanced actionable reports", "Custom chat Webpage", "Dedicated Manager"],
-                col: "from-blue-400 to-[#00E5C3]",
-                active: false
-              }
+              { plan: "Starter", price: "$99", sub: "Level 01", bg: "START", features: ["1 Product", "Basic Chat Interface", "300 Monthly Scans", "Email Support"], col: "from-[#00E5C3] to-emerald-400", active: false },
+              { plan: "Growth", price: "$349", sub: "Level 02", bg: "GROW", features: ["5 Products", "Upsell AI Logic", "Basic Analytics Reports", "1,000 Monthly Scans"], col: "from-[#F5A623] to-orange-400", active: true },
+              { plan: "Pro", price: "$699", sub: "Level 03", bg: "INTEL", features: ["15 Products", "Full Intelligence Dashboard", "Weekly PDF Reports", "3,000 Monthly Scans"], col: "from-purple-500 to-indigo-400", active: false },
+              { plan: "Enterprise", price: "Custom", sub: "Max Level", bg: "SCALE", features: ["Unlimited Products", "Custom Actionable Reports", "White-label Dashboard", "Dedicated Manager"], col: "from-blue-400 to-[#00E5C3]", active: false }
             ].map((p, i) => (
-              <FadeIn key={i} delay={i * 100} className="stat-grid-item group">
-                <div className={`relative h-full bg-[#1A1D24] border ${p.active ? 'border-[#00E5C3]/30 ring-1 ring-[#00E5C3]/20' : 'border-white/5'} rounded-3xl p-8 md:p-10 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1`}>
-                  
-                  <span className="stat-bg-text absolute -bottom-4 -right-4 text-8xl font-black text-white/[0.02] transition-all duration-700 pointer-events-none uppercase italic">
+              <FadeIn key={i} delay={i * 100} className="group h-full">
+                <div className={`relative h-full flex flex-col bg-[#1A1D24] border ${p.active ? 'border-[#00E5C3]/40 ring-1 ring-[#00E5C3]/20' : 'border-white/5'} rounded-3xl p-6 md:p-8 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1`}>
+                  <span className="absolute -bottom-2 -right-2 text-7xl font-black text-white/[0.02] transition-all duration-700 pointer-events-none uppercase italic group-hover:text-white/[0.04]">
                     {p.bg}
                   </span>
-
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-2">
                         <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${p.col} animate-pulse`} />
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
-                          {p.sub}
-                        </span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">{p.sub}</span>
                       </div>
                       {p.active && (
-                        <span className="text-[10px] font-black uppercase tracking-widest text-[#00E5C3] px-2 py-0.5 rounded-md bg-[#00E5C3]/10 border border-[#00E5C3]/20">Most Popular</span>
+                        <span className="text-[9px] font-black uppercase tracking-widest text-[#00E5C3] px-2 py-0.5 rounded-md bg-[#00E5C3]/10 border border-[#00E5C3]/20">Most Popular</span>
                       )}
                     </div>
-
-                    <div className="mb-10">
-                      <h3 className="text-2xl font-bold text-white mb-2">{p.plan}</h3>
-                      <div className={`text-6xl font-black tracking-tighter bg-gradient-to-br ${p.col} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-500 origin-left`}>
+                    <div className="mb-8">
+                      <h3 className="text-xl font-bold text-white mb-2">{p.plan}</h3>
+                      <div className={`text-5xl font-black tracking-tighter bg-gradient-to-br ${p.col} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-500 origin-left`}>
                         {p.price}
                       </div>
-                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-2">per month</p>
+                      {p.price !== "Custom" ? (
+                        <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-2">per month</p>
+                      ) : (
+                        <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-2">tailored for you</p>
+                      )}
                     </div>
-
-                    <div className="h-px w-full bg-white/5 mb-8" />
-
-                    <div className="space-y-4 flex-grow">
+                    <div className="h-px w-full bg-white/5 mb-6" />
+                    <div className="space-y-3.5 flex-grow mb-8">
                       {p.features.map((feat, idx) => (
-                        <div key={idx} className="flex items-center gap-3 group/item">
-                          <Check size={14} className="text-[#00E5C3]" />
-                          <span className="text-sm font-medium text-zinc-400 group-hover/item:text-zinc-200 transition-colors">{feat}</span>
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="mt-1 flex-shrink-0">
+                            <Check size={12} className="text-[#00E5C3]" />
+                          </div>
+                          <span className="text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors leading-tight">
+                            {feat}
+                          </span>
                         </div>
                       ))}
                     </div>
+                    
+                      href="#contact"
+                      className={`w-full py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 text-center block ${
+                        p.active
+                        ? 'bg-[#00E5C3] text-black hover:bg-[#00cba0]'
+                        : 'bg-white/5 text-white hover:bg-white/10 border border-white/5'
+                      }`}>
+                      {p.price === "Custom" ? "Contact Sales" : "Get Started"}
+                    </a>
                   </div>
                 </div>
               </FadeIn>
