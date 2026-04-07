@@ -453,7 +453,7 @@ export default function App() {
                 price: "$299", 
                 sub: "Level 01", 
                 bg: "CORE",
-                features: ["1–10 Products", "QR Code Generation", "Unlimited Scans", "Email Support"],
+                features: ["Up to 2 Products", "QR Code Generation", "Limited AI Scans", "Email Support"],
                 col: "from-[#00E5C3] to-emerald-400",
                 active: false
               },
@@ -462,7 +462,7 @@ export default function App() {
                 price: "$599", 
                 sub: "Level 02", 
                 bg: "GROWTH",
-                features: ["11–100 Products", "Upsell AI Logic", "Weekly Intel Reports", "Priority Support"],
+                features: ["Up to 10 Products", "Upsell AI Logic", "Weekly Intel Reports", "Up to 1,500 chats"],
                 col: "from-[#F5A623] to-orange-400",
                 active: true
               },
@@ -471,7 +471,7 @@ export default function App() {
                 price: "Custom", 
                 sub: "Max Level", 
                 bg: "SCALE",
-                features: ["Unlimited Products", "API Access", "Custom AI Training", "Dedicated Manager"],
+                features: ["Unlimited Products", "Advanced actionable reports", "Custom chat Webpage", "Dedicated Manager"],
                 col: "from-blue-400 to-[#00E5C3]",
                 active: false
               }
