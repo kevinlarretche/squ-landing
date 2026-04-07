@@ -160,8 +160,8 @@ export default function App() {
             </FadeIn>
             <FadeIn delay={100}>
               <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                Ask Any Stupid Question. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">Really.</span>
+                Your customers are talking.  <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">Are you listening?</span>
               </h1>
             </FadeIn>
             <FadeIn delay={200}>
@@ -449,17 +449,17 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { 
-                plan: "Core", 
+                plan: "Starter", 
                 price: "$299", 
                 sub: "Level 01", 
-                bg: "CORE",
+                bg: "STARTER",
                 features: ["Up to 2 Products", "QR Code Generation", "Limited AI Scans", "Email Support"],
                 col: "from-[#00E5C3] to-emerald-400",
                 active: false
               },
               { 
                 plan: "Growth", 
-                price: "$599", 
+                price: "$699", 
                 sub: "Level 02", 
                 bg: "GROWTH",
                 features: ["Up to 10 Products", "Upsell AI Logic", "Weekly Intel Reports", "Up to 1,500 chats"],
@@ -501,7 +501,7 @@ export default function App() {
                       <div className={`text-6xl font-black tracking-tighter bg-gradient-to-br ${p.col} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-500 origin-left`}>
                         {p.price}
                       </div>
-                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-2">per month, billed annually</p>
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-2">per month</p>
                     </div>
 
                     <div className="h-px w-full bg-white/5 mb-8" />
