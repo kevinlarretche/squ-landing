@@ -320,7 +320,7 @@ export default function App() {
                     <h2 className="text-4xl font-bold tracking-tight">Your Product, always Listening</h2>
                   </div>
                   <p className="text-xl text-zinc-400 leading-relaxed max-w-lg">
-                    Instantly turn thousands of raw customer questions into actionable product decisions. See what people ask when they're actually using your device.
+                    Stop guessing what to fix, what to market, and what to build next. Your customers are already telling you.
                   </p>
                 </div>
               </FadeIn>
