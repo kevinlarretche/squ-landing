@@ -3,7 +3,8 @@ import {
   Menu, X, Smartphone, Zap, BarChart3, 
   Check, ArrowRight, Sparkles, TrendingUp,
   Quote, Lightbulb, Calendar, AlertCircle, 
-  Volume2, Mic, Settings, MoveRight, Wrench
+  Volume2, Mic, Settings, MoveRight, Wrench,
+  BadgeDollarSign, BrainCircuit, Rocket, ChevronRight
 } from 'lucide-react';
 
 const styles = `
@@ -237,36 +238,46 @@ export default function App() {
       {/* STATS STRIPE */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: "↑", lab: "Turn browser questions into buyers", sub: "Conversion", col: "from-[#00E5C3] to-emerald-400" },
-              { icon: "⚡", lab: "Answer customer questions 24/7 without lifting a finger", sub: "Automation", col: "from-[#F5A623] to-orange-400" },
-              { icon: "$", lab: "AI recommends the right product at the right moment", sub: "Upsell Revenue", col: "from-blue-400 to-[#00E5C3]" },
-              { icon: "◎", lab: "Know exactly what customers think, every week", sub: "Intelligence", col: "from-zinc-200 to-zinc-500" }
-            ].map((stat, i) => (
-              <FadeIn key={i} delay={i * 100} className="stat-grid-item group">
-                <div className="relative h-full bg-[#1A1D24] border border-white/5 rounded-3xl p-8 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1">
-                  <span className="stat-bg-text absolute -bottom-4 -right-4 text-8xl font-black text-white/[0.02] transition-all duration-700 pointer-events-none uppercase italic">
-                    {stat.sub}
-                  </span>
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${stat.col} animate-pulse`} />
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
-                        {stat.sub}
-                      </span>
+              { icon: Zap, label: "AI Support", title: "Answers questions instantly, 24/7", tag: "Auto-Resolution", color: "text-[#00E5C3]", bgColor: "bg-[#00E5C3]" },
+              { icon: BadgeDollarSign, label: "Upsell Revenue", title: "Recommends the right product at the right moment", tag: "Smart Cart", color: "text-[#F5A623]", bgColor: "bg-[#F5A623]" },
+              { icon: BrainCircuit, label: "Product Intel", title: "Know what customers think, every single week", tag: "Sentiment AI", color: "text-blue-400", bgColor: "bg-blue-400" },
+              { icon: Rocket, label: "Fast Onboarding", title: "Go live in 24 hours, no dev needed", tag: "Zero-Code", color: "text-purple-400", bgColor: "bg-purple-400" }
+            ].map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <FadeIn key={i} delay={i * 100} className="h-full">
+                  <div className="group relative flex flex-col h-full min-h-[260px] bg-[#0F1115] rounded-[24px] border border-white/5 p-6 overflow-hidden transition-all duration-500 cursor-default hover:border-white/20 hover:bg-[#14171d] hover:-translate-y-2 shadow-2xl">
+                    <div className={`absolute -top-16 -right-16 w-32 h-32 blur-[60px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 ${stat.bgColor}`} />
+                    <div className="relative z-10 flex flex-col gap-5">
+                      <div className={`w-12 h-12 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/5 ${stat.color} transition-all duration-500 group-hover:bg-white/10 group-hover:scale-110 group-hover:rotate-3`}>
+                        <Icon size={24} strokeWidth={2.5} />
+                      </div>
+                      <div className="space-y-2">
+                        <h2 className="text-xl font-black tracking-tight text-white uppercase italic leading-none truncate">
+                          {stat.label}
+                        </h2>
+                        <div className={`h-[2px] w-8 ${stat.bgColor} transition-all duration-500 group-hover:w-full`} />
+                      </div>
                     </div>
-                    <div className={`text-5xl font-black mb-4 bg-gradient-to-br ${stat.col} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500 origin-left`}>
-                      {stat.icon}
+                    <div className="relative z-10 mt-4">
+                      <p className="text-sm font-bold text-zinc-400 leading-snug group-hover:text-zinc-200 transition-colors duration-300">
+                        {stat.title}
+                      </p>
                     </div>
-                    <div className="h-px w-8 bg-white/10 mb-4 group-hover:w-full transition-all duration-700" />
-                    <p className="text-sm font-bold text-zinc-400 leading-tight group-hover:text-zinc-200 transition-colors">
-                      {stat.lab}
-                    </p>
+                    <div className="mt-auto pt-6 relative z-10">
+                      <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-white/[0.02] border border-white/5 group-hover:bg-white/[0.05] transition-all duration-300">
+                        <span className={`text-[10px] font-black uppercase tracking-wider ${stat.color}`}>
+                          {stat.tag}
+                        </span>
+                        <ChevronRight size={14} className="text-zinc-600 group-hover:text-zinc-300 transition-colors" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>
