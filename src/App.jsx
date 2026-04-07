@@ -160,8 +160,10 @@ export default function App() {
             </FadeIn>
             <FadeIn delay={100}>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                Your customers are talking <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">Are you listening?</span>
+                Your customers are talking{" "}
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">
+                  Are you listening?
+                </span>
               </h1>
             </FadeIn>
             <FadeIn delay={200}>
