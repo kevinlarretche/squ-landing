@@ -575,61 +575,66 @@ export default function App() {
 
 
       {/* CONTACT SECTION */}
-      <section className="pb-16 md:pb-24 pt-4 px-4 md:px-6 relative overflow-hidden" id="contact">
+      <section className="pb-16 md:pb-24 pt-4 px-4 md:px-6 relative overflow-hidden bg-[#0A0C10] text-white min-h-screen" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <FadeIn>
-            <div className="glass-card rounded-3xl md:rounded-[3rem] p-6 md:p-16 border border-white/10">
-              <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">
-                    <Zap size={14} fill="currentColor" /> Invite-Only Access
-                  </div>
-                  <h2 className="text-3xl md:text-5xl font-black mb-4 md:mb-6 tracking-tighter leading-tight">
-                    Ready to transform your support?
-                  </h2>
-                  <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-6">
-                    SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
-                  </p>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <FadeIn>
+          <div className="bg-white/5 backdrop-blur-sm rounded-3xl md:rounded-[3rem] p-6 md:p-16 border border-white/10">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">
+                  <Zap size={14} fill="currentColor" /> Invite-Only Access
                 </div>
+                <h2 className="text-3xl md:text-5xl font-black mb-4 md:mb-6 tracking-tighter leading-tight">
+                  Ready to transform your support?
+                </h2>
+                <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-6">
+                  SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
+                </p>
+              </div>
 
-                <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-2xl md:rounded-[2rem] p-6 md:p-10 shadow-2xl overflow-hidden">
-                    <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-10">
-                      <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
-                        <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
-                          <span className="text-xl md:text-2xl font-black text-white tracking-tighter">KL</span>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
-                        <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+                <div className="relative bg-[#1A1D24] border border-white/10 rounded-2xl md:rounded-[2rem] p-6 md:p-10 shadow-2xl overflow-hidden">
+                  <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-10">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
+                      <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
+                        <span className="text-xl md:text-2xl font-black text-white tracking-tighter">KL</span>
                       </div>
                     </div>
-
-                    <div className="space-y-4">
-                      <a href="mailto:kevin.larretche@gmail.com" className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 md:p-4 rounded-xl transition-all group/btn">
-                        <div className="flex items-center gap-3 md:gap-4">
-                          <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                            <BarChart3 size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
-                          </div>
-                          <div className="text-left">
-                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Email Direct</p>
-                            <p className="text-xs md:text-sm font-medium text-zinc-200 break-all">kevin.larretche@gmail.com</p>
-                          </div>
-                        </div>
-                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all flex-shrink-0" />
-                      </a>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
+                      <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
                     </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    {/* CHANGED: Replaced mailto with Calendly link, added target="_blank", changed icon, and updated text */}
+                    <a 
+                      href="https://calendly.com/YOUR_CALENDLY_USERNAME" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 md:p-4 rounded-xl transition-all group/btn"
+                    >
+                      <div className="flex items-center gap-3 md:gap-4">
+                        <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                          <Calendar size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Book a Meeting</p>
+                          <p className="text-xs md:text-sm font-medium text-zinc-200 break-all">Schedule via Calendly</p>
+                        </div>
+                      </div>
+                      <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all flex-shrink-0" />
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-          </FadeIn>
-        </div>
-      </section>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
 
 
       <footer className="border-t border-white/5 py-12 px-6 text-center">
