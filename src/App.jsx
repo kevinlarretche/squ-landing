@@ -149,27 +149,42 @@ export default function App() {
       </nav>
 
       {/* HERO */}
-      <section className="pt-32 pb-8 px-6 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00E5C3]/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-left relative z-10">
-            <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/5 text-[#00E5C3] text-sm font-medium mb-6">
-                <Sparkles size={14} /> Less support. Better products. More sales.
-              </div>
-            </FadeIn>
-            <FadeIn delay={100}>
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                Your customers are talking.  <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">Are you listening?</span>
-              </h1>
-            </FadeIn>
-            <FadeIn delay={200}>
-              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed">
-                Customers scan a QR code, ask anything — and your AI answers instantly, reduces support, drives upsells, and captures what customers really think.
-              </p>
-            </FadeIn>
-          </div>
+<section className="pt-32 pb-12 px-6 relative">
+  {/* Background blur circle */}
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00E5C3]/10 blur-[120px] rounded-full pointer-events-none" />
+
+  <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    {/* Left content */}
+    <div className="text-left relative z-10">
+      <FadeIn>
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/5 text-[#00E5C3] text-sm font-medium mb-6">
+          <Sparkles size={14} /> Less support. Better products. More sales.
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={100}>
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.2] break-words pr-4 lg:pr-0">
+          Your customers are talking. <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">
+            Are you listening?
+          </span>
+        </h1>
+      </FadeIn>
+
+      <FadeIn delay={200}>
+        <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed">
+          Customers scan a QR code, ask anything — and your AI answers instantly, reducing support requests, driving upsells, and capturing what customers really think.
+        </p>
+      </FadeIn>
+    </div>
+
+    {/* Right image / visual placeholder */}
+    <div className="relative z-10 flex justify-center lg:justify-end">
+      {/* Replace with your hero image / webchat screenshot */}
+      <div className="w-full max-w-md h-80 bg-zinc-800 rounded-xl"></div>
+    </div>
+  </div>
+</section>
 
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
