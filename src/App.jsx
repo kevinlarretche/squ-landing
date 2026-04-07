@@ -173,6 +173,15 @@ export default function App() {
               </p>
             </FadeIn>
           </div>
+          {/* CTA Button */}
+          <FadeIn delay={300}>
+            <a 
+              href="#contact"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105 mt-8"
+            >
+              Request Early Access <ArrowRight size={16} />
+            </a>
+          </FadeIn>
 
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
