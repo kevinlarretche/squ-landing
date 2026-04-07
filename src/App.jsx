@@ -239,10 +239,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { val: "35%", lab: "Up to 35% conversion lift", sub: "Conversion", col: "from-[#00E5C3] to-emerald-400" },
-              { val: "80%", lab: "Up to 80% questions answered instantly", sub: "Automation", col: "from-[#F5A623] to-orange-400" },
-              { val: "25%", lab: "Up to 25% increase in upsells", sub: "Revenue", col: "from-blue-400 to-[#00E5C3]" },
-              { val: "24h", lab: "To go live from setup", sub: "Onboarding", col: "from-zinc-200 to-zinc-500" }
+              { icon: "↑", lab: "Turn browser questions into buyers", sub: "Conversion", col: "from-[#00E5C3] to-emerald-400" },
+              { icon: "⚡", lab: "Answer customer questions 24/7 without lifting a finger", sub: "Automation", col: "from-[#F5A623] to-orange-400" },
+              { icon: "$", lab: "AI recommends the right product at the right moment", sub: "Upsell Revenue", col: "from-blue-400 to-[#00E5C3]" },
+              { icon: "◎", lab: "Know exactly what customers think, every week", sub: "Intelligence", col: "from-zinc-200 to-zinc-500" }
             ].map((stat, i) => (
               <FadeIn key={i} delay={i * 100} className="stat-grid-item group">
                 <div className="relative h-full bg-[#1A1D24] border border-white/5 rounded-3xl p-8 overflow-hidden transition-all duration-500 hover:bg-[#23272f] hover:border-white/10 hover:-translate-y-1">
@@ -256,8 +256,8 @@ export default function App() {
                         {stat.sub}
                       </span>
                     </div>
-                    <div className={`text-6xl font-black mb-4 tracking-tighter bg-gradient-to-br ${stat.col} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500 origin-left`}>
-                      {stat.val}
+                    <div className={`text-5xl font-black mb-4 bg-gradient-to-br ${stat.col} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500 origin-left`}>
+                      {stat.icon}
                     </div>
                     <div className="h-px w-8 bg-white/10 mb-4 group-hover:w-full transition-all duration-700" />
                     <p className="text-sm font-bold text-zinc-400 leading-tight group-hover:text-zinc-200 transition-colors">
