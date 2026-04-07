@@ -159,9 +159,9 @@ export default function App() {
               </div>
             </FadeIn>
             <FadeIn delay={100}>
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
                 Your customers are talking{" "}
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">
+                <span className="block pb-2 text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">
                   Are you listening?
                 </span>
               </h1>
