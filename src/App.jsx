@@ -510,7 +510,7 @@ export default function App() {
                         </div>
                       ))}
                     </div>
-                    
+                    <a
                       href="#contact"
                       className={`w-full py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 text-center block ${
                         p.active
