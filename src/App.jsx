@@ -131,18 +131,32 @@ export default function App() {
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full z-50 bg-[#111317]/80 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5C3] to-emerald-500 flex items-center justify-center">
               <span className="text-[#111317] font-bold text-xl tracking-tighter">S</span>
             </div>
             <span className="text-2xl font-bold tracking-tight">SQU</span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Features</a>
-            <a href="#demo" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Demo</a>
-            <a href="#pricing" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Pricing</a>
-            <a href="#contact" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
+
+          {/* Desktop links + CTA */}
+          <div className="hidden md:flex items-center gap-6">
+            <div className="flex items-center gap-8">
+              <a href="#features" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Features</a>
+              <a href="#demo" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Demo</a>
+              <a href="#pricing" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Pricing</a>
+              <a href="#contact" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            {/* CTA Button */}
+            <a
+              href="#contact"
+              className="ml-4 px-4 py-2 bg-[#00E5C3] text-black font-bold text-sm rounded-lg uppercase tracking-widest hover:bg-[#00cba0] transition-colors"
+            >
+              Request Early Access
+            </a>
           </div>
+
+          {/* Mobile menu toggle */}
           <button className="md:hidden text-zinc-400" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -161,7 +175,7 @@ export default function App() {
             </FadeIn>
             <FadeIn delay={100}>
               <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] overflow-visible">
-                Your customers are talking{" "}
+                Your customers are talking.{" "}
                 <span className="block pb-4 text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#00E5C3] to-[#F5A623]">
                   Are you listening?
                 </span>
@@ -298,7 +312,7 @@ export default function App() {
                     <div className="w-12 h-12 rounded-2xl bg-[#F5A623]/20 flex items-center justify-center">
                       <Quote className="text-[#F5A623]" size={24} fill="currentColor" />
                     </div>
-                    <h2 className="text-4xl font-bold tracking-tight">Your Product, Always Listening</h2>
+                    <h2 className="text-4xl font-bold tracking-tight">Your Product, always Listening</h2>
                   </div>
                   <p className="text-xl text-zinc-400 leading-relaxed max-w-lg">
                     Instantly turn thousands of raw customer questions into actionable product decisions. See what people ask when they're actually using your device.
