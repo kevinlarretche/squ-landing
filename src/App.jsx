@@ -142,17 +142,22 @@ export default function App() {
           {/* Desktop links + CTA */}
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-8">
-              <a href="#features" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Features</a>
-              <a href="#demo" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Demo</a>
-              <a href="#pricing" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Pricing</a>
-              <a href="#contact" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
+              <a href="#features" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Features</a>
+              <a href="#demo" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Demo</a>
+              <a href="#pricing" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Pricing</a>
+              <a href="#contact" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Contact</a>
             </div>
+
             {/* CTA Button */}
             <a
               href="#contact"
-              className="ml-4 px-4 py-2 bg-[#00E5C3] text-black font-bold text-sm rounded-lg uppercase tracking-widest hover:bg-[#00cba0] transition-colors"
+              className="ml-4 relative group px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300"
             >
-              Request Early Access
+              <div className="absolute inset-0 bg-[#00E5C3]/10 group-hover:bg-[#00E5C3]/20 transition-colors border border-[#00E5C3]/30 rounded-full" />
+              <span className="relative z-10 text-[#00E5C3] font-bold text-[11px] uppercase tracking-[0.15em] flex items-center gap-2">
+                Request Early Access
+                <div className="w-1 h-1 rounded-full bg-[#00E5C3] animate-pulse" />
+              </span>
             </a>
           </div>
 
