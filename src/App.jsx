@@ -173,10 +173,7 @@ export default function App() {
               </p>
             </FadeIn>
             <FadeIn delay={300}>
-              
-                href="#contact"
-                className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105"
-              >
+              <a href="#contact" className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105">
                 Request Early Access <ArrowRight size={16} />
               </a>
             </FadeIn>
