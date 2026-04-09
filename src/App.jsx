@@ -512,8 +512,8 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { plan: "Starter", price: "$99", sub: "Level 01", bg: "START", features: ["Up to 2 Products", "Basic Web Chat Interface", "Up to 1,000 Monthly Scans", "Weekly summary"], col: "from-[#00E5C3] to-emerald-400", active: false },
-              { plan: "Growth", price: "$349", sub: "Level 02", bg: "GROW", features: ["Up to 5 Products", "Upsell AI Logic", "Full Intelligence Reports", "5,000 Monthly Scans"], col: "from-[#F5A623] to-orange-400", active: false },
+              { plan: "Starter", price: "$99", sub: "Level 01", bg: "START", features: ["Up to 2 Products", "Instant AI customer support", "Up to 1,000 Monthly Scans", "Weekly Customer Insights"], col: "from-[#00E5C3] to-emerald-400", active: false },
+              { plan: "Growth", price: "$349", sub: "Level 02", bg: "GROW", features: ["Up to 5 Products", "Smart product recommendations", "Full Intelligence Reports", "5,000 Monthly Scans"], col: "from-[#F5A623] to-orange-400", active: false },
               { plan: "Pro", price: "$699", sub: "Level 03", bg: "INTEL", features: ["Up to 15 Products", "Advanced Weekly Reports","Product & Marketing Recommendations","Priority Support", "15,000 Monthly Scans"], col: "from-purple-500 to-indigo-400", active: true },
               { plan: "Enterprise", price: "Custom", sub: "Max Level", bg: "SCALE", features: ["Unlimited Products", "Custom Actionable Reports", "White-label Dashboard", "Dedicated Manager"], col: "from-blue-400 to-[#00E5C3]", active: false }
             ].map((p, i) => (
