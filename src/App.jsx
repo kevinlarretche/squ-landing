@@ -35,10 +35,26 @@ const translations = {
 
     // Stats
     stats: [
-      { label: "AI Support", title: "Answers questions instantly, 24/7", tag: "Always On" },
-      { label: "Upsell Revenue", title: "Recommends the right product at the right moment", tag: "Smart Upsell" },
-      { label: "Product Intel", title: "Know what customers think, every single week", tag: "Weekly Intel" },
-      { label: "Fast Onboarding", title: "Go live in 24 hours, no dev needed", tag: "Live in 24h" }
+      { label: "AI Support", title: "Answers questions instantly, 24/7", tag: "Always On",
+        modalTitle: "AI-Powered Customer Support",
+        modalDesc: "Your product becomes its own support agent. The moment a customer scans your QR code, SQU's AI jumps in — trained specifically on your product specs, troubleshooting guides, and brand voice.",
+        modalPoints: ["Handles product questions, setup help, and troubleshooting instantly", "Speaks your brand's tone — professional, casual, technical, whatever fits", "Escalates edge cases to your team with full conversation context", "Available 24/7 in multiple languages — no staffing required"]
+      },
+      { label: "Upsell Revenue", title: "Recommends the right product at the right moment", tag: "Smart Upsell",
+        modalTitle: "Contextual Upselling",
+        modalDesc: "SQU doesn't just answer questions — it listens for buying signals. When a customer asks about a feature their current product doesn't have, SQU recommends the right upgrade naturally within the conversation.",
+        modalPoints: ["Detects intent from real questions — not generic popups", "Recommends accessories, upgrades, and complementary products", "Conversion happens in-context, not through cold email follow-ups", "Track upsell performance per product in your weekly reports"]
+      },
+      { label: "Product Intel", title: "Know what customers think, every single week", tag: "Weekly Intel",
+        modalTitle: "Weekly Intelligence Reports",
+        modalDesc: "Every scan, every question, every frustration — clustered and analyzed automatically. You get a structured weekly report that tells you exactly what to fix, what to market, and what to build next.",
+        modalPoints: ["Pain points ranked by frequency and severity", "Marketing opportunities surfaced from real customer language", "Engineering notes flagging recurring technical issues", "Sentiment tracking over time so you can measure impact"]
+      },
+      { label: "Fast Onboarding", title: "Go live in 24 hours, no dev needed", tag: "Live in 24h",
+        modalTitle: "Live in 24 Hours",
+        modalDesc: "No SDK, no API integration, no developer sprints. You send us your product info, we configure your AI agent, and you get a QR code ready to print. That's it.",
+        modalPoints: ["Zero technical integration — works with any product or packaging", "We handle AI training from your existing docs and specs", "QR codes delivered print-ready in any format you need", "Dedicated onboarding support to get you live fast"]
+      }
     ],
 
     // Intelligence Reports
@@ -98,7 +114,9 @@ const translations = {
     // Footer
     footerQuote: '"The stupidest thing about business is ignoring your customers."',
 
-    // How It Works
+    // Modal
+    modalCTA: "Request Early Access",
+    learnMore: "Learn More",
     howTitle: "How It Works",
     howSub: "From scan to strategy in three steps. No dev team required.",
     howSteps: [
@@ -133,10 +151,26 @@ const translations = {
 
     // Stats
     stats: [
-      { label: "Support IA", title: "Répond aux questions instantanément, 24h/24 7j/7", tag: "Toujours actif" },
-      { label: "Revenus additionnels", title: "Recommande le bon produit au bon moment", tag: "Upsell intelligent" },
-      { label: "Intelligence Produit", title: "Sachez ce que pensent vos clients, chaque semaine", tag: "Intel hebdomadaire" },
-      { label: "Démarrage rapide", title: "Opérationnel en 24h, sans développement", tag: "En ligne en 24h" }
+      { label: "Support IA", title: "Répond aux questions instantanément, 24h/24 7j/7", tag: "Toujours actif",
+        modalTitle: "Support Client propulsé par l'IA",
+        modalDesc: "Votre produit devient son propre agent de support. Dès qu'un client scanne votre QR code, l'IA de SQU intervient — formée spécifiquement sur vos fiches produit, guides et ton de marque.",
+        modalPoints: ["Gère les questions produit, l'installation et le dépannage instantanément", "Parle avec le ton de votre marque — professionnel, décontracté, technique", "Escalade les cas complexes à votre équipe avec le contexte complet", "Disponible 24h/24, 7j/7, en plusieurs langues — sans recrutement"]
+      },
+      { label: "Revenus additionnels", title: "Recommande le bon produit au bon moment", tag: "Upsell intelligent",
+        modalTitle: "Upsell Contextuel",
+        modalDesc: "SQU ne se contente pas de répondre — il détecte les signaux d'achat. Quand un client demande une fonctionnalité que son produit actuel n'a pas, SQU recommande le bon upgrade naturellement.",
+        modalPoints: ["Détecte l'intention d'achat à partir de vraies questions — pas de popups génériques", "Recommande accessoires, upgrades et produits complémentaires", "La conversion se fait dans le contexte, pas via des emails de relance", "Suivez la performance upsell par produit dans vos rapports hebdomadaires"]
+      },
+      { label: "Intelligence Produit", title: "Sachez ce que pensent vos clients, chaque semaine", tag: "Intel hebdomadaire",
+        modalTitle: "Rapports d'Intelligence Hebdomadaires",
+        modalDesc: "Chaque scan, chaque question, chaque frustration — regroupés et analysés automatiquement. Vous recevez un rapport structuré qui vous dit exactement quoi corriger, quoi marketer et quoi développer.",
+        modalPoints: ["Points de friction classés par fréquence et sévérité", "Opportunités marketing issues du langage réel de vos clients", "Notes d'ingénierie signalant les problèmes techniques récurrents", "Suivi du sentiment dans le temps pour mesurer votre impact"]
+      },
+      { label: "Démarrage rapide", title: "Opérationnel en 24h, sans développement", tag: "En ligne en 24h",
+        modalTitle: "En ligne en 24 heures",
+        modalDesc: "Pas de SDK, pas d'intégration API, pas de sprint développeur. Vous nous envoyez vos infos produit, on configure votre agent IA, et vous recevez un QR code prêt à imprimer. C'est tout.",
+        modalPoints: ["Zéro intégration technique — fonctionne avec n'importe quel produit", "On gère la formation IA à partir de vos docs existants", "QR codes livrés prêts à imprimer dans le format de votre choix", "Support dédié pour vous mettre en ligne rapidement"]
+      }
     ],
 
     // Intelligence Reports
@@ -195,6 +229,10 @@ const translations = {
 
     // Footer
     footerQuote: '"La pire erreur en business ? Ignorer ses clients."',
+
+    // Modal
+    modalCTA: "Demander un accès anticipé",
+    learnMore: "En savoir plus",
 
     // How It Works
     howTitle: "Comment ça marche",
@@ -303,6 +341,7 @@ export default function App() {
   const [loadingStep, setLoadingStep] = useState(0);
   const [simStep, setSimStep] = useState(0);
   const [lang, setLang] = useState('EN');
+  const [activeModal, setActiveModal] = useState(null);
 
   const t = translations[lang];
 
@@ -608,7 +647,7 @@ export default function App() {
               const Icon = cfg.icon;
               return (
                 <FadeIn key={i} delay={i * 100} className="h-full">
-                  <div className="group relative flex flex-col h-full min-h-[260px] bg-[#0F1115] rounded-[24px] border border-white/5 p-6 overflow-hidden transition-all duration-500 cursor-default hover:border-white/20 hover:bg-[#14171d] hover:-translate-y-2 shadow-2xl">
+                  <div onClick={() => setActiveModal(i)} className="group relative flex flex-col h-full min-h-[260px] bg-[#0F1115] rounded-[24px] border border-white/5 p-6 overflow-hidden transition-all duration-500 cursor-pointer hover:border-white/20 hover:bg-[#14171d] hover:-translate-y-2 shadow-2xl">
                     <div className={`absolute -top-16 -right-16 w-32 h-32 blur-[60px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 ${cfg.bgColor}`} />
                     <div className="relative z-10 flex flex-col gap-5">
                       <div className={`w-12 h-12 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/5 ${cfg.color} transition-all duration-500 group-hover:bg-white/10 group-hover:scale-110 group-hover:rotate-3`}>
@@ -629,7 +668,7 @@ export default function App() {
                     <div className="mt-auto pt-6 relative z-10">
                       <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-white/[0.02] border border-white/5 group-hover:bg-white/[0.05] transition-all duration-300">
                         <span className={`text-[10px] font-black uppercase tracking-wider ${cfg.color}`}>
-                          {stat.tag}
+                          {t.learnMore}
                         </span>
                         <ChevronRight size={14} className="text-zinc-600 group-hover:text-zinc-300 transition-colors" />
                       </div>
@@ -938,6 +977,82 @@ export default function App() {
           <p className="text-zinc-600 text-sm font-medium italic">{t.footerQuote}</p>
         </div>
       </footer>
+
+      {/* FEATURE DETAIL MODAL */}
+      {activeModal !== null && (() => {
+        const stat = t.stats[activeModal];
+        const cfg = statConfig[activeModal];
+        const Icon = cfg.icon;
+        return (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+            onClick={() => setActiveModal(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+            {/* Modal */}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg bg-[#1A1D24] border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl animate-in zoom-in-95 fade-in duration-300 max-h-[90vh] overflow-y-auto"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setActiveModal(null)}
+                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors text-zinc-400 hover:text-white"
+              >
+                <X size={16} />
+              </button>
+
+              {/* Glow */}
+              <div className={`absolute -top-20 -right-20 w-40 h-40 blur-[80px] opacity-20 ${cfg.bgColor} pointer-events-none`} />
+
+              {/* Icon + Tag */}
+              <div className="flex items-center gap-4 mb-6 relative z-10">
+                <div className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.05] border border-white/10 ${cfg.color}`}>
+                  <Icon size={28} strokeWidth={2} />
+                </div>
+                <div>
+                  <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${cfg.color}`}>{stat.tag}</span>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-4 relative z-10">
+                {stat.modalTitle}
+              </h3>
+
+              {/* Description */}
+              <p className="text-zinc-400 leading-relaxed mb-8 relative z-10">
+                {stat.modalDesc}
+              </p>
+
+              {/* Points */}
+              <div className="space-y-4 mb-10 relative z-10">
+                {stat.modalPoints.map((point, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <div className="mt-1.5 flex-shrink-0">
+                      <div className={`w-1.5 h-1.5 rounded-full ${cfg.bgColor}`} />
+                    </div>
+                    <p className="text-sm text-zinc-300 leading-relaxed">{point}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="h-px w-full bg-white/5 mb-6 relative z-10" />
+
+              {/* CTA */}
+              <button
+                onClick={() => { setActiveModal(null); openCalendly(); }}
+                className="w-full py-3.5 rounded-xl bg-[#00E5C3] text-black font-bold text-sm uppercase tracking-wider hover:bg-[#00cba0] transition-all duration-300 flex items-center justify-center gap-2 relative z-10"
+              >
+                {t.modalCTA} <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
