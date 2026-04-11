@@ -69,7 +69,6 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef();
 
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -83,7 +82,6 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
 
   return (
     <div
@@ -105,6 +103,31 @@ export default function App() {
   const [loadingStep, setLoadingStep] = useState(0);
   const [simStep, setSimStep] = useState(0);
 
+  // Load Calendly assets once on mount
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(link);
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/kevin-larretche-squ/30min',
+      });
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -113,9 +136,7 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
-
   const steps = ["Accessing Database...", "Clustering 124 User Scans...", "Identifying Core Sentiment...", "Drafting Brand Strategy..."];
-
 
   const handleGenerateInsight = () => {
     setReportState('loading');
@@ -132,16 +153,13 @@ export default function App() {
     }, 900);
   };
 
-
   return (
     <div className="min-h-screen bg-[#111317] text-zinc-100 font-sans selection:bg-[#00E5C3] selection:text-zinc-900 overflow-x-hidden">
       <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full z-50 bg-[#111317]/80 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5C3] to-emerald-500 flex items-center justify-center">
               <span className="text-[#111317] font-bold text-xl tracking-tighter">S</span>
@@ -149,8 +167,6 @@ export default function App() {
             <span className="text-2xl font-bold tracking-tight">SQU</span>
           </div>
 
-
-          {/* Desktop links + CTA */}
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-8">
               <a href="#features" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Features</a>
@@ -159,10 +175,8 @@ export default function App() {
               <a href="#contact" className="text-[13px] font-semibold text-zinc-400 hover:text-white transition-colors tracking-wide">Contact</a>
             </div>
 
-
-            {/* CTA Button */}
-            <a
-              href="#contact"
+            <button
+              onClick={openCalendly}
               className="ml-4 relative group px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300"
             >
               <div className="absolute inset-0 bg-[#00E5C3]/10 group-hover:bg-[#00E5C3]/20 transition-colors border border-[#00E5C3]/30 rounded-full" />
@@ -170,17 +184,14 @@ export default function App() {
                 Request Early Access
                 <div className="w-1 h-1 rounded-full bg-[#00E5C3] animate-pulse" />
               </span>
-            </a>
+            </button>
           </div>
 
-
-          {/* Mobile menu toggle */}
           <button className="md:hidden text-zinc-400" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
-
 
       {/* HERO */}
       <section className="pt-32 pb-8 px-6 relative">
@@ -206,12 +217,14 @@ export default function App() {
               </p>
             </FadeIn>
             <FadeIn delay={300}>
-              <a href="#contact" className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105">
+              <button
+                onClick={openCalendly}
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-wider hover:bg-[#00E5C3]/90 transition-all duration-300 hover:scale-105"
+              >
                 Request Early Access <ArrowRight size={16} />
-              </a>
+              </button>
             </FadeIn>
           </div>
-
 
           <FadeIn delay={400} className="relative">
             <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
@@ -274,7 +287,6 @@ export default function App() {
         </div>
       </section>
 
-
       {/* STATS STRIPE */}
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
@@ -322,7 +334,6 @@ export default function App() {
         </div>
       </section>
 
-
       {/* INTELLIGENCE REPORTS */}
       <section className="pb-24 pt-8 px-6 bg-[#111317]" id="demo">
         <div className="max-w-7xl mx-auto">
@@ -341,7 +352,7 @@ export default function App() {
                   </p>
                 </div>
               </FadeIn>
-             
+
               <div className="glass-card p-6 rounded-2xl border-white/5 mb-8">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
@@ -353,7 +364,6 @@ export default function App() {
                   </div>
                 </div>
               </div>
-
 
               <div className="space-y-6 pl-4 border-l-2 border-white/5 flex-grow">
                 {[
@@ -374,13 +384,11 @@ export default function App() {
               </div>
             </div>
 
-
             <FadeIn delay={400} className="w-full h-full flex">
               <div className="glass-card rounded-[2.5rem] p-8 md:p-10 border border-white/10 shadow-2xl w-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#111317] relative overflow-hidden min-h-[700px]">
                 <span className="stat-bg-text absolute -bottom-10 -right-10 text-[12rem] font-black text-white/[0.01] transition-all duration-700 pointer-events-none uppercase italic">
                   INTEL
                 </span>
-
 
                 <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
                   <div className="flex items-center gap-3">
@@ -399,7 +407,6 @@ export default function App() {
                   )}
                 </div>
 
-
                 {reportState === 'idle' && (
                   <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8 animate-in fade-in duration-500">
                     <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center border border-dashed border-white/10 relative">
@@ -415,7 +422,6 @@ export default function App() {
                     </button>
                   </div>
                 )}
-
 
                 {reportState === 'loading' && (
                   <div className="flex-1 flex flex-col items-center justify-center space-y-8 relative py-20">
@@ -433,7 +439,6 @@ export default function App() {
                   </div>
                 )}
 
-
                 {reportState === 'complete' && (
                   <div className="flex-1 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 flex flex-col">
                     <div className="space-y-6 flex-grow">
@@ -444,7 +449,7 @@ export default function App() {
                           <p className="text-xs text-zinc-500 font-medium">Aura Speaker Gen 2 • <span className="text-white">Active Sentiment: Positive (72%)</span></p>
                         </div>
                       </div>
-                     
+
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/5">
                           <p className="text-[10px] uppercase font-black text-zinc-500 tracking-widest mb-1">Total Scans</p>
@@ -458,7 +463,6 @@ export default function App() {
                         </div>
                       </div>
 
-
                       <div className="space-y-4">
                         <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-all">
                           <div className="flex items-center gap-2 mb-3 text-[#00E5C3] font-bold text-xs uppercase tracking-widest">
@@ -468,7 +472,7 @@ export default function App() {
                             <span className="text-white font-bold">14 users</span> specifically asked about pairing with older Gen 1 models. Currently, the AI handles this manually—recommend adding a dedicated <span className="text-white font-bold">"Stereo Link" guide</span> to the scan flow.
                           </p>
                         </div>
-                       
+
                         <div className="group bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-all">
                           <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest">
                             <TrendingUp size={14} /> Marketing Opportunity
@@ -477,7 +481,6 @@ export default function App() {
                             Users are asking about <span className="text-white font-bold">beach usage</span>. Leverage this by adding an "Outdoors & Sand Safety" video module to increase upsells on our Rugged Carrying Case.
                           </p>
                         </div>
-
 
                         <div className="group bg-[#F5A623]/5 border border-[#F5A623]/20 rounded-2xl p-5 hover:bg-[#F5A623]/10 transition-all relative overflow-hidden">
                           <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest relative z-10">
@@ -500,7 +503,6 @@ export default function App() {
         </div>
       </section>
 
-
       {/* PRICING */}
       <section className="py-24 px-4 bg-[#111317]" id="pricing">
         <div className="max-w-7xl mx-auto">
@@ -508,7 +510,6 @@ export default function App() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">Scale Your Intelligence</h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">Transparent pricing for brands at every stage.</p>
           </FadeIn>
-
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -556,15 +557,15 @@ export default function App() {
                         </div>
                       ))}
                     </div>
-                    <a
-                      href="#contact"
+                    <button
+                      onClick={openCalendly}
                       className={`w-full py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 text-center block ${
                         p.active
                         ? 'bg-[#00E5C3] text-black hover:bg-[#00cba0]'
                         : 'bg-white/5 text-white hover:bg-white/10 border border-white/5'
                       }`}>
                       {p.price === "Custom" ? "Contact Sales" : "Get Started"}
-                    </a>
+                    </button>
                   </div>
                 </div>
               </FadeIn>
@@ -573,69 +574,64 @@ export default function App() {
         </div>
       </section>
 
-
       {/* CONTACT SECTION */}
       <section className="pb-16 md:pb-24 pt-4 px-4 md:px-6 relative overflow-hidden bg-[#0A0C10] text-white min-h-screen" id="contact">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
-      <div className="max-w-6xl mx-auto relative z-10">
-        <FadeIn>
-          <div className="bg-white/5 backdrop-blur-sm rounded-3xl md:rounded-[3rem] p-6 md:p-16 border border-white/10">
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">
-                  <Zap size={14} fill="currentColor" /> Invite-Only Access
-                </div>
-                <h2 className="text-3xl md:text-5xl font-black mb-4 md:mb-6 tracking-tighter leading-tight">
-                  Ready to transform your support?
-                </h2>
-                <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-6">
-                  SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
-                </p>
-              </div>
-
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-                <div className="relative bg-[#1A1D24] border border-white/10 rounded-2xl md:rounded-[2rem] p-6 md:p-10 shadow-2xl overflow-hidden">
-                  <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-10">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
-                      <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
-                        <span className="text-xl md:text-2xl font-black text-white tracking-tighter">KL</span>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
-                      <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
-                    </div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <FadeIn>
+            <div className="bg-white/5 backdrop-blur-sm rounded-3xl md:rounded-[3rem] p-6 md:p-16 border border-white/10">
+              <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623] text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">
+                    <Zap size={14} fill="currentColor" /> Invite-Only Access
                   </div>
+                  <h2 className="text-3xl md:text-5xl font-black mb-4 md:mb-6 tracking-tighter leading-tight">
+                    Ready to transform your support?
+                  </h2>
+                  <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-6">
+                    SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.
+                  </p>
+                </div>
 
-                  <div className="space-y-4">
-                    {/* CHANGED: Replaced mailto with Calendly link, added target="_blank", changed icon, and updated text */}
-                    <a 
-                      href="https://calendly.com/YOUR_CALENDLY_USERNAME" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 md:p-4 rounded-xl transition-all group/btn"
-                    >
-                      <div className="flex items-center gap-3 md:gap-4">
-                        <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                          <Calendar size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
-                        </div>
-                        <div className="text-left">
-                          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Book a Meeting</p>
-                          <p className="text-xs md:text-sm font-medium text-zinc-200 break-all">Schedule via Calendly</p>
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] rounded-[2rem] md:rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+                  <div className="relative bg-[#1A1D24] border border-white/10 rounded-2xl md:rounded-[2rem] p-6 md:p-10 shadow-2xl overflow-hidden">
+                    <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-10">
+                      <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#00E5C3] to-blue-600 p-[2px]">
+                        <div className="w-full h-full bg-[#111317] rounded-full flex items-center justify-center">
+                          <span className="text-xl md:text-2xl font-black text-white tracking-tighter">KL</span>
                         </div>
                       </div>
-                      <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all flex-shrink-0" />
-                    </a>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Kevin Larretche</h3>
+                        <p className="text-[#00E5C3] font-medium text-sm">Founder & CEO</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <button
+                        onClick={openCalendly}
+                        className="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#00E5C3]/30 p-3 md:p-4 rounded-xl transition-all group/btn"
+                      >
+                        <div className="flex items-center gap-3 md:gap-4">
+                          <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-[#111317] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                            <Calendar size={18} className="text-zinc-400 group-hover/btn:text-[#00E5C3]" />
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Book a Meeting</p>
+                            <p className="text-xs md:text-sm font-medium text-zinc-200">Book an intro call</p>
+                          </div>
+                        </div>
+                        <ArrowRight size={16} className="text-zinc-600 group-hover/btn:text-[#00E5C3] group-hover/btn:translate-x-1 transition-all flex-shrink-0" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-
+          </FadeIn>
+        </div>
+      </section>
 
       <footer className="border-t border-white/5 py-12 px-6 text-center">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -649,4 +645,3 @@ export default function App() {
     </div>
   );
 }
-
