@@ -264,7 +264,7 @@ export default function App() {
                       <p className="font-bold text-[#00E5C3] mb-1 flex items-center gap-1.5 text-xs uppercase tracking-wider">
                         <Zap size={10} fill="currentColor" /> SQU AI
                       </p>
-                      This specific model isn't rain-rated, but our <span className="text-[#00E5C3] font-bold">Pro Edition</span> is fully waterproof. Interested in upgrading your order?
+                      This specific model isn't IPX4 certified, but our <span className="text-[#00E5C3] font-bold">Pro Edition</span> is fully waterproof. Interested in upgrading your order?
                     </div>
                   </div>
                 )}
