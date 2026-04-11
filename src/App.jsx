@@ -539,60 +539,62 @@ export default function App() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 px-6 bg-[#0D0F13] relative overflow-hidden">
+      <section className="py-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="max-w-7xl mx-auto">
-          <FadeIn className="mb-16 text-center">
+        <div className="max-w-5xl mx-auto">
+          <FadeIn className="mb-14 text-center">
             <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#00E5C3] mb-4">1 → 2 → 3</p>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">{t.howTitle}</h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">{t.howSub}</p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Connecting line (desktop only) */}
-            <div className="hidden md:block absolute top-[72px] left-[16.6%] right-[16.6%] h-px">
-              <div className="w-full h-full bg-gradient-to-r from-[#00E5C3]/40 via-[#F5A623]/40 to-purple-500/40" />
-              <div className="absolute top-1/2 left-0 w-2 h-2 -translate-y-1/2 rounded-full bg-[#00E5C3]" />
-              <div className="absolute top-1/2 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F5A623]" />
-              <div className="absolute top-1/2 right-0 w-2 h-2 -translate-y-1/2 rounded-full bg-purple-500" />
-            </div>
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line (mobile) / Horizontal line (desktop) */}
+            <div className="hidden md:block absolute top-[28px] left-[calc(16.66%+7px)] right-[calc(16.66%+7px)] h-px bg-gradient-to-r from-[#00E5C3]/30 via-[#F5A623]/30 to-purple-500/30" />
+            <div className="md:hidden absolute top-0 bottom-0 left-[19px] w-px bg-gradient-to-b from-[#00E5C3]/30 via-[#F5A623]/30 to-purple-500/30" />
 
-            {[
-              { icon: QrCode, color: "text-[#00E5C3]", bgColor: "bg-[#00E5C3]", borderHover: "hover:border-[#00E5C3]/30" },
-              { icon: MessageSquareText, color: "text-[#F5A623]", bgColor: "bg-[#F5A623]", borderHover: "hover:border-[#F5A623]/30" },
-              { icon: BarChart2, color: "text-purple-400", bgColor: "bg-purple-500", borderHover: "hover:border-purple-500/30" }
-            ].map((cfg, i) => {
-              const step = t.howSteps[i];
-              const Icon = cfg.icon;
-              return (
-                <FadeIn key={i} delay={i * 200}>
-                  <div className={`group relative bg-[#111317] rounded-[24px] border border-white/5 p-8 transition-all duration-500 hover:bg-[#14171d] ${cfg.borderHover} hover:-translate-y-1`}>
-                    <div className={`absolute -top-10 -right-10 w-24 h-24 blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 ${cfg.bgColor}`} />
-
-                    <div className="relative z-10">
-                      {/* Step number */}
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/5 ${cfg.color} transition-all duration-500 group-hover:bg-white/10 group-hover:scale-110`}>
-                          <Icon size={28} strokeWidth={2} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+              {[
+                { color: "#00E5C3", icon: QrCode },
+                { color: "#F5A623", icon: MessageSquareText },
+                { color: "rgb(168,85,247)", icon: BarChart2 }
+              ].map((cfg, i) => {
+                const step = t.howSteps[i];
+                const Icon = cfg.icon;
+                return (
+                  <FadeIn key={i} delay={i * 200}>
+                    <div className="relative flex md:flex-col items-start gap-5 md:gap-0 md:items-center md:text-center py-6 md:py-0 md:px-6">
+                      {/* Dot */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div
+                          className="w-[40px] h-[40px] rounded-full flex items-center justify-center border-2 bg-[#111317]"
+                          style={{ borderColor: cfg.color }}
+                        >
+                          <Icon size={18} style={{ color: cfg.color }} />
                         </div>
-                        <span className={`text-4xl font-black ${cfg.color} opacity-20 group-hover:opacity-40 transition-opacity`}>
-                          {step.number}
-                        </span>
                       </div>
 
                       {/* Content */}
-                      <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
-                        {step.title}
-                      </h3>
-                      <p className="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors duration-300">
-                        {step.desc}
-                      </p>
+                      <div className="md:mt-8">
+                        <span
+                          className="text-[11px] font-black uppercase tracking-[0.2em] mb-2 block"
+                          style={{ color: cfg.color }}
+                        >
+                          {step.number}
+                        </span>
+                        <h3 className="text-lg font-bold text-white mb-2 tracking-tight">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-zinc-500 leading-relaxed max-w-xs md:mx-auto">
+                          {step.desc}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </FadeIn>
-              );
-            })}
+                  </FadeIn>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
