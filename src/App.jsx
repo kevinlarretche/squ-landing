@@ -4,7 +4,8 @@ import {
   Check, ArrowRight, Sparkles, TrendingUp,
   Quote, Lightbulb, Calendar, AlertCircle,
   Volume2, Mic, Settings, MoveRight, Wrench,
-  BadgeDollarSign, BrainCircuit, Rocket, ChevronRight
+  BadgeDollarSign, BrainCircuit, Rocket, ChevronRight,
+  QrCode, MessageSquareText, BarChart2
 } from 'lucide-react';
 
 // ─── TRANSLATIONS ────────────────────────────────────────────────
@@ -96,6 +97,15 @@ const translations = {
 
     // Footer
     footerQuote: '"The stupidest thing about business is ignoring your customers."',
+
+    // How It Works
+    howTitle: "How It Works",
+    howSub: "From scan to strategy in three steps. No dev team required.",
+    howSteps: [
+      { number: "01", title: "Place Your QR Code", desc: "Add a branded QR code to your packaging, manual, or product. Customers scan it the moment they need help — or just want to know more." },
+      { number: "02", title: "AI Handles the Conversation", desc: "SQU answers questions, recommends upgrades, and resolves issues instantly — trained on your product, speaking your brand's voice." },
+      { number: "03", title: "You Get the Intelligence", desc: "Every interaction becomes a data point. Weekly reports surface pain points, upsell opportunities, and product insights you'd never get from reviews alone." }
+    ],
   },
 
   FR: {
@@ -185,6 +195,15 @@ const translations = {
 
     // Footer
     footerQuote: '"La pire erreur en business ? Ignorer ses clients."',
+
+    // How It Works
+    howTitle: "Comment ça marche",
+    howSub: "Du scan à la stratégie en trois étapes. Aucune équipe technique requise.",
+    howSteps: [
+      { number: "01", title: "Placez votre QR Code", desc: "Ajoutez un QR code à votre packaging, notice ou produit. Vos clients le scannent dès qu'ils ont besoin d'aide — ou simplement envie d'en savoir plus." },
+      { number: "02", title: "L'IA gère la conversation", desc: "SQU répond aux questions, recommande des upgrades et résout les problèmes instantanément — formée sur votre produit, avec le ton de votre marque." },
+      { number: "03", title: "Vous recevez l'intelligence", desc: "Chaque interaction devient une donnée. Des rapports hebdomadaires révèlent les points de friction, les opportunités de vente et des insights produit introuvables dans les avis clients." }
+    ],
   }
 };
 
@@ -516,6 +535,65 @@ export default function App() {
               </div>
             </div>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-24 px-6 bg-[#0D0F13] relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="max-w-7xl mx-auto">
+          <FadeIn className="mb-16 text-center">
+            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#00E5C3] mb-4">1 → 2 → 3</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">{t.howTitle}</h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">{t.howSub}</p>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+            {/* Connecting line (desktop only) */}
+            <div className="hidden md:block absolute top-[72px] left-[16.6%] right-[16.6%] h-px">
+              <div className="w-full h-full bg-gradient-to-r from-[#00E5C3]/40 via-[#F5A623]/40 to-purple-500/40" />
+              <div className="absolute top-1/2 left-0 w-2 h-2 -translate-y-1/2 rounded-full bg-[#00E5C3]" />
+              <div className="absolute top-1/2 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F5A623]" />
+              <div className="absolute top-1/2 right-0 w-2 h-2 -translate-y-1/2 rounded-full bg-purple-500" />
+            </div>
+
+            {[
+              { icon: QrCode, color: "text-[#00E5C3]", bgColor: "bg-[#00E5C3]", borderHover: "hover:border-[#00E5C3]/30" },
+              { icon: MessageSquareText, color: "text-[#F5A623]", bgColor: "bg-[#F5A623]", borderHover: "hover:border-[#F5A623]/30" },
+              { icon: BarChart2, color: "text-purple-400", bgColor: "bg-purple-500", borderHover: "hover:border-purple-500/30" }
+            ].map((cfg, i) => {
+              const step = t.howSteps[i];
+              const Icon = cfg.icon;
+              return (
+                <FadeIn key={i} delay={i * 200}>
+                  <div className={`group relative bg-[#111317] rounded-[24px] border border-white/5 p-8 transition-all duration-500 hover:bg-[#14171d] ${cfg.borderHover} hover:-translate-y-1`}>
+                    <div className={`absolute -top-10 -right-10 w-24 h-24 blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 ${cfg.bgColor}`} />
+
+                    <div className="relative z-10">
+                      {/* Step number */}
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/5 ${cfg.color} transition-all duration-500 group-hover:bg-white/10 group-hover:scale-110`}>
+                          <Icon size={28} strokeWidth={2} />
+                        </div>
+                        <span className={`text-4xl font-black ${cfg.color} opacity-20 group-hover:opacity-40 transition-opacity`}>
+                          {step.number}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors duration-300">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
+          </div>
         </div>
       </section>
 
