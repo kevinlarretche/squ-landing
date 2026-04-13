@@ -202,12 +202,10 @@ const SquLogo = ({ height = 44 }) => (
     <polyline fill="none" stroke="#00E5C3" strokeWidth="40" strokeLinecap="butt" strokeLinejoin="miter"
       points="669.72,1113.46 754.74,1113.46 754.74,1028.44"/>
 
-    {/* Top-left teal triangle */}
-    <path fill="#00E5C3" d="M647.08,865.42l-140.77,140.77c-9.18-38.15,1.09-80.04,30.91-109.85
-      C567.04,866.51,608.93,856.24,647.08,865.42z"/>
-    {/* Bottom-right teal triangle */}
-    <path fill="#00E5C3" d="M702.04,1061.16c-29.82,29.82-71.78,40.18-109.94,30.99l140.92-140.92
-      C742.22,989.37,731.86,1031.34,702.04,1061.16z"/>
+    {/* Top-left large teal triangle — fills top-left diagonal half of icon */}
+    <polygon fill="#00E5C3" points="485,844 755,844 485,1114"/>
+    {/* Bottom-right large teal triangle — fills bottom-right diagonal half of icon */}
+    <polygon fill="#00E5C3" points="755,1114 485,1114 755,844"/>
 
     {/* Centre white bowtie */}
     <path fill="#FFFFFF" d="M662.59,1021.69l-0.32-0.32c-15.32-15.55-13.95-41.05,1.49-56.49l24.47-24.47
