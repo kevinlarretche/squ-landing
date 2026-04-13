@@ -175,14 +175,47 @@ const translations = {
 
 
 // ─── SQU SVG LOGO COMPONENT ──────────────────────────────────────
+// Uses the full original 2000×2000 viewBox so all coordinates are exact.
+// A background rect fills the icon square so the bracket/triangle layering works correctly.
 const SquLogo = ({ height = 44 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="430 840 1100 320"
+    viewBox="455 830 1090 330"
     style={{ height, width: 'auto', display: 'block' }}
     aria-label="SQU"
   >
-    {/* S */}
+    {/* Dark background square behind icon — required so bracket strokes read correctly */}
+    <rect x="455" y="830" width="330" height="330" fill="#111317"/>
+
+    {/* ── ICON (original coordinates) ── */}
+
+    {/* Top-left corner: white L-bracket */}
+    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="butt" strokeLinejoin="miter"
+      points="570.26,844.05 485.24,844.05 485.24,929.07"/>
+    {/* Bottom-left corner: white L-bracket */}
+    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="butt" strokeLinejoin="miter"
+      points="570.26,1113.46 485.24,1113.46 485.24,1028.44"/>
+    {/* Top-right corner: white L-bracket */}
+    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="butt" strokeLinejoin="miter"
+      points="669.72,844.05 754.74,844.05 754.74,929.07"/>
+    {/* Bottom-right corner: teal L-bracket */}
+    <polyline fill="none" stroke="#00E5C3" strokeWidth="40" strokeLinecap="butt" strokeLinejoin="miter"
+      points="669.72,1113.46 754.74,1113.46 754.74,1028.44"/>
+
+    {/* Top-left teal triangle */}
+    <path fill="#00E5C3" d="M647.08,865.42l-140.77,140.77c-9.18-38.15,1.09-80.04,30.91-109.85
+      C567.04,866.51,608.93,856.24,647.08,865.42z"/>
+    {/* Bottom-right teal triangle */}
+    <path fill="#00E5C3" d="M702.04,1061.16c-29.82,29.82-71.78,40.18-109.94,30.99l140.92-140.92
+      C742.22,989.37,731.86,1031.34,702.04,1061.16z"/>
+
+    {/* Centre white bowtie */}
+    <path fill="#FFFFFF" d="M662.59,1021.69l-0.32-0.32c-15.32-15.55-13.95-41.05,1.49-56.49l24.47-24.47
+      c7.53-7.53,9.37-19.65,3.14-28.29c-7.92-11.01-23.38-11.92-32.55-2.75l-25.28,25.28c-15.44,15.44-40.94,16.81-56.49,1.49
+      l-0.32-0.32l0.32,0.32c15.33,15.55,13.95,41.05-1.48,56.49l-24.47,24.47c-7.53,7.53-9.36,19.65-3.14,28.29
+      c7.93,11.01,23.38,11.92,32.56,2.74l25.28-25.28c15.44-15.44,40.94-16.81,56.49-1.48L662.59,1021.69z"/>
+
+    {/* ── LETTERS S Q U ── */}
     <path fill="#FFFFFF" d="M948.42,898.61c-15.03,0-26.94,2.66-35.72,7.98c-8.79,5.32-13.18,13.41-13.18,24.27
       c0,5.78,1.27,10.53,3.82,14.22c2.54,3.7,6.88,6.82,13,9.36c6.12,2.55,14.97,4.86,26.53,6.94l26.01,4.86
       c21.5,3.93,38.67,10.87,51.5,20.81c12.83,9.94,19.25,24.86,19.25,44.74c0,21.97-8.1,38.49-24.28,49.59
@@ -192,7 +225,6 @@ const SquLogo = ({ height = 44 }) => (
       c-12.48-9.36-18.73-24.33-18.73-44.91c0-14.57,3.81-26.99,11.44-37.28c7.63-10.29,17.98-18.09,31.04-23.41
       c13.06-5.32,27.68-7.98,43.87-7.98c25.2,0,46.07,6.3,62.6,18.9c16.53,12.61,25.14,31.04,25.84,55.32h-38.5
       C995.81,911.33,979.16,898.61,948.42,898.61z"/>
-    {/* Q */}
     <path fill="#FFFFFF" d="M1249.28,877.81c17.92,10.18,31.74,24.34,41.44,42.48c9.71,18.15,14.57,38.9,14.57,62.25
       c0,21.97-4.57,40.99-13.7,57.06c-9.14,16.07-21.5,28.21-37.11,36.41c-15.61,8.21-32.89,11.97-51.85,11.27v3.82
       c9.71-0.46,17.74,1.62,24.1,6.24c6.36,4.62,9.88,11.79,10.58,21.5l2.08,37.11h-38.15l-2.43-39.54
@@ -203,30 +235,10 @@ const SquLogo = ({ height = 44 }) => (
       c24.05,0,43.47-7.17,58.27-21.51c14.8-14.33,22.2-34.79,22.2-61.39c0-26.58-7.4-47.1-22.2-61.56
       c-14.8-14.44-34.22-21.67-58.27-21.67c-25.2,0-44.91,7.11-59.13,21.33c-14.22,14.22-21.33,34.86-21.33,61.91
       C1105.87,1009.6,1112.98,1030.18,1127.19,1044.28z"/>
-    {/* U */}
     <path fill="#FFFFFF" d="M1370.49,866.01v141.16c0,18.5,5.14,32.31,15.43,41.44c10.29,9.14,23.42,13.7,39.37,13.7
       c14.57,0,26.88-4.62,36.94-13.87c10.05-9.25,15.08-23.01,15.08-41.27V866.01h37.46v141.85c0,17.12-3.59,32.49-10.75,46.13
       c-7.17,13.64-17.52,24.45-31.04,32.43c-13.53,7.97-29.43,11.96-47.69,11.96c-19.2,0-35.73-3.99-49.6-11.96
       c-13.87-7.98-24.45-18.79-31.73-32.43c-7.28-13.64-10.92-29.01-10.92-46.13V866.01H1370.49z"/>
-    {/* Icon - corner polylines: top-left white, bottom-left white, top-right white, bottom-right teal */}
-    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
-      points="570.26,844.05 485.24,844.05 485.24,929.07"/>
-    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
-      points="570.26,1113.46 485.24,1113.46 485.24,1028.44"/>
-    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
-      points="669.72,844.05 754.74,844.05 754.74,929.07"/>
-    {/* Icon - teal filled triangle paths */}
-    <path fill="#00E5C3" d="M647.08,865.42l-140.77,140.77c-9.18-38.15,1.09-80.04,30.91-109.85
-      C567.04,866.51,608.93,856.24,647.08,865.42z"/>
-    <path fill="#00E5C3" d="M702.04,1061.16c-29.82,29.82-71.78,40.18-109.94,30.99l140.92-140.92
-      C742.22,989.37,731.86,1031.34,702.04,1061.16z"/>
-    <polyline fill="none" stroke="#00E5C3" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
-      points="669.72,1113.46 754.74,1113.46 754.74,1028.44"/>
-    {/* Icon - white inner diamond shape */}
-    <path fill="#FFFFFF" d="M662.59,1021.69l-0.32-0.32c-15.32-15.55-13.95-41.05,1.49-56.49l24.47-24.47
-      c7.53-7.53,9.37-19.65,3.14-28.29c-7.92-11.01-23.38-11.92-32.55-2.75l-25.28,25.28c-15.44,15.44-40.94,16.81-56.49,1.49
-      l-0.32-0.32l0.32,0.32c15.33,15.55,13.95,41.05-1.48,56.49l-24.47,24.47c-7.53,7.53-9.36,19.65-3.14,28.29
-      c7.93,11.01,23.38,11.92,32.56,2.74l25.28-25.28c15.44-15.44,40.94-16.81,56.49-1.48L662.59,1021.69z"/>
   </svg>
 );
 
