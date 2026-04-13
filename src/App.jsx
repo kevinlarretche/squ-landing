@@ -208,19 +208,19 @@ const SquLogo = ({ height = 44 }) => (
       c14.57,0,26.88-4.62,36.94-13.87c10.05-9.25,15.08-23.01,15.08-41.27V866.01h37.46v141.85c0,17.12-3.59,32.49-10.75,46.13
       c-7.17,13.64-17.52,24.45-31.04,32.43c-13.53,7.97-29.43,11.96-47.69,11.96c-19.2,0-35.73-3.99-49.6-11.96
       c-13.87-7.98-24.45-18.79-31.73-32.43c-7.28-13.64-10.92-29.01-10.92-46.13V866.01H1370.49z"/>
-    {/* Icon - corner polylines (white) */}
-    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"
+    {/* Icon - corner polylines: top-left white, bottom-left white, top-right white, bottom-right teal */}
+    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
       points="570.26,844.05 485.24,844.05 485.24,929.07"/>
-    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"
+    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
       points="570.26,1113.46 485.24,1113.46 485.24,1028.44"/>
-    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"
+    <polyline fill="none" stroke="#FFFFFF" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
       points="669.72,844.05 754.74,844.05 754.74,929.07"/>
-    {/* Icon - teal filled paths */}
+    {/* Icon - teal filled triangle paths */}
     <path fill="#00E5C3" d="M647.08,865.42l-140.77,140.77c-9.18-38.15,1.09-80.04,30.91-109.85
       C567.04,866.51,608.93,856.24,647.08,865.42z"/>
     <path fill="#00E5C3" d="M702.04,1061.16c-29.82,29.82-71.78,40.18-109.94,30.99l140.92-140.92
       C742.22,989.37,731.86,1031.34,702.04,1061.16z"/>
-    <polyline fill="none" stroke="#00E5C3" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"
+    <polyline fill="none" stroke="#00E5C3" strokeWidth="40" strokeLinecap="square" strokeLinejoin="miter"
       points="669.72,1113.46 754.74,1113.46 754.74,1028.44"/>
     {/* Icon - white inner diamond shape */}
     <path fill="#FFFFFF" d="M662.59,1021.69l-0.32-0.32c-15.32-15.55-13.95-41.05,1.49-56.49l24.47-24.47
