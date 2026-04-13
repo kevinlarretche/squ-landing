@@ -175,10 +175,10 @@ const translations = {
 
 
 // ─── SQU SVG LOGO COMPONENT ──────────────────────────────────────
-const SquLogo = ({ height = 32 }) => (
+const SquLogo = ({ height = 44 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 2000 2000"
+    viewBox="430 840 1100 320"
     style={{ height, width: 'auto', display: 'block' }}
     aria-label="SQU"
   >
@@ -395,7 +395,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <SquLogo height={36} />
+            <SquLogo height={44} />
           </div>
 
           <div className="hidden md:flex items-center gap-6">
@@ -901,7 +901,7 @@ export default function App() {
       <footer className="border-t border-white/5 py-12 px-6 text-center">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Logo in footer */}
-          <SquLogo height={28} />
+          <SquLogo height={36} />
           <p className="text-zinc-600 text-sm font-medium italic">{t.footerQuote}</p>
         </div>
       </footer>
