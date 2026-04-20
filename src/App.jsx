@@ -375,20 +375,26 @@ export default function App() {
   // Waitlist submission (wire this to Mailchimp / Formspree / your backend)
   const handleWaitlistSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) return;
+    console.log('[waitlist] handler fired, email =', email);
+    if (!email || !email.includes('@')) {
+      console.log('[waitlist] blocked by validation');
+      return;
+    }
     try {
+      console.log('[waitlist] sending fetch...');
       const res = await fetch('https://formspree.io/f/xrerllag', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email, source: 'SQU landing waitlist', language: lang }),
       });
+      console.log('[waitlist] response status:', res.status);
       if (res.ok) {
         setWaitlistSubmitted(true);
       } else {
-        console.error('Waitlist submit failed', await res.text());
+        console.error('[waitlist] failed', await res.text());
       }
     } catch (err) {
-      console.error('Waitlist submit error', err);
+      console.error('[waitlist] error', err);
     }
   };
 
