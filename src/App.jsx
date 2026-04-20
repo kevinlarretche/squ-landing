@@ -93,9 +93,9 @@ const translations = {
     bookDemo: "Book a Demo",
     contactSales: "Contact Sales",
     plans: [
-      { plan: "Starter", features: ["Up to 2 products", "Instant AI customer support", "Up to 1,000 monthly scans", "Weekly customer insights"] },
-      { plan: "Growth", features: ["Up to 5 products", "Smart product recommendations", "Full intelligence reports", "5,000 monthly scans"] },
-      { plan: "Pro", features: ["Up to 15 products", "Advanced weekly reports", "Product & marketing recommendations", "Priority support", "15,000 monthly scans"] },
+      { plan: "Starter", features: [ "Instant AI customer support", "Up to 100 monthly scans", "Weekly customer insights"] },
+      { plan: "Growth", features: ["Smart product recommendations", "Full intelligence reports", "400 monthly scans"] },
+      { plan: "Pro", features: [ "Advanced dashboard", "Product & marketing recommendations", "Priority support", "1,200 monthly scans"] },
       { plan: "Enterprise", features: ["Unlimited products", "Custom actionable reports", "White-label dashboard", "Dedicated manager"] }
     ],
 
@@ -193,10 +193,10 @@ const translations = {
     bookDemo: "Réserver une démo",
     contactSales: "Nous contacter",
     plans: [
-      { plan: "Starter", features: ["Jusqu'à 2 produits", "Support client IA instantané", "Jusqu'à 1 000 scans mensuels", "Insights clients hebdomadaires"] },
-      { plan: "Growth", features: ["Jusqu'à 5 produits", "Recommandations produits intelligentes", "Rapports d'intelligence complets", "5 000 scans mensuels"] },
-      { plan: "Pro", features: ["Jusqu'à 15 produits", "Rapports hebdomadaires avancés", "Recommandations produit & marketing", "Support prioritaire", "15 000 scans mensuels"] },
-      { plan: "Enterprise", features: ["Produits illimités", "Rapports personnalisés actionnables", "Dashboard en marque blanche", "Manager dédié"] }
+      { plan: "Starter", features: ["Support client IA instantané", "100 scans mensuels", "Insights clients hebdomadaires"] },
+      { plan: "Growth", features: ["Recommandations produits intelligentes", "Rapports d'intelligence complets", "500 scans mensuels"] },
+      { plan: "Pro", features: ["Rapports hebdomadaires avancés", "Recommandations produit & marketing", "Support prioritaire", "1 200 scans mensuels"] },
+      { plan: "Enterprise", features: ["Rapports personnalisés actionnables", "Dashboard en marque blanche", "Manager dédié"] }
     ],
 
     inviteOnly: "Accès sur Invitation",
@@ -405,8 +405,8 @@ export default function App() {
 
   const pricingConfig = [
     { price: "$99",    sub: "Starter Level",    col: "from-[#00E5C3] to-emerald-400", active: false, cta: 'waitlist' },
-    { price: "$349",   sub: "Growth Level",     col: "from-[#F5A623] to-orange-400",  active: false, cta: 'waitlist' },
-    { price: "$699",   sub: "Pro Level",        col: "from-purple-500 to-indigo-400", active: true,  cta: 'demo' },
+    { price: "$399",   sub: "Growth Level",     col: "from-[#F5A623] to-orange-400",  active: false, cta: 'waitlist' },
+    { price: "$749",   sub: "Pro Level",        col: "from-purple-500 to-indigo-400", active: true,  cta: 'demo' },
     { price: "Custom", sub: "Enterprise Level", col: "from-blue-400 to-[#00E5C3]",    active: false, cta: 'sales' }
   ];
 
@@ -911,7 +911,7 @@ export default function App() {
                 return (
                   <FadeIn key={i} delay={i * 80} className="group h-full">
                     <div
-                      className={`relative h-full flex flex-col bg-[#1A1D24] rounded-3xl p-6 md:p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
+                      className={`relative h-full flex flex-col bg-[#1A1D24] rounded-3xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 ${
                         p.active
                           ? 'border-2 border-[#00E5C3]/50 ring-2 ring-[#00E5C3]/10 glow-pro'
                           : 'border border-white/10 hover:border-white/20'
