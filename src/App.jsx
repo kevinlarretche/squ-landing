@@ -432,10 +432,10 @@ export default function App() {
       <style dangerouslySetInnerHTML={{ __html: styles }} />
 
       {/* SKIP TO CONTENT */}
-      
+      <a
         href="#main"
         className={`sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#00E5C3] focus:text-black focus:font-bold focus:rounded-full ${focusRing}`}
-      <a>
+      >
         {t.skipToContent}
       </a>
 
