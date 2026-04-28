@@ -19,8 +19,8 @@ const translations = {
     heroTitle1: "Put an AI on every",
     heroTitle2: "product you ship.",
     heroSubtitle: "One QR code. Customers get instant answers. You get a weekly report on what to fix, market, and build next. Live in 24 hours, no packaging redesign.",
-    heroPrimaryCTA: "Book a 20-min walkthrough",
-    heroSecondary: "or join the waitlist",
+    heroPrimaryCTA: "Get in touch",
+    heroSecondary: "or book a 20-min walkthrough",
     heroTrust: "In pilot with brands in consumer audio, beauty, and home goods. Reference calls on request.",
 
     livePreviewTitle: "Live scan preview",
@@ -93,10 +93,10 @@ const translations = {
     bookCallCTA: "Book a walkthrough",
     contactSales: "Contact sales",
     plans: [
-      { plan: "Starter", roi: "Pays for itself by deflecting ~5 support replies a week.", features: ["Instant AI customer support", "Up to 100 monthly scans", "Weekly customer insights"] },
-      { plan: "Growth", roi: "Pays for itself with 1-2 captured upsells per month.", features: ["Smart product recommendations", "Full intelligence reports", "400 monthly scans"] },
-      { plan: "Pro", roi: "Pays for itself if it prevents 4 returns OR captures 6 upsells per month.", features: ["Advanced dashboard", "Product & marketing recommendations", "Priority support", "1,200 monthly scans"] },
-      { plan: "Enterprise", roi: "Built around your category, your volume, your margins.", features: ["Unlimited products", "Custom actionable reports", "White-label dashboard", "Dedicated manager"] }
+      { plan: "Starter", features: ["Instant AI customer support", "Up to 100 monthly scans", "Weekly customer insights"] },
+      { plan: "Growth", features: ["Smart product recommendations", "Full intelligence reports", "400 monthly scans"] },
+      { plan: "Pro", features: ["Advanced dashboard", "Product & marketing recommendations", "Priority support", "1,200 monthly scans"] },
+      { plan: "Enterprise", features: ["Unlimited products", "Custom actionable reports", "White-label dashboard", "Dedicated manager"] }
     ],
 
     waitlistKicker: "Not ready for a call?",
@@ -108,7 +108,7 @@ const translations = {
 
     inviteOnly: "Invite-only access",
     contactTitle: "Want to see your weekly report before you commit?",
-    contactSub: "SQU is in private pilot. Book 20 minutes with me. I'll show you what your weekly intelligence report would look like, with your actual products. No deck, no fluff.",
+    contactSub: "SQU is in private pilot. Book 20 minutes with me and I'll show you what your weekly intelligence report would look like, with your actual products.",
     bookMeeting: "Book a walkthrough",
     bookIntro: "20 minutes. Founder to founder.",
     founderTitle: "Founder & CEO",
@@ -129,8 +129,8 @@ const translations = {
     heroTitle1: "Une IA sur chaque produit",
     heroTitle2: "que vous expédiez.",
     heroSubtitle: "Un QR code. Vos clients ont des réponses instantanées. Vous recevez un rapport hebdo sur ce qu'il faut corriger, marketer, ou développer. En ligne en 24h, sans redesign packaging.",
-    heroPrimaryCTA: "Réserver un appel de 20 min",
-    heroSecondary: "ou rejoindre la waitlist",
+    heroPrimaryCTA: "Me contacter",
+    heroSecondary: "ou réserver un appel de 20 min",
     heroTrust: "En pilote avec des marques en audio grand public, beauté et maison. Appels références sur demande.",
 
     livePreviewTitle: "Aperçu scan en direct",
@@ -203,10 +203,10 @@ const translations = {
     bookCallCTA: "Réserver un appel",
     contactSales: "Nous contacter",
     plans: [
-      { plan: "Starter", roi: "Rentabilisé en évitant ~5 réponses SAV par semaine.", features: ["Support client IA instantané", "100 scans mensuels", "Insights clients hebdomadaires"] },
-      { plan: "Growth", roi: "Rentabilisé avec 1-2 upsells captés par mois.", features: ["Recommandations produits intelligentes", "Rapports d'intelligence complets", "500 scans mensuels"] },
-      { plan: "Pro", roi: "Rentabilisé en évitant 4 retours OU en captant 6 upsells par mois.", features: ["Rapports hebdomadaires avancés", "Recommandations produit & marketing", "Support prioritaire", "1 200 scans mensuels"] },
-      { plan: "Enterprise", roi: "Construit autour de votre catégorie, vos volumes, vos marges.", features: ["Rapports personnalisés actionnables", "Dashboard en marque blanche", "Manager dédié"] }
+      { plan: "Starter", features: ["Support client IA instantané", "100 scans mensuels", "Insights clients hebdomadaires"] },
+      { plan: "Growth", features: ["Recommandations produits intelligentes", "Rapports d'intelligence complets", "500 scans mensuels"] },
+      { plan: "Pro", features: ["Rapports hebdomadaires avancés", "Recommandations produit & marketing", "Support prioritaire", "1 200 scans mensuels"] },
+      { plan: "Enterprise", features: ["Rapports personnalisés actionnables", "Dashboard en marque blanche", "Manager dédié"] }
     ],
 
     waitlistKicker: "Pas prêt pour un appel ?",
@@ -218,7 +218,7 @@ const translations = {
 
     inviteOnly: "Accès sur invitation",
     contactTitle: "Vous voulez voir votre rapport avant de vous engager ?",
-    contactSub: "SQU est en pilote privé. Réservez 20 min avec moi. Je vous montre à quoi ressemblerait votre rapport hebdo, avec vos vrais produits. Pas de deck, pas de fluff.",
+    contactSub: "SQU est en pilote privé. Réservez 20 min avec moi et je vous montre à quoi ressemblerait votre rapport hebdo, avec vos vrais produits.",
     bookMeeting: "Réserver un appel",
     bookIntro: "20 minutes. De fondateur à fondateur.",
     founderTitle: "Fondateur & CEO",
@@ -510,23 +510,52 @@ export default function App() {
               </FadeIn>
 
               <FadeIn delay={300}>
-                <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
+                {!waitlistSubmitted ? (
+                  <form
+                    id="waitlist-form"
+                    onSubmit={handleWaitlistSubmit}
+                    className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md"
+                  >
+                    <label htmlFor="waitlist-email" className="sr-only">Email address</label>
+                    <div className="relative flex-1">
+                      <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" aria-hidden="true" />
+                      <input
+                        id="waitlist-email"
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder={t.waitlistPlaceholder}
+                        className={`w-full pl-11 pr-4 py-3.5 rounded-full bg-white/5 border border-white/10 text-white placeholder-zinc-500 font-medium ${focusRing}`}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className={`px-7 py-3.5 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-widest hover:bg-[#00cba0] transition whitespace-nowrap glow-primary ${focusRing}`}
+                    >
+                      {t.heroPrimaryCTA}
+                    </button>
+                  </form>
+                ) : (
+                  <div
+                    role="status"
+                    aria-live="polite"
+                    className="mt-8 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#00E5C3]/10 border border-[#00E5C3]/30 text-[#00E5C3] font-medium"
+                  >
+                    <Check size={16} aria-hidden="true" /> {t.waitlistSuccess}
+                  </div>
+                )}
+
+                <p className="mt-4 text-sm text-zinc-400">
                   <button
                     onClick={openCalendly}
-                    className={`inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-[#00E5C3] text-black font-black text-base uppercase tracking-widest hover:bg-[#00cba0] transition glow-primary ${focusRing}`}
-                  >
-                    {t.heroPrimaryCTA}
-                    <ArrowRight size={18} />
-                  </button>
-                  <button
-                    onClick={scrollToWaitlist}
-                    className={`text-sm text-zinc-300 hover:text-white underline underline-offset-4 font-medium transition rounded-sm ${focusRing}`}
+                    className={`text-zinc-300 hover:text-white underline underline-offset-4 font-medium transition rounded-sm ${focusRing}`}
                   >
                     {t.heroSecondary}
                   </button>
-                </div>
+                </p>
 
-                <p className="mt-6 text-xs text-zinc-400 font-medium max-w-md">
+                <p className="mt-4 text-xs text-zinc-400 font-medium max-w-md">
                   {t.heroTrust}
                 </p>
               </FadeIn>
@@ -803,7 +832,7 @@ export default function App() {
 
             <FadeIn className="mt-12 text-center">
               <button
-                onClick={openCalendly}
+                onClick={scrollToWaitlist}
                 className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-widest hover:bg-[#00cba0] transition glow-primary ${focusRing}`}
               >
                 {t.heroPrimaryCTA}
@@ -826,7 +855,7 @@ export default function App() {
               {pricingConfig.map((p, i) => {
                 const planT = t.plans[i];
                 const isEnterprise = p.price === "Custom";
-                const ctaLabel = isEnterprise ? t.contactSales : t.bookCallCTA;
+                const ctaLabel = isEnterprise ? t.contactSales : t.heroPrimaryCTA;
 
                 return (
                   <FadeIn key={i} delay={i * 80} className="group h-full">
@@ -859,10 +888,6 @@ export default function App() {
                           </p>
                         </div>
 
-                        <p className="text-xs text-zinc-300 leading-relaxed italic mb-6 min-h-[3rem]">
-                          {planT.roi}
-                        </p>
-
                         <div className="h-px w-full bg-white/10 mb-6" />
 
                         <ul className="space-y-3.5 flex-grow mb-8 list-none">
@@ -875,7 +900,7 @@ export default function App() {
                         </ul>
 
                         <button
-                          onClick={openCalendly}
+                          onClick={scrollToWaitlist}
                           className={`w-full py-3 rounded-full text-xs font-bold uppercase tracking-widest transition ${focusRing} ${
                             p.active
                               ? 'bg-[#00E5C3] text-black hover:bg-[#00cba0]'
@@ -890,53 +915,6 @@ export default function App() {
                 );
               })}
             </div>
-          </div>
-        </section>
-
-        {/* WAITLIST (secondary path) */}
-        <section className="py-20 px-6 border-t border-white/5">
-          <div className="max-w-3xl mx-auto text-center">
-            <FadeIn>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-400 mb-3">{t.waitlistKicker}</p>
-              <h2 className="text-2xl md:text-4xl font-black tracking-tight text-white mb-3">{t.waitlistTitle}</h2>
-              <p className="text-zinc-300 text-base md:text-lg max-w-xl mx-auto mb-8">{t.waitlistSub}</p>
-
-              {!waitlistSubmitted ? (
-                <form
-                  id="waitlist-form"
-                  onSubmit={handleWaitlistSubmit}
-                  className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-                >
-                  <label htmlFor="waitlist-email" className="sr-only">Email address</label>
-                  <div className="relative flex-1">
-                    <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" aria-hidden="true" />
-                    <input
-                      id="waitlist-email"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder={t.waitlistPlaceholder}
-                      className={`w-full pl-11 pr-4 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder-zinc-500 font-medium ${focusRing}`}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className={`px-6 py-3 rounded-full bg-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/20 transition whitespace-nowrap border border-white/10 ${focusRing}`}
-                  >
-                    {t.waitlistCTA}
-                  </button>
-                </form>
-              ) : (
-                <div
-                  role="status"
-                  aria-live="polite"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#00E5C3]/10 border border-[#00E5C3]/30 text-[#00E5C3] font-medium"
-                >
-                  <Check size={16} aria-hidden="true" /> {t.waitlistSuccess}
-                </div>
-              )}
-            </FadeIn>
           </div>
         </section>
 
@@ -970,20 +948,29 @@ export default function App() {
                       </div>
 
                       <button
-                        onClick={openCalendly}
+                        onClick={scrollToWaitlist}
                         className={`w-full flex items-center justify-between bg-[#00E5C3] hover:bg-[#00cba0] text-black p-4 rounded-2xl transition glow-primary ${focusRing}`}
                       >
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center" aria-hidden="true">
-                            <Calendar size={18} className="text-black" />
+                            <Mail size={18} className="text-black" />
                           </div>
                           <div className="text-left">
-                            <p className="text-xs font-black uppercase tracking-widest mb-0.5">{t.bookMeeting}</p>
+                            <p className="text-xs font-black uppercase tracking-widest mb-0.5">{t.heroPrimaryCTA}</p>
                             <p className="text-sm font-medium">{t.bookIntro}</p>
                           </div>
                         </div>
                         <ArrowRight size={16} className="flex-shrink-0" aria-hidden="true" />
                       </button>
+
+                      <p className="mt-4 text-center text-sm text-zinc-400">
+                        <button
+                          onClick={openCalendly}
+                          className={`text-zinc-300 hover:text-white underline underline-offset-4 font-medium transition rounded-sm ${focusRing}`}
+                        >
+                          {t.heroSecondary}
+                        </button>
+                      </p>
                     </div>
                   </div>
                 </div>
