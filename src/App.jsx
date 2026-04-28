@@ -1,148 +1,164 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Menu, X, Smartphone, Zap,
-  Check, ArrowRight, Sparkles, TrendingUp,
-  Quote, Calendar, AlertCircle,
-  Volume2, Mic, Settings, Wrench,
-  BadgeDollarSign, BrainCircuit, Rocket, ChevronRight,
-  QrCode, MessageSquareText, BarChart2, Mail
+  Menu, X, Zap, Check, ArrowRight, Sparkles, TrendingUp,
+  Quote, Calendar, AlertCircle, Volume2, Wrench, BrainCircuit,
+  QrCode, MessageSquareText, BarChart2, Mail, Settings
 } from 'lucide-react';
 
 // ─── TRANSLATIONS ────────────────────────────────────────────────
 const translations = {
   EN: {
     skipToContent: "Skip to content",
-    navFeatures: "Features",
-    navDemo: "Demo",
+    navFeatures: "What changes",
+    navHow: "How it works",
     navPricing: "Pricing",
     navContact: "Contact",
-    navDemoCTA: "Book a demo",
+    navDemoCTA: "Book a walkthrough",
 
-    heroBadge: "Less support. Better products. More sales.",
-    heroTitle1: "Your customers are talking.",
-    heroTitle2: "Are you listening?",
-    heroSubtitle: "A QR code on your product. An AI that answers, upsells, and reports back.",
-    waitlistPlaceholder: "your@email.com",
-    waitlistCTA: "Join the waitlist",
-    waitlistSuccess: "You're on the list. We'll be in touch.",
-    orBook: "or",
-    bookDemoInline: "book a 30-min demo",
-    pilotNote: "Currently piloting with select product brands in Europe and Asia.",
+    heroKicker: "For DTC and product brands",
+    heroTitle1: "Put an AI on every",
+    heroTitle2: "product you ship.",
+    heroSubtitle: "One QR code. Customers get instant answers. You get a weekly report on what to fix, market, and build next. Live in 24 hours, no packaging redesign.",
+    heroPrimaryCTA: "Book a 20-min walkthrough",
+    heroSecondary: "or join the waitlist",
+    heroTrust: "In pilot with brands in consumer audio, beauty, and home goods. Reference calls on request.",
 
     livePreviewTitle: "Live scan preview",
-    livePreviewSub: "Instant AI upsell demo",
+    livePreviewSub: "Instant answer + smart upsell",
     waitingScan: "Waiting for scan...",
     userQuestion: "Can I use these earbuds outdoors when it rains?",
-    aiResponse: 'This model isn\'t IPX4 certified, but our <span class="text-[#00E5C3] font-bold">Pro Edition</span> is fully waterproof. Interested in upgrading your order?',
+    aiResponse: 'This model isn\'t IPX4 certified, but our <span class="text-[#00E5C3] font-bold">Pro Edition</span> is fully waterproof. Want to upgrade your order?',
     liveDemo: "Live demo",
 
-    outcomesKicker: "By the numbers",
-    outcomesTitle: "Built to ship fast.",
-    outcomes: [
-      { number: "24h", label: "Signup to live", desc: "No dev work. No packaging redesign." },
-      { number: "24/7", label: "AI coverage", desc: "Instant answers, in your brand voice." },
-      { number: "3 in 1", label: "Support, upsell, insight", desc: "Every scan does all three." },
-      { number: "0", label: "Engineering required", desc: "Card insert, sticker, or link works." }
+    changesKicker: "What you get on day one",
+    changesTitle: "Three things change. Immediately.",
+    changesSub: "Same product. Same packaging. A new layer of intelligence and revenue underneath.",
+    pillars: [
+      {
+        tag: "Customer Intelligence",
+        headline: "Stop guessing what to build, market, or fix.",
+        body: "Every scan becomes a data point. Every Monday, a report lands in your inbox: what your customers actually want, what confused them, what nearly cost you the sale."
+      },
+      {
+        tag: "Instant AI Support",
+        headline: "Cut repetitive support to near zero.",
+        body: "SQU answers in your brand voice, 24/7. Trained on your exact product info. When it's unsure, it escalates to a human."
+      },
+      {
+        tag: "Built-in Upsell",
+        headline: "Turn every question into a sales moment.",
+        body: 'When a customer asks "is this waterproof?", SQU doesn\'t just answer. It recommends the Pro Edition that is. The right offer, at the right second, automatically.'
+      }
     ],
 
     howKicker: "1 → 2 → 3",
-    howTitle: "How It Works",
+    howTitle: "How it works",
     howSub: "From scan to strategy in three steps. No dev team required.",
     howSteps: [
-      { number: "01", title: "Place Your QR Code", desc: "Add a branded QR code to your packaging, manual, or product. Customers scan it when they need help, or just want to know more." },
-      { number: "02", title: "AI Handles the Conversation", desc: "SQU answers questions, recommends upgrades, and resolves issues instantly. Trained on your product, speaking your brand's voice." },
-      { number: "03", title: "You Get the Intelligence", desc: "Every interaction becomes a data point. Weekly reports surface pain points, upsell opportunities, and product insights you'd never get from reviews alone." }
+      { number: "01", title: "Place your QR code", desc: "Add a branded QR code to your packaging, manual, or product. Customers scan it when they need help, or just want to know more." },
+      { number: "02", title: "AI handles the conversation", desc: "SQU answers questions, recommends upgrades, and resolves issues instantly. Trained on your product, speaking your brand's voice." },
+      { number: "03", title: "You get the intelligence", desc: "Every interaction becomes a data point. Weekly reports surface pain points, upsell opportunities, and product insights you'd never get from reviews alone." }
     ],
 
-    intelTitle: "Your Product, Always Listening",
-    intelSubtitle: "Stop guessing what to fix, what to market, and what to build next. Your customers are already telling you.",
+    intelKicker: "What lands in your inbox every Monday",
+    intelTitle: "Real customer questions. Synthesized into action.",
+    intelSubtitle: "Not raw transcripts. Strategic intel. What to build, what to fix, what to market.",
     productName: "Aura Speaker Gen 2",
-    productTracking: "Active Product Tracking",
+    productTracking: "Last 7 days",
     feedbackItems: [
       { tag: '"Bass feels muddy at 80% volume"', type: 'Audio Quality' },
       { tag: '"How do I link two for stereo?"', type: 'UX Friction' },
       { tag: '"Is it safe near salt water?"', type: 'Support Gap' }
     ],
-    intelSweep: "Intelligence Sweep",
-    autoSynthesis: "Auto-Synthesis Mode",
-    liveData: "Live Data",
-    convPending: "124 Conversations Pending",
-    convPendingSub: "New questions regarding Aura Speaker Gen 2 collected in the last 72 hours.",
-    analyzeCTA: "Analyze Product Intel",
-    loadingSteps: ["Accessing database...", "Clustering 124 user scans...", "Identifying core sentiment...", "Drafting brand strategy..."],
-    weeklyReport: "Weekly Engagement Report",
-    weeklyReportSub: "Aura Speaker Gen 2",
-    activeSentiment: "Active sentiment: Positive (72%)",
+    weeklyReport: "Weekly Intelligence Report",
+    weeklyReportSub: "Aura Speaker Gen 2 · Last 7 days",
+    activeSentiment: "Sentiment: 72% positive",
     totalScans: "Total Scans",
-    activeChats: "Active Chats",
+    activeChats: "Conversations",
     vsLastWeek: "+12% vs last week",
-    conversion: "+18% conversion",
+    conversion: "+18% upsell rate",
     corePain: "Core Pain Point",
-    corePainText: '<span class="text-white font-bold">14 users</span> specifically asked about pairing with older Gen 1 models. Currently, the AI handles this manually. We recommend adding a dedicated <span class="text-white font-bold">"Stereo Link" guide</span> to the scan flow.',
+    corePainText: '<span class="text-white font-bold">14 customers</span> asked how to pair with older Gen 1 models. Add a dedicated <span class="text-white font-bold">"Stereo Link"</span> guide to the scan flow to deflect this fully.',
     marketingOpp: "Marketing Opportunity",
-    marketingOppText: 'Users are asking about <span class="text-white font-bold">beach usage</span>. Leverage this by adding an "Outdoors & Sand Safety" video module to increase upsells on our Rugged Carrying Case.',
+    marketingOppText: 'Customers are asking about <span class="text-white font-bold">beach use</span>. Add an "Outdoor & Sand Safety" guide to drive Rugged Carrying Case upsells.',
     engNote: "Engineering Note",
-    engNoteText: 'Cluster detected: <span class="text-white font-bold">"Blue light flashing"</span> questions peak at night. Consider a future firmware update for an <span class="text-[#F5A623] font-bold">"Auto-Dim"</span> or <span class="text-[#F5A623] font-bold">"Stealth Mode."</span>',
+    engNoteText: 'Cluster: <span class="text-white font-bold">"blue light flashing"</span> questions peak at night. Consider an <span class="text-[#F5A623] font-bold">"Auto-Dim"</span> firmware update.',
 
-    pricingTitle: "Scale Your Intelligence",
-    pricingSub: "Transparent pricing for brands at every stage.",
+    pricingKicker: "Pricing",
+    pricingTitle: "Plans that pay for themselves.",
+    pricingSub: "Start at $99. Cancel anytime.",
     perMonth: "per month",
     tailored: "tailored for you",
     mostPopular: "Most Popular",
-    joinWaitlist: "Join Waitlist",
-    bookDemo: "Book a Demo",
-    contactSales: "Contact Sales",
+    bookCallCTA: "Book a walkthrough",
+    contactSales: "Contact sales",
     plans: [
-      { plan: "Starter", features: [ "Instant AI customer support", "Up to 100 monthly scans", "Weekly customer insights"] },
-      { plan: "Growth", features: ["Smart product recommendations", "Full intelligence reports", "400 monthly scans"] },
-      { plan: "Pro", features: [ "Advanced dashboard", "Product & marketing recommendations", "Priority support", "1,200 monthly scans"] },
-      { plan: "Enterprise", features: ["Unlimited products", "Custom actionable reports", "White-label dashboard", "Dedicated manager"] }
+      { plan: "Starter", roi: "Pays for itself by deflecting ~5 support replies a week.", features: ["Instant AI customer support", "Up to 100 monthly scans", "Weekly customer insights"] },
+      { plan: "Growth", roi: "Pays for itself with 1-2 captured upsells per month.", features: ["Smart product recommendations", "Full intelligence reports", "400 monthly scans"] },
+      { plan: "Pro", roi: "Pays for itself if it prevents 4 returns OR captures 6 upsells per month.", features: ["Advanced dashboard", "Product & marketing recommendations", "Priority support", "1,200 monthly scans"] },
+      { plan: "Enterprise", roi: "Built around your category, your volume, your margins.", features: ["Unlimited products", "Custom actionable reports", "White-label dashboard", "Dedicated manager"] }
     ],
 
-    inviteOnly: "Invite-Only Access",
-    contactTitle: "Ready to hear what your customers are saying?",
-    contactSub: "SQU is currently rolling out to select partners. Reach out directly to discuss how we can elevate your brand.",
-    bookMeeting: "Book a Meeting",
-    bookIntro: "Book an intro call",
+    waitlistKicker: "Not ready for a call?",
+    waitlistTitle: "Get a sample weekly report instead.",
+    waitlistSub: "Drop your email. We'll send you a short walkthrough video and a sample SQU intelligence report you can share with your team.",
+    waitlistPlaceholder: "your@email.com",
+    waitlistCTA: "Send me the sample",
+    waitlistSuccess: "Done. Check your inbox in the next few minutes.",
+
+    inviteOnly: "Invite-only access",
+    contactTitle: "Want to see your weekly report before you commit?",
+    contactSub: "SQU is in private pilot. Book 20 minutes with me. I'll show you what your weekly intelligence report would look like, with your actual products. No deck, no fluff.",
+    bookMeeting: "Book a walkthrough",
+    bookIntro: "20 minutes. Founder to founder.",
     founderTitle: "Founder & CEO",
 
     footerQuote: '"The stupidest thing about business is ignoring your customers."',
-    footerRights: "© 2026 SQU Solutions. All rights reserved.",
+    footerRights: "© 2026 SQU Solutions. All rights reserved."
   },
 
   FR: {
     skipToContent: "Aller au contenu",
-    navFeatures: "Fonctionnalités",
-    navDemo: "Démo",
+    navFeatures: "Ce qui change",
+    navHow: "Comment ça marche",
     navPricing: "Tarifs",
     navContact: "Contact",
-    navDemoCTA: "Réserver une démo",
+    navDemoCTA: "Réserver un appel",
 
-    heroBadge: "Moins de SAV. De meilleurs produits. Plus de ventes.",
-    heroTitle1: "Vos clients vous parlent.",
-    heroTitle2: "Ne les ignorez plus.",
-    heroSubtitle: "Un QR code sur votre produit. Une IA qui répond, vend plus, et vous informe.",
-    waitlistPlaceholder: "votre@email.com",
-    waitlistCTA: "Rejoindre la waitlist",
-    waitlistSuccess: "Vous êtes sur la liste. Nous reviendrons vers vous.",
-    orBook: "ou",
-    bookDemoInline: "réserver une démo de 30 min",
-    pilotNote: "Actuellement en pilote avec des marques sélectionnées en Europe et en Asie.",
+    heroKicker: "Pour les marques DTC et produits",
+    heroTitle1: "Une IA sur chaque produit",
+    heroTitle2: "que vous expédiez.",
+    heroSubtitle: "Un QR code. Vos clients ont des réponses instantanées. Vous recevez un rapport hebdo sur ce qu'il faut corriger, marketer, ou développer. En ligne en 24h, sans redesign packaging.",
+    heroPrimaryCTA: "Réserver un appel de 20 min",
+    heroSecondary: "ou rejoindre la waitlist",
+    heroTrust: "En pilote avec des marques en audio grand public, beauté et maison. Appels références sur demande.",
 
     livePreviewTitle: "Aperçu scan en direct",
-    livePreviewSub: "Démo upsell IA instantané",
+    livePreviewSub: "Réponse instantanée + upsell intelligent",
     waitingScan: "En attente de scan...",
     userQuestion: "Est-ce que je peux utiliser ces écouteurs sous la pluie ?",
-    aiResponse: 'Ce modèle n\'est pas certifié IPX4, mais notre <span class="text-[#00E5C3] font-bold">Édition Pro</span> est entièrement étanche. Intéressé par un upgrade ?',
-    liveDemo: "Démo en direct",
+    aiResponse: 'Ce modèle n\'est pas certifié IPX4, mais notre <span class="text-[#00E5C3] font-bold">Édition Pro</span> est entièrement étanche. On vous fait l\'upgrade ?',
+    liveDemo: "Démo live",
 
-    outcomesKicker: "En chiffres",
-    outcomesTitle: "Conçu pour démarrer vite.",
-    outcomes: [
-      { number: "24h", label: "Du signup à live", desc: "Sans dev, sans redesign packaging." },
-      { number: "24/7", label: "Couverture IA", desc: "Réponses instantanées, avec votre voix." },
-      { number: "3 en 1", label: "Support, upsell, insight", desc: "Chaque scan fait les trois." },
-      { number: "0", label: "Dev requis", desc: "Carte, sticker ou lien suffisent." }
+    changesKicker: "Ce que vous obtenez dès le jour 1",
+    changesTitle: "Trois choses changent. Tout de suite.",
+    changesSub: "Même produit. Même packaging. Une nouvelle couche d'intelligence et de revenus en dessous.",
+    pillars: [
+      {
+        tag: "Intelligence Client",
+        headline: "Arrêtez de deviner ce qu'il faut développer, marketer ou corriger.",
+        body: "Chaque scan devient une donnée. Chaque lundi, un rapport arrive : ce que vos clients veulent vraiment, ce qui les a perdus, ce qui a failli vous coûter une vente."
+      },
+      {
+        tag: "Support IA Instantané",
+        headline: "Réduisez le SAV répétitif à presque zéro.",
+        body: "SQU répond avec le ton de votre marque, 24/7. Formé sur vos infos produit exactes. Si elle ne sait pas, elle escalade vers un humain."
+      },
+      {
+        tag: "Upsell Intégré",
+        headline: "Transformez chaque question en moment de vente.",
+        body: 'Quand un client demande "c\'est étanche ?", SQU ne se contente pas de répondre. Elle propose l\'Édition Pro qui l\'est. La bonne offre, à la bonne seconde, automatiquement.'
+      }
     ],
 
     howKicker: "1 → 2 → 3",
@@ -151,63 +167,64 @@ const translations = {
     howSteps: [
       { number: "01", title: "Placez votre QR Code", desc: "Ajoutez un QR code à votre packaging, notice ou produit. Vos clients le scannent dès qu'ils ont besoin d'aide, ou simplement envie d'en savoir plus." },
       { number: "02", title: "L'IA gère la conversation", desc: "SQU répond aux questions, recommande des upgrades, et résout les problèmes instantanément. Formée sur votre produit, avec le ton de votre marque." },
-      { number: "03", title: "Vous recevez l'intelligence", desc: "Chaque interaction devient une donnée. Des rapports hebdomadaires révèlent les points de friction, les opportunités de vente et des insights produit introuvables dans les avis clients." }
+      { number: "03", title: "Vous recevez l'intelligence", desc: "Chaque interaction devient une donnée. Des rapports hebdomadaires révèlent les frictions, les opportunités de vente et des insights produit introuvables ailleurs." }
     ],
 
-    intelTitle: "Votre Produit, Toujours à l'Écoute",
-    intelSubtitle: "Arrêtez de deviner ce qu'il faut améliorer, marketer ou développer. Vos clients vous le disent déjà.",
+    intelKicker: "Ce qui arrive dans votre boîte chaque lundi",
+    intelTitle: "Les vraies questions de vos clients. Transformées en actions.",
+    intelSubtitle: "Pas des transcriptions brutes. De l'intelligence stratégique. Quoi développer, quoi corriger, quoi marketer.",
     productName: "Aura Speaker Gen 2",
-    productTracking: "Suivi Produit Actif",
+    productTracking: "7 derniers jours",
     feedbackItems: [
       { tag: '"Les basses sont brouillées à 80% du volume"', type: 'Qualité Audio' },
       { tag: '"Comment connecter deux enceintes en stéréo ?"', type: 'Friction UX' },
       { tag: '"Est-ce qu\'elle résiste à l\'eau salée ?"', type: 'Lacune Support' }
     ],
-    intelSweep: "Analyse Intelligence",
-    autoSynthesis: "Mode Auto-Synthèse",
-    liveData: "Données en direct",
-    convPending: "124 Conversations en Attente",
-    convPendingSub: "Nouvelles questions concernant l'Aura Speaker Gen 2 collectées ces 72 dernières heures.",
-    analyzeCTA: "Analyser l'Intelligence Produit",
-    loadingSteps: ["Accès à la base de données...", "Regroupement de 124 scans...", "Identification du sentiment principal...", "Rédaction de la stratégie de marque..."],
-    weeklyReport: "Rapport d'Engagement Hebdomadaire",
-    weeklyReportSub: "Aura Speaker Gen 2",
-    activeSentiment: "Sentiment actif : Positif (72%)",
+    weeklyReport: "Rapport d'Intelligence Hebdo",
+    weeklyReportSub: "Aura Speaker Gen 2 · 7 derniers jours",
+    activeSentiment: "Sentiment : 72% positif",
     totalScans: "Scans Totaux",
-    activeChats: "Chats Actifs",
+    activeChats: "Conversations",
     vsLastWeek: "+12% vs semaine dernière",
-    conversion: "+18% conversion",
+    conversion: "+18% taux upsell",
     corePain: "Point de Friction Principal",
-    corePainText: '<span class="text-white font-bold">14 utilisateurs</span> ont demandé comment appairer avec les anciens modèles Gen 1. Actuellement, l\'IA gère cela manuellement. Nous recommandons d\'ajouter un <span class="text-white font-bold">guide "Stereo Link"</span> dédié au flux de scan.',
+    corePainText: '<span class="text-white font-bold">14 clients</span> ont demandé comment appairer avec les anciens modèles Gen 1. Ajoutez un guide <span class="text-white font-bold">"Stereo Link"</span> dédié au flux de scan pour traiter ça.',
     marketingOpp: "Opportunité Marketing",
-    marketingOppText: 'Les utilisateurs posent des questions sur <span class="text-white font-bold">l\'utilisation à la plage</span>. Exploitez cela en ajoutant un module vidéo "Sécurité Extérieur & Sable" pour augmenter les ventes de notre Housse Renforcée.',
+    marketingOppText: 'Les clients posent des questions sur <span class="text-white font-bold">l\'utilisation à la plage</span>. Ajoutez un guide "Sécurité Extérieur & Sable" pour booster les ventes de la Housse Renforcée.',
     engNote: "Note Ingénierie",
-    engNoteText: 'Cluster détecté : les questions <span class="text-white font-bold">"lumière bleue clignotante"</span> augmentent la nuit. Envisagez une mise à jour firmware pour un mode <span class="text-[#F5A623] font-bold">"Auto-Dim"</span> ou <span class="text-[#F5A623] font-bold">"Mode Discret."</span>',
+    engNoteText: 'Cluster : les questions <span class="text-white font-bold">"lumière bleue clignotante"</span> augmentent la nuit. Envisagez une mise à jour firmware <span class="text-[#F5A623] font-bold">"Auto-Dim"</span>.',
 
-    pricingTitle: "Passez à l'échelle supérieure",
-    pricingSub: "Des tarifs transparents pour les marques à chaque étape.",
+    pricingKicker: "Tarifs",
+    pricingTitle: "Des plans qui se paient tout seuls.",
+    pricingSub: "À partir de 99$. Annulable à tout moment.",
     perMonth: "par mois",
     tailored: "sur mesure",
     mostPopular: "Le Plus Populaire",
-    joinWaitlist: "Rejoindre",
-    bookDemo: "Réserver une démo",
+    bookCallCTA: "Réserver un appel",
     contactSales: "Nous contacter",
     plans: [
-      { plan: "Starter", features: ["Support client IA instantané", "100 scans mensuels", "Insights clients hebdomadaires"] },
-      { plan: "Growth", features: ["Recommandations produits intelligentes", "Rapports d'intelligence complets", "500 scans mensuels"] },
-      { plan: "Pro", features: ["Rapports hebdomadaires avancés", "Recommandations produit & marketing", "Support prioritaire", "1 200 scans mensuels"] },
-      { plan: "Enterprise", features: ["Rapports personnalisés actionnables", "Dashboard en marque blanche", "Manager dédié"] }
+      { plan: "Starter", roi: "Rentabilisé en évitant ~5 réponses SAV par semaine.", features: ["Support client IA instantané", "100 scans mensuels", "Insights clients hebdomadaires"] },
+      { plan: "Growth", roi: "Rentabilisé avec 1-2 upsells captés par mois.", features: ["Recommandations produits intelligentes", "Rapports d'intelligence complets", "500 scans mensuels"] },
+      { plan: "Pro", roi: "Rentabilisé en évitant 4 retours OU en captant 6 upsells par mois.", features: ["Rapports hebdomadaires avancés", "Recommandations produit & marketing", "Support prioritaire", "1 200 scans mensuels"] },
+      { plan: "Enterprise", roi: "Construit autour de votre catégorie, vos volumes, vos marges.", features: ["Rapports personnalisés actionnables", "Dashboard en marque blanche", "Manager dédié"] }
     ],
 
-    inviteOnly: "Accès sur Invitation",
-    contactTitle: "Prêt à entendre ce que disent vos clients ?",
-    contactSub: "SQU est actuellement en accès limité. Contactez-nous directement pour discuter de ce que nous pouvons faire pour votre marque.",
-    bookMeeting: "Réserver un Rendez-vous",
-    bookIntro: "Réserver un appel découverte",
+    waitlistKicker: "Pas prêt pour un appel ?",
+    waitlistTitle: "Recevez un exemple de rapport hebdo.",
+    waitlistSub: "Laissez votre email. On vous envoie une vidéo de présentation et un exemple de rapport SQU que vous pouvez partager avec votre équipe.",
+    waitlistPlaceholder: "votre@email.com",
+    waitlistCTA: "Recevoir l'exemple",
+    waitlistSuccess: "C'est bon. Vérifiez votre boîte dans quelques minutes.",
+
+    inviteOnly: "Accès sur invitation",
+    contactTitle: "Vous voulez voir votre rapport avant de vous engager ?",
+    contactSub: "SQU est en pilote privé. Réservez 20 min avec moi. Je vous montre à quoi ressemblerait votre rapport hebdo, avec vos vrais produits. Pas de deck, pas de fluff.",
+    bookMeeting: "Réserver un appel",
+    bookIntro: "20 minutes. De fondateur à fondateur.",
     founderTitle: "Fondateur & CEO",
 
     footerQuote: '"La pire erreur en business ? Ignorer ses clients."',
-    footerRights: "© 2026 SQU Solutions. Tous droits réservés.",
+    footerRights: "© 2026 SQU Solutions. Tous droits réservés."
   }
 };
 
@@ -238,7 +255,6 @@ const styles = `
   @keyframes blink-fast { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
   @keyframes typing { 0%,100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(-3px); opacity: 1; } }
   @keyframes slide-in-right { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-  @keyframes scan-line { 0% { top: 0%; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
 
   .animate-blink-fast { animation: blink-fast 0.8s ease-in-out infinite; }
   .typing-dot { animation: typing 1s ease-in-out infinite; }
@@ -249,24 +265,13 @@ const styles = `
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
-  .glow-primary { box-shadow: 0 0 24px rgba(0, 229, 195, 0.25); }
+  .glow-primary { box-shadow: 0 0 32px rgba(0, 229, 195, 0.35); }
   .glow-pro { box-shadow: 0 0 40px rgba(0, 229, 195, 0.18); }
 
-  .scan-effect {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00E5C3, transparent);
-    animation: scan-line 2s linear infinite;
-  }
-
-  /* Accessibility: respect reduced-motion */
   @media (prefers-reduced-motion: reduce) {
     .animate-blink-fast,
     .typing-dot,
     .animate-slide-user,
-    .scan-effect,
     .animate-pulse,
     .animate-ping,
     .animate-spin {
@@ -315,8 +320,6 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
 // ─── APP ─────────────────────────────────────────────────────────
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [reportState, setReportState] = useState('idle');
-  const [loadingStep, setLoadingStep] = useState(0);
   const [simStep, setSimStep] = useState(0);
   const [lang, setLang] = useState('EN');
   const [email, setEmail] = useState('');
@@ -324,7 +327,6 @@ export default function App() {
 
   const t = translations[lang];
 
-  // Reusable focus ring
   const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5C3] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0C10]";
 
   // Load Calendly
@@ -351,48 +353,23 @@ export default function App() {
     }
   };
 
-  // Demo sim
+  // Hero chat sim
   useEffect(() => {
     const timer = setInterval(() => setSimStep((p) => (p + 1) % 4), 3200);
     return () => clearInterval(timer);
   }, []);
 
-  const handleGenerateInsight = () => {
-    setReportState('loading');
-    setLoadingStep(0);
-    const interval = setInterval(() => {
-      setLoadingStep(prev => {
-        if (prev >= t.loadingSteps.length - 1) {
-          clearInterval(interval);
-          setTimeout(() => setReportState('complete'), 800);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 900);
-  };
-
-  // Waitlist submission (wire this to Mailchimp / Formspree / your backend)
+  // Waitlist
   const handleWaitlistSubmit = async (e) => {
     e.preventDefault();
-    console.log('[waitlist] handler fired, email =', email);
-    if (!email || !email.includes('@')) {
-      console.log('[waitlist] blocked by validation');
-      return;
-    }
+    if (!email || !email.includes('@')) return;
     try {
-      console.log('[waitlist] sending fetch...');
       const res = await fetch('https://formspree.io/f/xrerllag', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email, source: 'SQU landing waitlist', language: lang }),
       });
-      console.log('[waitlist] response status:', res.status);
-      if (res.ok) {
-        setWaitlistSubmitted(true);
-      } else {
-        console.error('[waitlist] failed', await res.text());
-      }
+      if (res.ok) setWaitlistSubmitted(true);
     } catch (err) {
       console.error('[waitlist] error', err);
     }
@@ -406,12 +383,11 @@ export default function App() {
     }
   };
 
-  // Outcomes config
-  const outcomeConfig = [
-    { icon: Rocket, color: "#00E5C3" },
-    { icon: Zap, color: "#F5A623" },
-    { icon: BrainCircuit, color: "#60A5FA" },
-    { icon: Wrench, color: "#A78BFA" }
+  // Pillar config (intel first, support second, upsell third)
+  const pillarConfig = [
+    { icon: BrainCircuit,       color: '#00E5C3', tint: 'rgba(0, 229, 195, 0.12)' },
+    { icon: MessageSquareText,  color: '#60A5FA', tint: 'rgba(96, 165, 250, 0.12)' },
+    { icon: TrendingUp,         color: '#F5A623', tint: 'rgba(245, 166, 35, 0.12)' }
   ];
 
   const feedbackColors = [
@@ -421,10 +397,10 @@ export default function App() {
   ];
 
   const pricingConfig = [
-    { price: "$99",    sub: "Starter Level",    col: "from-[#00E5C3] to-emerald-400", active: false, cta: 'waitlist' },
-    { price: "$399",   sub: "Growth Level",     col: "from-[#F5A623] to-orange-400",  active: false, cta: 'waitlist' },
-    { price: "$749",   sub: "Pro Level",        col: "from-purple-500 to-indigo-400", active: true,  cta: 'demo' },
-    { price: "Custom", sub: "Enterprise Level", col: "from-blue-400 to-[#00E5C3]",    active: false, cta: 'sales' }
+    { price: "$99",    sub: "Starter",    col: "from-[#00E5C3] to-emerald-400", active: false },
+    { price: "$399",   sub: "Growth",     col: "from-[#F5A623] to-orange-400",  active: false },
+    { price: "$749",   sub: "Pro",        col: "from-purple-500 to-indigo-400", active: true  },
+    { price: "Custom", sub: "Enterprise", col: "from-blue-400 to-[#00E5C3]",    active: false }
   ];
 
   return (
@@ -449,7 +425,7 @@ export default function App() {
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-8">
               <a href="#features" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navFeatures}</a>
-              <a href="#demo" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navDemo}</a>
+              <a href="#how" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navHow}</a>
               <a href="#pricing" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navPricing}</a>
               <a href="#contact" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navContact}</a>
             </div>
@@ -493,7 +469,7 @@ export default function App() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-[#0A0C10]/95 backdrop-blur-lg border-t border-white/5 px-6 py-6 space-y-4">
             <a href="#features" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navFeatures}</a>
-            <a href="#demo" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navDemo}</a>
+            <a href="#how" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navHow}</a>
             <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navPricing}</a>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navContact}</a>
             <button
@@ -508,13 +484,13 @@ export default function App() {
 
       <main id="main">
         {/* HERO */}
-        <section className="pt-32 pb-16 px-6 relative">
+        <section className="pt-32 pb-20 px-6 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00E5C3]/10 blur-[120px] rounded-full pointer-events-none" />
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-left relative z-10">
               <FadeIn>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/5 text-[#00E5C3] text-sm font-medium mb-6">
-                  <Sparkles size={14} aria-hidden="true" /> {t.heroBadge}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/5 text-[#00E5C3] text-xs font-bold uppercase tracking-widest mb-6">
+                  <Sparkles size={12} aria-hidden="true" /> {t.heroKicker}
                 </div>
               </FadeIn>
 
@@ -528,60 +504,30 @@ export default function App() {
               </FadeIn>
 
               <FadeIn delay={200}>
-                <p className="text-xl md:text-2xl text-zinc-300 max-w-xl leading-relaxed font-medium">
+                <p className="text-lg md:text-xl text-zinc-300 max-w-xl leading-relaxed font-medium">
                   {t.heroSubtitle}
                 </p>
               </FadeIn>
 
               <FadeIn delay={300}>
-                {!waitlistSubmitted ? (
-                  <form
-                    id="waitlist-form"
-                    onSubmit={handleWaitlistSubmit}
-                    className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md"
-                  >
-                    <label htmlFor="waitlist-email" className="sr-only">Email address</label>
-                    <div className="relative flex-1">
-                      <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" aria-hidden="true" />
-                      <input
-                        id="waitlist-email"
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder={t.waitlistPlaceholder}
-                        className={`w-full pl-11 pr-4 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder-zinc-500 font-medium ${focusRing}`}
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className={`px-6 py-3 rounded-full bg-[#00E5C3] text-black font-bold text-sm uppercase tracking-widest hover:bg-[#00cba0] transition whitespace-nowrap ${focusRing}`}
-                    >
-                      {t.waitlistCTA}
-                    </button>
-                  </form>
-                ) : (
-                  <div
-                    role="status"
-                    aria-live="polite"
-                    className="mt-8 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#00E5C3]/10 border border-[#00E5C3]/30 text-[#00E5C3] font-medium"
-                  >
-                    <Check size={16} aria-hidden="true" /> {t.waitlistSuccess}
-                  </div>
-                )}
-
-                <p className="mt-4 text-sm text-zinc-400">
-                  {t.orBook}{" "}
+                <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
                   <button
                     onClick={openCalendly}
-                    className={`text-[#00E5C3] font-semibold underline underline-offset-4 hover:text-white transition rounded-sm ${focusRing}`}
+                    className={`inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-[#00E5C3] text-black font-black text-base uppercase tracking-widest hover:bg-[#00cba0] transition glow-primary ${focusRing}`}
                   >
-                    {t.bookDemoInline}
+                    {t.heroPrimaryCTA}
+                    <ArrowRight size={18} />
                   </button>
-                </p>
+                  <button
+                    onClick={scrollToWaitlist}
+                    className={`text-sm text-zinc-300 hover:text-white underline underline-offset-4 font-medium transition rounded-sm ${focusRing}`}
+                  >
+                    {t.heroSecondary}
+                  </button>
+                </div>
 
                 <p className="mt-6 text-xs text-zinc-400 font-medium max-w-md">
-                  {t.pilotNote}
+                  {t.heroTrust}
                 </p>
               </FadeIn>
             </div>
@@ -591,7 +537,7 @@ export default function App() {
               <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-[#00E5C3]/20 flex items-center justify-center" aria-hidden="true">
-                    <Smartphone className="text-[#00E5C3]" size={20} />
+                    <QrCode className="text-[#00E5C3]" size={20} />
                   </div>
                   <div>
                     <h2 className="font-bold text-sm text-white">{t.livePreviewTitle}</h2>
@@ -650,44 +596,50 @@ export default function App() {
           </div>
         </section>
 
-        {/* OUTCOMES BAND (replaces old stats stripe) */}
-        <section className="py-16 px-6" id="features">
+        {/* THREE PILLARS — what changes day one */}
+        <section id="features" className="py-20 px-6 border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <FadeIn className="mb-10 text-center">
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00E5C3] mb-3">{t.outcomesKicker}</p>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-white">{t.outcomesTitle}</h2>
+            <FadeIn className="mb-12 text-center max-w-2xl mx-auto">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00E5C3] mb-3">{t.changesKicker}</p>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-4">{t.changesTitle}</h2>
+              <p className="text-zinc-300 text-lg">{t.changesSub}</p>
             </FadeIn>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-              {t.outcomes.map((o, i) => {
-                const cfg = outcomeConfig[i];
+            <div className="grid md:grid-cols-3 gap-5">
+              {t.pillars.map((p, i) => {
+                const cfg = pillarConfig[i];
                 const Icon = cfg.icon;
+                const isLead = i === 0;
                 return (
-                  <FadeIn key={i} delay={i * 80}>
+                  <FadeIn key={i} delay={i * 100}>
                     <div
-                      className="group relative h-full bg-[#0F1115] rounded-2xl border border-white/5 p-6 overflow-hidden transition-all duration-300 hover:border-white/20 hover:-translate-y-1"
+                      className={`group relative h-full rounded-3xl p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 ${
+                        isLead
+                          ? 'bg-[#0F1115] border-2 border-[#00E5C3]/40 ring-1 ring-[#00E5C3]/10'
+                          : 'bg-[#0F1115] border border-white/10 hover:border-white/20'
+                      }`}
                     >
                       <div
-                        className="absolute -top-16 -right-16 w-32 h-32 blur-[60px] opacity-0 group-hover:opacity-30 transition-opacity"
-                        style={{ backgroundColor: cfg.color }}
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6"
+                        style={{ backgroundColor: cfg.tint, color: cfg.color }}
                         aria-hidden="true"
-                      />
-                      <div className="relative z-10 flex flex-col gap-4">
-                        <div
-                          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/5"
-                          style={{ color: cfg.color }}
-                          aria-hidden="true"
-                        >
-                          <Icon size={20} strokeWidth={2.5} />
-                        </div>
-                        <div>
-                          <div className="text-4xl md:text-5xl font-black tracking-tight text-white leading-none">
-                            {o.number}
-                          </div>
-                          <p className="mt-2 text-sm font-bold text-white">{o.label}</p>
-                        </div>
-                        <p className="text-sm text-zinc-400 leading-relaxed">{o.desc}</p>
+                      >
+                        <Icon size={22} strokeWidth={2.2} />
                       </div>
+
+                      <span
+                        className="text-xs font-bold uppercase tracking-[0.2em] mb-3 block"
+                        style={{ color: cfg.color }}
+                      >
+                        {p.tag}
+                      </span>
+
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight leading-snug">
+                        {p.headline}
+                      </h3>
+                      <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                        {p.body}
+                      </p>
                     </div>
                   </FadeIn>
                 );
@@ -697,11 +649,11 @@ export default function App() {
         </section>
 
         {/* HOW IT WORKS */}
-        <section className="py-20 px-6 relative overflow-hidden border-t border-white/5">
+        <section id="how" className="py-20 px-6 relative overflow-hidden border-t border-white/5">
           <div className="max-w-5xl mx-auto">
             <FadeIn className="mb-14 text-center">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00E5C3] mb-3">{t.howKicker}</p>
-              <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-white">{t.howTitle}</h2>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4 text-white">{t.howTitle}</h2>
               <p className="text-zinc-300 text-lg max-w-2xl mx-auto">{t.howSub}</p>
             </FadeIn>
 
@@ -745,44 +697,38 @@ export default function App() {
           </div>
         </section>
 
-        {/* INTELLIGENCE DEMO */}
-        <section className="py-24 px-6 bg-[#0A0C10] border-t border-white/5" id="demo">
+        {/* WEEKLY INTEL REPORT */}
+        <section id="demo" className="py-24 px-6 bg-[#0A0C10] border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-stretch">
-              <div className="flex flex-col h-full">
-                <FadeIn className="mb-10">
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-[#F5A623]/20 flex items-center justify-center" aria-hidden="true">
-                        <Quote className="text-[#F5A623]" size={24} fill="currentColor" />
-                      </div>
-                      <h2 className="text-3xl md:text-4xl font-black tracking-tight text-white">{t.intelTitle}</h2>
-                    </div>
-                    <p className="text-lg md:text-xl text-zinc-300 leading-relaxed max-w-lg">{t.intelSubtitle}</p>
-                  </div>
-                </FadeIn>
+            <FadeIn className="mb-14 text-center max-w-3xl mx-auto">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#F5A623] mb-3">{t.intelKicker}</p>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-4">{t.intelTitle}</h2>
+              <p className="text-zinc-300 text-lg">{t.intelSubtitle}</p>
+            </FadeIn>
 
+            <div className="grid lg:grid-cols-2 gap-10 items-stretch">
+              <div className="flex flex-col">
                 <div className="glass-card p-6 rounded-2xl mb-8">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10" aria-hidden="true">
-                      <Volume2 className="text-zinc-300" size={32} />
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10" aria-hidden="true">
+                      <Volume2 className="text-zinc-300" size={28} />
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-white">{t.productName}</h3>
+                      <h3 className="font-bold text-base text-white">{t.productName}</h3>
                       <p className="text-xs text-zinc-400 uppercase tracking-widest font-bold">{t.productTracking}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-6 pl-4 border-l-2 border-white/10 flex-grow">
+                <div className="space-y-5 pl-4 border-l-2 border-white/10 flex-grow">
                   {t.feedbackItems.map((item, idx) => (
                     <FadeIn key={idx} delay={idx * 120} className="relative">
                       <div className="absolute -left-[25px] top-4 w-4 h-4 rounded-full border-2 border-[#F5A623] bg-[#0A0C10]" aria-hidden="true" />
-                      <div className="glass-card p-6 rounded-2xl hover:border-[#F5A623]/30 transition-colors">
-                        <span className={`text-xs uppercase font-bold tracking-widest px-2 py-0.5 rounded-full ${feedbackColors[idx]} mb-3 inline-block`}>
+                      <div className="glass-card p-5 rounded-2xl hover:border-[#F5A623]/30 transition-colors">
+                        <span className={`text-xs uppercase font-bold tracking-widest px-2 py-0.5 rounded-full ${feedbackColors[idx]} mb-2 inline-block`}>
                           {item.type}
                         </span>
-                        <p className="text-lg md:text-xl font-medium text-zinc-200 italic">{item.tag}</p>
+                        <p className="text-base md:text-lg font-medium text-zinc-200 italic">{item.tag}</p>
                       </div>
                     </FadeIn>
                   ))}
@@ -790,7 +736,7 @@ export default function App() {
               </div>
 
               <FadeIn delay={300} className="w-full h-full flex">
-                <div className="glass-card rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl w-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#0A0C10] relative overflow-hidden min-h-[600px] md:min-h-[700px]">
+                <div className="glass-card rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl w-full flex flex-col bg-gradient-to-br from-[#1A1D24] to-[#0A0C10] relative overflow-hidden">
                   <span
                     className="absolute -bottom-10 -right-10 text-[10rem] md:text-[12rem] font-black text-white/[0.02] pointer-events-none uppercase italic"
                     aria-hidden="true"
@@ -798,132 +744,89 @@ export default function App() {
                     INTEL
                   </span>
 
-                  <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-6">
+                  <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-5">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-2xl bg-[#00E5C3]/20 flex items-center justify-center" aria-hidden="true">
                         <Zap className="text-[#00E5C3]" size={20} fill="currentColor" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-white">{t.intelSweep}</h3>
-                        <p className="text-xs uppercase tracking-widest text-zinc-400 font-bold">{t.autoSynthesis}</p>
+                        <h3 className="text-base md:text-lg font-bold text-white">{t.weeklyReport}</h3>
+                        <p className="text-xs text-zinc-400 font-medium">{t.weeklyReportSub}</p>
                       </div>
                     </div>
-                    {reportState === 'complete' && (
-                      <div role="status" aria-live="polite" className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold uppercase tracking-widest border border-emerald-500/30">
-                        {t.liveData}
-                      </div>
-                    )}
+                    <div className="hidden sm:block px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-[10px] font-bold uppercase tracking-widest border border-emerald-500/30">
+                      {t.activeSentiment}
+                    </div>
                   </div>
 
-                  {reportState === 'idle' && (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-8">
-                      <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center border border-dashed border-white/10 relative" aria-hidden="true">
-                        <div className="absolute inset-0 rounded-full border border-[#00E5C3]/20 animate-ping opacity-20"></div>
-                        <Mic className="text-zinc-400" size={40} />
-                      </div>
-                      <div className="max-w-xs space-y-3">
-                        <h4 className="text-xl font-bold text-white tracking-tight">{t.convPending}</h4>
-                        <p className="text-sm text-zinc-400">{t.convPendingSub}</p>
-                      </div>
-                      <button
-                        onClick={handleGenerateInsight}
-                        className={`w-full bg-[#00E5C3] text-[#0A0C10] py-4 rounded-2xl font-black text-base md:text-lg hover:bg-[#00cba0] transition-all glow-primary flex items-center justify-center gap-3 ${focusRing}`}
-                      >
-                        <Sparkles size={20} fill="currentColor" aria-hidden="true" /> {t.analyzeCTA}
-                      </button>
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/10">
+                      <p className="text-xs uppercase font-bold text-zinc-400 tracking-widest mb-1">{t.totalScans}</p>
+                      <p className="text-2xl font-black text-white">124</p>
+                      <p className="text-xs text-emerald-300 font-bold">{t.vsLastWeek}</p>
                     </div>
-                  )}
-
-                  {reportState === 'loading' && (
-                    <div className="flex-1 flex flex-col items-center justify-center space-y-8 relative py-20" role="status" aria-live="polite">
-                      <div className="scan-effect" aria-hidden="true"></div>
-                      <div className="w-20 h-20 border-t-2 border-r-2 border-[#00E5C3] rounded-full animate-spin" aria-hidden="true"></div>
-                      <div className="text-center">
-                        <p className="text-sm font-mono text-[#00E5C3] mb-2">{t.loadingSteps[loadingStep]}</p>
-                        <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-[#00E5C3] transition-all duration-500"
-                            style={{ width: `${((loadingStep + 1) / t.loadingSteps.length) * 100}%` }}
-                          />
-                        </div>
-                      </div>
+                    <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/10">
+                      <p className="text-xs uppercase font-bold text-zinc-400 tracking-widest mb-1">{t.activeChats}</p>
+                      <p className="text-2xl font-black text-white">42</p>
+                      <p className="text-xs text-emerald-300 font-bold">{t.conversion}</p>
                     </div>
-                  )}
+                  </div>
 
-                  {reportState === 'complete' && (
-                    <div className="flex-1 space-y-8 flex flex-col">
-                      <div className="space-y-6 flex-grow">
-                        <div className="flex items-center gap-4 text-zinc-200">
-                          <Calendar size={18} className="text-[#F5A623]" aria-hidden="true" />
-                          <div>
-                            <h4 className="font-bold text-lg text-white">{t.weeklyReport}</h4>
-                            <p className="text-xs text-zinc-400 font-medium">{t.weeklyReportSub} • <span className="text-white">{t.activeSentiment}</span></p>
-                          </div>
-                        </div>
+                  <div className="space-y-4">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-colors">
+                      <div className="flex items-center gap-2 mb-3 text-[#00E5C3] font-bold text-xs uppercase tracking-widest">
+                        <AlertCircle size={14} aria-hidden="true" /> {t.corePain}
+                      </div>
+                      <p className="text-sm text-zinc-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.corePainText }} />
+                    </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/10">
-                            <p className="text-xs uppercase font-bold text-zinc-400 tracking-widest mb-1">{t.totalScans}</p>
-                            <p className="text-2xl font-black text-white">124</p>
-                            <p className="text-xs text-emerald-300 font-bold">{t.vsLastWeek}</p>
-                          </div>
-                          <div className="bg-[#1A1D24] p-4 rounded-2xl border border-white/10">
-                            <p className="text-xs uppercase font-bold text-zinc-400 tracking-widest mb-1">{t.activeChats}</p>
-                            <p className="text-2xl font-black text-white">42</p>
-                            <p className="text-xs text-emerald-300 font-bold">{t.conversion}</p>
-                          </div>
-                        </div>
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-colors">
+                      <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest">
+                        <TrendingUp size={14} aria-hidden="true" /> {t.marketingOpp}
+                      </div>
+                      <p className="text-sm text-zinc-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.marketingOppText }} />
+                    </div>
 
-                        <div className="space-y-4">
-                          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#00E5C3]/30 transition-colors">
-                            <div className="flex items-center gap-2 mb-3 text-[#00E5C3] font-bold text-xs uppercase tracking-widest">
-                              <AlertCircle size={14} aria-hidden="true" /> {t.corePain}
-                            </div>
-                            <p className="text-sm text-zinc-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.corePainText }} />
-                          </div>
-
-                          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#F5A623]/30 transition-colors">
-                            <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest">
-                              <TrendingUp size={14} aria-hidden="true" /> {t.marketingOpp}
-                            </div>
-                            <p className="text-sm text-zinc-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.marketingOppText }} />
-                          </div>
-
-                          <div className="bg-[#F5A623]/5 border border-[#F5A623]/30 rounded-2xl p-5 hover:bg-[#F5A623]/10 transition-colors relative overflow-hidden">
-                            <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest relative z-10">
-                              <Wrench size={14} aria-hidden="true" /> {t.engNote}
-                            </div>
-                            <p className="text-sm text-zinc-200 leading-relaxed relative z-10" dangerouslySetInnerHTML={{ __html: t.engNoteText }} />
-                            <div className="absolute top-0 right-0 p-2 opacity-10" aria-hidden="true">
-                              <Settings className="text-[#F5A623]" size={40} style={{ animation: 'spin 8s linear infinite' }} />
-                            </div>
-                          </div>
-                        </div>
+                    <div className="bg-[#F5A623]/5 border border-[#F5A623]/30 rounded-2xl p-5 hover:bg-[#F5A623]/10 transition-colors relative overflow-hidden">
+                      <div className="flex items-center gap-2 mb-3 text-[#F5A623] font-bold text-xs uppercase tracking-widest relative z-10">
+                        <Wrench size={14} aria-hidden="true" /> {t.engNote}
+                      </div>
+                      <p className="text-sm text-zinc-200 leading-relaxed relative z-10" dangerouslySetInnerHTML={{ __html: t.engNoteText }} />
+                      <div className="absolute top-0 right-0 p-2 opacity-10" aria-hidden="true">
+                        <Settings className="text-[#F5A623]" size={40} style={{ animation: 'spin 8s linear infinite' }} />
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               </FadeIn>
             </div>
+
+            <FadeIn className="mt-12 text-center">
+              <button
+                onClick={openCalendly}
+                className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#00E5C3] text-black font-black text-sm uppercase tracking-widest hover:bg-[#00cba0] transition glow-primary ${focusRing}`}
+              >
+                {t.heroPrimaryCTA}
+                <ArrowRight size={16} />
+              </button>
+            </FadeIn>
           </div>
         </section>
 
         {/* PRICING */}
-        <section className="py-24 px-4 bg-[#0A0C10] border-t border-white/5" id="pricing">
+        <section id="pricing" className="py-24 px-4 bg-[#0A0C10] border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <FadeIn className="mb-16 text-center">
-              <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-white">{t.pricingTitle}</h2>
+            <FadeIn className="mb-14 text-center">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00E5C3] mb-3">{t.pricingKicker}</p>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4 text-white">{t.pricingTitle}</h2>
               <p className="text-zinc-300 text-lg max-w-2xl mx-auto">{t.pricingSub}</p>
             </FadeIn>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
               {pricingConfig.map((p, i) => {
                 const planT = t.plans[i];
-                const ctaLabel =
-                  p.cta === 'demo' ? t.bookDemo :
-                  p.cta === 'sales' ? t.contactSales :
-                  t.joinWaitlist;
-                const handleClick = p.cta === 'waitlist' ? scrollToWaitlist : openCalendly;
+                const isEnterprise = p.price === "Custom";
+                const ctaLabel = isEnterprise ? t.contactSales : t.bookCallCTA;
 
                 return (
                   <FadeIn key={i} delay={i * 80} className="group h-full">
@@ -935,7 +838,7 @@ export default function App() {
                       }`}
                     >
                       {p.active && (
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 rounded-full bg-[#00E5C3] text-black text-xs font-black uppercase tracking-widest">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 rounded-full bg-[#00E5C3] text-black text-xs font-black uppercase tracking-widest whitespace-nowrap">
                           {t.mostPopular}
                         </div>
                       )}
@@ -946,7 +849,7 @@ export default function App() {
                           <span className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">{p.sub}</span>
                         </div>
 
-                        <div className="mb-8">
+                        <div className="mb-5">
                           <h3 className="text-xl font-bold text-white mb-2">{planT.plan}</h3>
                           <div className={`text-5xl font-black tracking-tight bg-gradient-to-br ${p.col} bg-clip-text text-transparent`}>
                             {p.price}
@@ -955,6 +858,10 @@ export default function App() {
                             {p.price === "Custom" ? t.tailored : t.perMonth}
                           </p>
                         </div>
+
+                        <p className="text-xs text-zinc-300 leading-relaxed italic mb-6 min-h-[3rem]">
+                          {planT.roi}
+                        </p>
 
                         <div className="h-px w-full bg-white/10 mb-6" />
 
@@ -968,7 +875,7 @@ export default function App() {
                         </ul>
 
                         <button
-                          onClick={handleClick}
+                          onClick={openCalendly}
                           className={`w-full py-3 rounded-full text-xs font-bold uppercase tracking-widest transition ${focusRing} ${
                             p.active
                               ? 'bg-[#00E5C3] text-black hover:bg-[#00cba0]'
@@ -983,6 +890,53 @@ export default function App() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        {/* WAITLIST (secondary path) */}
+        <section className="py-20 px-6 border-t border-white/5">
+          <div className="max-w-3xl mx-auto text-center">
+            <FadeIn>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-400 mb-3">{t.waitlistKicker}</p>
+              <h2 className="text-2xl md:text-4xl font-black tracking-tight text-white mb-3">{t.waitlistTitle}</h2>
+              <p className="text-zinc-300 text-base md:text-lg max-w-xl mx-auto mb-8">{t.waitlistSub}</p>
+
+              {!waitlistSubmitted ? (
+                <form
+                  id="waitlist-form"
+                  onSubmit={handleWaitlistSubmit}
+                  className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                >
+                  <label htmlFor="waitlist-email" className="sr-only">Email address</label>
+                  <div className="relative flex-1">
+                    <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" aria-hidden="true" />
+                    <input
+                      id="waitlist-email"
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={t.waitlistPlaceholder}
+                      className={`w-full pl-11 pr-4 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder-zinc-500 font-medium ${focusRing}`}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className={`px-6 py-3 rounded-full bg-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/20 transition whitespace-nowrap border border-white/10 ${focusRing}`}
+                  >
+                    {t.waitlistCTA}
+                  </button>
+                </form>
+              ) : (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#00E5C3]/10 border border-[#00E5C3]/30 text-[#00E5C3] font-medium"
+                >
+                  <Check size={16} aria-hidden="true" /> {t.waitlistSuccess}
+                </div>
+              )}
+            </FadeIn>
           </div>
         </section>
 
@@ -1017,18 +971,18 @@ export default function App() {
 
                       <button
                         onClick={openCalendly}
-                        className={`w-full flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#00E5C3]/40 p-4 rounded-2xl transition ${focusRing}`}
+                        className={`w-full flex items-center justify-between bg-[#00E5C3] hover:bg-[#00cba0] text-black p-4 rounded-2xl transition glow-primary ${focusRing}`}
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-[#0A0C10] flex items-center justify-center" aria-hidden="true">
-                            <Calendar size={18} className="text-[#00E5C3]" />
+                          <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center" aria-hidden="true">
+                            <Calendar size={18} className="text-black" />
                           </div>
                           <div className="text-left">
-                            <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-0.5">{t.bookMeeting}</p>
-                            <p className="text-sm font-medium text-white">{t.bookIntro}</p>
+                            <p className="text-xs font-black uppercase tracking-widest mb-0.5">{t.bookMeeting}</p>
+                            <p className="text-sm font-medium">{t.bookIntro}</p>
                           </div>
                         </div>
-                        <ArrowRight size={16} className="text-zinc-300 flex-shrink-0" aria-hidden="true" />
+                        <ArrowRight size={16} className="flex-shrink-0" aria-hidden="true" />
                       </button>
                     </div>
                   </div>
