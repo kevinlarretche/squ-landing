@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu, X, Zap, Check, ArrowRight, Sparkles, TrendingUp,
   Quote, Calendar, AlertCircle, Volume2, Wrench, BrainCircuit,
-  QrCode, MessageSquareText, BarChart2, Mail, Settings
+  QrCode, MessageSquareText, BarChart2, Mail, Settings,
+  Store, Tablet
 } from 'lucide-react';
 
 // ─── TRANSLATIONS ────────────────────────────────────────────────
@@ -11,6 +12,7 @@ const translations = {
     skipToContent: "Skip to content",
     navFeatures: "What changes",
     navHow: "How it works",
+    navDistrib: "For Distributors",
     navPricing: "Pricing",
     navContact: "Contact",
     navDemoCTA: "Book a walkthrough",
@@ -113,6 +115,20 @@ const translations = {
     bookIntro: "20 minutes. Founder to founder.",
     founderTitle: "Founder & CEO",
 
+    distribKicker: "For multi-brand retailers",
+    distribTitle1: "Run a retail floor?",
+    distribTitle2: "Turn every aisle into a smart sales floor.",
+    distribSub: "SQU Distributor is the in-store AI assistant for multi-brand retailers. Customers scan a QR on the shelf, get instant answers across every brand you carry, and your salespeople always have backup.",
+    distribCardsTitle: "Built for the way distributors actually sell",
+    distribCards: [
+      { icon: "Store", title: "Multi-brand on day one", body: "20+ brands, hundreds of SKUs, all answered by one assistant. Add a brand, the AI knows it the same week." },
+      { icon: "TrendingUp", title: "Higher in-store conversion", body: "Every product question gets an instant answer. Fewer walkouts. Salespeople pull more attached sales." },
+      { icon: "Tablet", title: "QR panels and tablets", body: "Branded panels in every aisle. Tablets at the till. No app to install, no hardware to buy." },
+      { icon: "Zap", title: "Live in days", body: "From signed pilot to first scan in 3 days. Per-store pricing, predictable, easy ROI math." }
+    ],
+    distribCTA: "Book a 15-min retail walkthrough",
+    distribCTASub: "We'll show you what it looks like in your stores. Real pilot in one location, full rollout if the numbers work.",
+
     footerQuote: '"The stupidest thing about business is ignoring your customers."',
     footerRights: "© 2026 SQU Solutions. All rights reserved."
   },
@@ -121,6 +137,7 @@ const translations = {
     skipToContent: "Aller au contenu",
     navFeatures: "Ce qui change",
     navHow: "Comment ça marche",
+    navDistrib: "Pour distributeurs",
     navPricing: "Tarifs",
     navContact: "Contact",
     navDemoCTA: "Réserver un appel",
@@ -222,6 +239,20 @@ const translations = {
     bookMeeting: "Réserver un appel",
     bookIntro: "20 minutes. De fondateur à fondateur.",
     founderTitle: "Fondateur & CEO",
+
+    distribKicker: "Pour les distributeurs multi-marques",
+    distribTitle1: "Vous gérez un magasin ?",
+    distribTitle2: "Transformez chaque rayon en vendeur intelligent.",
+    distribSub: "SQU Distributor est l'assistant IA en magasin pour distributeurs multi-marques. Le client scanne un QR sur l'étagère, obtient une réponse instantanée sur toutes vos marques, et vos vendeurs ont toujours un appui.",
+    distribCardsTitle: "Pensé pour la façon dont les distributeurs vendent vraiment",
+    distribCards: [
+      { icon: "Store", title: "Multi-marques dès le jour 1", body: "20 marques, des centaines de références, un seul assistant. Ajoutez une marque, l'IA la connaît dans la semaine." },
+      { icon: "TrendingUp", title: "Plus de conversion en magasin", body: "Chaque question produit obtient une réponse immédiate. Moins de clients qui repartent, plus de ventes additionnelles." },
+      { icon: "Tablet", title: "Panneaux QR et tablettes", body: "Panneaux brandés dans chaque rayon. Tablettes en caisse. Aucune app à installer, aucun matériel à acheter." },
+      { icon: "Zap", title: "En ligne en quelques jours", body: "Du contrat signé au premier scan en 3 jours. Tarification par magasin, prévisible, ROI évident." }
+    ],
+    distribCTA: "Réserver une démo retail (15 min)",
+    distribCTASub: "On vous montre à quoi ça ressemble dans vos magasins. Pilote dans un magasin, déploiement complet si les chiffres sont là.",
 
     footerQuote: '"La pire erreur en business ? Ignorer ses clients."',
     footerRights: "© 2026 SQU Solutions. Tous droits réservés."
@@ -403,11 +434,12 @@ export default function App() {
     { price: "Custom", sub: "Enterprise", col: "from-blue-400 to-[#00E5C3]",    active: false }
   ];
 
+  const distribIconMap = { Store, TrendingUp, Tablet, Zap };
+
   return (
     <div className="min-h-screen bg-[#0A0C10] text-zinc-100 font-sans selection:bg-[#00E5C3] selection:text-zinc-900 overflow-x-hidden">
       <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      {/* SKIP TO CONTENT */}
       <a
         href="#main"
         className={`sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#00E5C3] focus:text-black focus:font-bold focus:rounded-full ${focusRing}`}
@@ -415,7 +447,6 @@ export default function App() {
         {t.skipToContent}
       </a>
 
-      {/* NAVBAR */}
       <nav className="fixed top-0 w-full z-50 bg-[#0A0C10]/80 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#" className={`flex items-center ${focusRing} rounded-md`} aria-label="SQU home">
@@ -426,6 +457,7 @@ export default function App() {
             <div className="flex items-center gap-8">
               <a href="#features" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navFeatures}</a>
               <a href="#how" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navHow}</a>
+              <a href="#distributors" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navDistrib}</a>
               <a href="#pricing" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navPricing}</a>
               <a href="#contact" className={`text-sm font-medium text-zinc-300 hover:text-white transition-colors ${focusRing} rounded-md px-1 py-0.5`}>{t.navContact}</a>
             </div>
@@ -470,6 +502,7 @@ export default function App() {
           <div className="md:hidden bg-[#0A0C10]/95 backdrop-blur-lg border-t border-white/5 px-6 py-6 space-y-4">
             <a href="#features" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navFeatures}</a>
             <a href="#how" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navHow}</a>
+            <a href="#distributors" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navDistrib}</a>
             <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navPricing}</a>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block text-base font-medium text-zinc-300 hover:text-white">{t.navContact}</a>
             <button
@@ -483,7 +516,6 @@ export default function App() {
       </nav>
 
       <main id="main">
-        {/* HERO */}
         <section className="pt-32 pb-20 px-6 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00E5C3]/10 blur-[120px] rounded-full pointer-events-none" />
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -561,7 +593,6 @@ export default function App() {
               </FadeIn>
             </div>
 
-            {/* Live scan preview */}
             <FadeIn delay={400} className="relative">
               <div className="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden max-w-md mx-auto">
                 <div className="flex items-center gap-3 mb-6">
@@ -625,7 +656,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* THREE PILLARS — what changes day one */}
         <section id="features" className="py-20 px-6 border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <FadeIn className="mb-12 text-center max-w-2xl mx-auto">
@@ -677,7 +707,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* HOW IT WORKS */}
         <section id="how" className="py-20 px-6 relative overflow-hidden border-t border-white/5">
           <div className="max-w-5xl mx-auto">
             <FadeIn className="mb-14 text-center">
@@ -726,7 +755,76 @@ export default function App() {
           </div>
         </section>
 
-        {/* WEEKLY INTEL REPORT */}
+        <section id="distributors" className="py-24 px-6 relative overflow-hidden border-t border-white/5">
+          <div className="absolute inset-0 pointer-events-none opacity-30" aria-hidden="true">
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#00E5C3]/10 blur-[120px]" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[#F5A623]/10 blur-[120px]" />
+          </div>
+
+          <div className="max-w-7xl mx-auto relative">
+            <FadeIn className="mb-14 max-w-3xl">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00E5C3] mb-3">{t.distribKicker}</p>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-3">
+                {t.distribTitle1}
+              </h2>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6 bg-gradient-to-r from-[#00E5C3] to-[#F5A623] bg-clip-text text-transparent">
+                {t.distribTitle2}
+              </h2>
+              <p className="text-zinc-300 text-lg leading-relaxed">{t.distribSub}</p>
+            </FadeIn>
+
+            <FadeIn delay={100}>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 mb-6">
+                {t.distribCardsTitle}
+              </p>
+            </FadeIn>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+              {t.distribCards.map((card, i) => {
+                const Icon = distribIconMap[card.icon] || Store;
+                const accentColor = i % 2 === 0 ? '#00E5C3' : '#F5A623';
+                return (
+                  <FadeIn key={i} delay={150 + i * 80}>
+                    <div className="relative h-full p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition">
+                      <div
+                        className="absolute top-0 left-6 right-6 h-[3px] rounded-full"
+                        style={{ background: accentColor }}
+                        aria-hidden="true"
+                      />
+                      <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                        style={{ background: `${accentColor}1A`, color: accentColor }}
+                        aria-hidden="true"
+                      >
+                        <Icon size={22} />
+                      </div>
+                      <h3 className="text-white font-bold text-base mb-2 leading-snug">{card.title}</h3>
+                      <p className="text-zinc-400 text-sm leading-relaxed">{card.body}</p>
+                    </div>
+                  </FadeIn>
+                );
+              })}
+            </div>
+
+            <FadeIn delay={500}>
+              <div className="rounded-2xl p-8 md:p-10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div className="max-w-xl">
+                  <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
+                    {t.distribCTASub}
+                  </p>
+                </div>
+                <button
+                  onClick={openCalendly}
+                  className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#00E5C3] text-black font-bold text-sm uppercase tracking-widest hover:bg-[#00cba0] transition whitespace-nowrap ${focusRing}`}
+                >
+                  {t.distribCTA}
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
         <section id="demo" className="py-24 px-6 bg-[#0A0C10] border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <FadeIn className="mb-14 text-center max-w-3xl mx-auto">
@@ -842,7 +940,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* PRICING */}
         <section id="pricing" className="py-24 px-4 bg-[#0A0C10] border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <FadeIn className="mb-14 text-center">
@@ -918,7 +1015,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* CONTACT */}
         <section className="py-24 px-4 md:px-6 relative overflow-hidden bg-[#0A0C10] border-t border-white/5" id="contact">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#00E5C3]/5 blur-[100px] rounded-full pointer-events-none" />
           <div className="max-w-6xl mx-auto relative z-10">
@@ -980,7 +1076,6 @@ export default function App() {
         </section>
       </main>
 
-      {/* FOOTER */}
       <footer className="border-t border-white/10 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <SquLogo height={32} />
